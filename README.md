@@ -1,6 +1,6 @@
 # CBT-Buddy
 
-## Group Members: Xilong Cai, Yiwei Tao, and Victor Wu
+Group Members: Xilong Cai, Yiwei Tao, and Victor Wu
 
 Welcome to our CBT Buddy app—the perfect tool for anyone looking to improve their mental health and well-being!
 Our app offers a range of evidence-based techniques from Cognitive Behavioral Therapy (CBT) to help you manage stress, anxiety, and depression. With an intuitive interface and easy-to-follow exercises, our app is perfect for beginners and experienced users alike.
