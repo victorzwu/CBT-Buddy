@@ -18,7 +18,7 @@ export default function App() {
 
   const AppStack = (
     <>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="Home" component={Home} />
     </>
   );
 
