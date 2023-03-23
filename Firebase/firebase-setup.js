@@ -26,13 +26,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const myApp = initializeApp(firebaseConfig);
-export const firestore = getFirestore(myApp);
+const CBTBuddy = initializeApp(firebaseConfig);
+export const firestore = getFirestore(CBTBuddy);
 
 //create authentication token
-export const auth = initializeAuth(myApp, {
+export const auth = initializeAuth(CBTBuddy, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 
 //export storage
-export const storage = getStorage(myApp);
+export const storage = getStorage(CBTBuddy);
