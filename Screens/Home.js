@@ -12,8 +12,8 @@ export default function Home() {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator>
-      <Tab.Screen name="CBT" component={CBT} options={{ headerShown: false }}/>
       <Tab.Screen name="Journal" component={Journal}/>
+      <Tab.Screen name="CBT" component={CBT} options={{ headerShown: false }}/>
       <Tab.Screen name="Relaxation" component={Relaxation}/>
       <Tab.Screen name="Resources" component={Resources}/>
       <Tab.Screen name="Profile" component={Profile}/>
