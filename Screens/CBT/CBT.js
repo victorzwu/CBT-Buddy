@@ -7,7 +7,7 @@ export default function CBT() {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Screen 1" component={CBTScreen1} />
+      <Stack.Screen name="Screen 1" component={CBTScreen1} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
