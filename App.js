@@ -2,32 +2,31 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CBT from "./Screens/CBT/CBT";
-import Journal from "./Screens/Journal/Journal";
-import Profile from "./Screens/Profile/Profile";
-import Relaxation from "./Screens/Relaxation/Relaxation";
-import Resources from "./Screens/Resources/Resources";
+import Home from "./Home";
+import Login from "./Screens/Authentication/Login";
+import SignUp from "./Screens/Authentication/SignUp";
 
 export default function App() {
-  const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
+
+  const AuthStack = (
+    <>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+    </>
+  );
+
+  const AppStack = (
+    <>
+      <Stack.Screen name="Home" component={Home} />
+    </>
+  );
+
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Journal">
-          {(props) => <Journal {...props} />}
-        </Tab.Screen>
-        <Tab.Screen name="CBT">{(props) => <CBT {...props} />}</Tab.Screen>
-        {/* <Tab.Screen name="Relaxation">
-          {(props) => <Relaxation {...props} />}
-        </Tab.Screen> */}
-        <Tab.Screen name="Resources">
-          {(props) => <Resources {...props} />}
-        </Tab.Screen>
-        <Tab.Screen name="Profile">
-          {(props) => <Profile {...props} />}
-        </Tab.Screen>
-      </Tab.Navigator>
+      <Stack.Navigator>
+        {AppStack}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
