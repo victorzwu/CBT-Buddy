@@ -54,9 +54,16 @@ export default function CBT() {
     };
   }, []);
 
-  useEffect(async () => {
-    await addEntry(situation, distortion, reframe, date);
-    await resetEntry();
+  useEffect(() => {
+    async function addAndReset()
+    {
+      await addEntry(situation, distortion, reframe, date);
+      await resetEntry();
+    }
+    if(confirmed=== true)
+    {
+      addAndReset();
+    }
   }, [confirmed]);
 
   async function resetEntry() {
@@ -109,10 +116,9 @@ export default function CBT() {
           };
         }}
       >
-        {(props) => <CBTAllEntries {...props} entries={entries} />}
+        {(props) => <CBTAllEntries {...props} entries={entries} deleteEntry = {deleteEntry} />}
       </Stack.Screen>
       <Stack.Screen name="Describe the Situation" options={{}}>
-        {" "}
         {(props) => <CBTDescribe {...props} setSituation={setSituation} />}
       </Stack.Screen>
       <Stack.Screen name="Cognitive Distortions" options={{}}>
