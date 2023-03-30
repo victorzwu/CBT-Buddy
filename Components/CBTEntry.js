@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 
-export default function CBTEntry() {
+export default function CBTEntry({entry}) {
   return (
-    <View>
-      <Text>CBTEntry</Text>
-    </View>
+    <Pressable onPress = {()=>{}}>
+        <Text>Hi</Text>
+    </Pressable>
   )
 }

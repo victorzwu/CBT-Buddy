@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CBTAllEntries from "./CBTAllEntries";
@@ -9,9 +9,12 @@ import CBTReframe from "./CBTReframe";
 import CBTReview from "./CBTReview";
 import { deleteFromCBT, editFromCBT } from "../../Firebase/fireStoreHelper";
 import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CBT() {
   const [entries, setEntries] = useState([]);
+
+  const navigation = useNavigation();
 
   const Stack = createNativeStackNavigator();
 
@@ -42,16 +45,15 @@ export default function CBT() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="CBT"
-        component={CBTAllEntries}
+        name="CBT Home"
         options={() => {
           return {
             headerRight: () => {
               return (
                 <Pressable
-                  onPress={() => navigation.navigate("Add An Entry")}
+                  onPress={() => navigation.navigate("Describe the Situation")}
                 >
-                  <Entypo name="plus" size={24} color="white" />
+                  <Entypo name="plus" size={24} color="black" />
                 </Pressable>
               );
             },
