@@ -7,13 +7,33 @@ import CBTDescribe from "./CBTDescribe";
 import CBTCognitiveDistortions from "./CBTCognitiveDistortions";
 import CBTReframe from "./CBTReframe";
 import CBTReview from "./CBTReview";
-import { deleteFromCBT, editFromCBT, writeToCBT } from "../../Firebase/fireStoreHelper";
+import {
+  deleteFromCBT,
+  editFromCBT,
+  writeToCBT,
+} from "../../Firebase/fireStoreHelper";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { collection, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
 
 export default function CBT() {
+  const [entries, setEntries] = useState([]);
+
+  const navigation = useNavigation();
+
+  const Stack = createNativeStackNavigator();
+
+  const [confirmed, setConfirmed] = useState(false);
+
+  const [situation, setSituation] = useState("");
+
+  const [distortion, setDistortion] = useState("");
+
+  const [reframe, setReframe] = useState("");
+
+  const [date, setDate] = useState("");
+
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(firestore, "CBTentries"),
@@ -34,11 +54,19 @@ export default function CBT() {
     };
   }, []);
 
-  const [entries, setEntries] = useState([]);
+  useEffect(async () => {
+    await addEntry(situation, distortion, reframe, date);
+    await resetEntry();
+  }, [confirmed]);
 
-  const navigation = useNavigation();
-
-  const Stack = createNativeStackNavigator();
+  async function resetEntry()
+  {
+    setConfirmed(false);
+    setSituation("");
+    setDistortion("");
+    setReframe("");
+    setDate("");
+  }
 
   function addEntry(situation, distortion, reframe, date) {
     let entry = {
@@ -99,16 +127,8 @@ export default function CBT() {
         component={CBTReframe}
         options={{}}
       />
-      <Stack.Screen
-        name="Review"
-        component={CBTReview}
-        options={{}}
-      />
-      <Stack.Screen
-        name="Details"
-        component={CBTDetails}
-        options={{}}
-      />
+      <Stack.Screen name="Review" component={CBTReview} options={{}} />
+      <Stack.Screen name="Details" component={CBTDetails} options={{}} />
     </Stack.Navigator>
   );
 }
