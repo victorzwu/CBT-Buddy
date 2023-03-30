@@ -17,10 +17,9 @@ export async function writeToCBT(entry) {
     }
   }
 
-
-  export async function editFromCBT(id) {
+  export async function editFromCBT(id, entry) {
     try {
-      await updateDoc(doc(firestore, "CBTentries", id), {overLimit: false});
+      await updateDoc(doc(firestore, "CBTentries", id), entry);
     } catch (err) {
       console.log(err);
     }

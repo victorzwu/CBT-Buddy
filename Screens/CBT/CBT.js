@@ -7,9 +7,29 @@ import CBTDescribe from "./CBTDescribe";
 import CBTCognitiveDistortions from "./CBTCognitiveDistortions";
 import CBTReframe from "./CBTReframe";
 import CBTReview from "./CBTReview";
+import { deleteFromCBT, editFromCBT } from "../../Firebase/fireStoreHelper";
 
 export default function CBT() {
+
   const Stack = createNativeStackNavigator();
+
+  function addEntry(situation, distortion, reframe, date)
+  {
+    let entry = { situation: situation, distortion: distortion, reframe: reframe, date: date}
+    writeToCBT(entry);
+  }
+
+  function editEntry(id, situation, distortion, reframe, date)
+  {
+    let entry = { situation: situation, distortion: distortion, reframe: reframe, date: date}
+    editFromCBT(id, entry);
+  }
+
+  function deleteEntry(id)
+  {
+    deleteFromCBT(id);
+  }
+
   return (
     <Stack.Navigator>
       <Stack.Screen name="CBT" component={CBTAllEntries} options={{ headerShown: false }} />
