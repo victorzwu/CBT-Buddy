@@ -8,6 +8,7 @@ import CBTCognitiveDistortions from "./CBTCognitiveDistortions";
 import CBTReframe from "./CBTReframe";
 import CBTReview from "./CBTReview";
 import { deleteFromCBT, editFromCBT } from "../../Firebase/fireStoreHelper";
+import { Entypo } from "@expo/vector-icons";
 
 export default function CBT() {
   const [entries, setEntries] = useState([]);
@@ -43,7 +44,19 @@ export default function CBT() {
       <Stack.Screen
         name="CBT"
         component={CBTAllEntries}
-        options={{ headerShown: false }}
+        options={() => {
+          return {
+            headerRight: () => {
+              return (
+                <Pressable
+                  onPress={() => navigation.navigate("Add An Entry")}
+                >
+                  <Entypo name="plus" size={24} color="white" />
+                </Pressable>
+              );
+            },
+          };
+        }}
       >
         {(props) => <CBTAllEntries {...props} entries={entries} />}
       </Stack.Screen>
