@@ -59,8 +59,7 @@ export default function CBT() {
     await resetEntry();
   }, [confirmed]);
 
-  async function resetEntry()
-  {
+  async function resetEntry() {
     setConfirmed(false);
     setSituation("");
     setDistortion("");
@@ -112,22 +111,21 @@ export default function CBT() {
       >
         {(props) => <CBTAllEntries {...props} entries={entries} />}
       </Stack.Screen>
-      <Stack.Screen
-        name="Describe the Situation"
-        component={CBTDescribe}
-        options={{}}
-      />
-      <Stack.Screen
-        name="Cognitive Distortions"
-        component={CBTCognitiveDistortions}
-        options={{}}
-      />
-      <Stack.Screen
-        name="Challenge the Thought"
-        component={CBTReframe}
-        options={{}}
-      />
-      <Stack.Screen name="Review" component={CBTReview} options={{}} />
+      <Stack.Screen name="Describe the Situation" options={{}}>
+        {" "}
+        {(props) => <CBTDescribe {...props} setSituation={setSituation} />}
+      </Stack.Screen>
+      <Stack.Screen name="Cognitive Distortions" options={{}}>
+        {(props) => (
+          <CBTCognitiveDistortions {...props} setDistortion={setDistortion} />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="Challenge the Thought" options={{}}>
+        {(props) => <CBTReframe {...props} setReframe={setReframe} />}
+      </Stack.Screen>
+      <Stack.Screen name="Review" options={{}}>
+        {(props) => <CBTReview {...props} setConfirmed={setConfirmed} />}
+      </Stack.Screen>
       <Stack.Screen name="Details" component={CBTDetails} options={{}} />
     </Stack.Navigator>
   );
