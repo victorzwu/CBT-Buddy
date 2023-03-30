@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CBTAllEntries from "./CBTAllEntries";
 import CBTDetails from "./CBTDetails";
@@ -7,11 +7,33 @@ import CBTDescribe from "./CBTDescribe";
 import CBTCognitiveDistortions from "./CBTCognitiveDistortions";
 import CBTReframe from "./CBTReframe";
 import CBTReview from "./CBTReview";
-import { deleteFromCBT, editFromCBT } from "../../Firebase/fireStoreHelper";
+import { deleteFromCBT, editFromCBT, writeToCBT } from "../../Firebase/fireStoreHelper";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { collection, onSnapshot } from "firebase/firestore";
+import { firestore } from "../../Firebase/firebase-setup";
 
 export default function CBT() {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(firestore, "CBTentries"),
+      (querySnapshot) => {
+        if (querySnapshot.empty) {
+          setEntries([]);
+        } else {
+          let arr = [];
+          querySnapshot.docs.forEach((snap) =>
+            arr.push({ ...snap.data(), id: snap.id })
+          );
+          setEntries(arr);
+        }
+      }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const [entries, setEntries] = useState([]);
 
   const navigation = useNavigation();
@@ -65,27 +87,27 @@ export default function CBT() {
       <Stack.Screen
         name="Describe the Situation"
         component={CBTDescribe}
-        options={{ headerShown: false }}
+        options={{}}
       />
       <Stack.Screen
         name="Cognitive Distortions"
         component={CBTCognitiveDistortions}
-        options={{ headerShown: false }}
+        options={{}}
       />
       <Stack.Screen
         name="Challenge the Thought"
         component={CBTReframe}
-        options={{ headerShown: false }}
+        options={{}}
       />
       <Stack.Screen
         name="Review"
         component={CBTReview}
-        options={{ headerShown: false }}
+        options={{}}
       />
       <Stack.Screen
         name="Details"
         component={CBTDetails}
-        options={{ headerShown: false }}
+        options={{}}
       />
     </Stack.Navigator>
   );
