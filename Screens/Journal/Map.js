@@ -6,15 +6,12 @@ import { update } from "../../Firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
-// import { MAP_API_KEY } from "@env";
-const MAP_API_KEY="AIzaSyCB-LzTwbzYe4FNuj8VNoWQrS-PtJTQcPU"
+import { MAP_API_KEY } from "@env";
 
 export default function Com({ formData, setFormData, navigation, getData }) {
   const [address, setAddress] = useState(null);
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const handleMapPress = async (coordinate) => {
     const { latitude, longitude } = coordinate;

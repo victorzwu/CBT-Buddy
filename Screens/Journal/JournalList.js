@@ -60,9 +60,7 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
                         height: 80,
                       }}
                       source={{
-                        uri: `https://firebasestorage.googleapis.com/v0/b/journal-5dfda.appspot.com/o/${
-                          v.photo
-                        }?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
+                        uri: `https://firebasestorage.googleapis.com/v0/b/journal-5dfda.appspot.com/o/${v.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
                       }}
                     />
                   </View>
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
   cardLeftTop: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 5
+    marginBottom: 5,
   },
   cardRight: {
     flex: 1,

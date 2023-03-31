@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-setup";
@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>Email</Text>
       <TextInput
         value={email}
@@ -35,6 +35,6 @@ export default function Login({ navigation }) {
       />
       <Button title="Login" onPress={login} />
       <Button title="Not registered? Make an account" onPress={signUp} />
-    </View>
+    </SafeAreaView>
   );
 }

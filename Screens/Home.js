@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { COLORS } from '../color';
+import { COLORS } from "../color";
 import CBT from "./CBT/CBT";
 import Journal from "./Journal/Journal";
 import Relaxation from "./Relaxation/Relaxation";
