@@ -23,7 +23,7 @@ Preliminary implementation of the selection of albums or photos, and open the ma
 <img src="./assets/readme/camera.png" height="30%" width="30%" >
 
 #### Map Page
-Select location.
+Choose your own preferred geographic location.
 
 <img src="./assets/readme/map.png" height="30%" width="30%" >
 
