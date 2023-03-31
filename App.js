@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { auth } from "./Firebase/firebase-setup";
 import Home from "./Screens/Home";
 import Login from "./Screens/Authentication/Login";
 import SignUp from "./Screens/Authentication/SignUp";

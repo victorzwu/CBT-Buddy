@@ -1,6 +1,6 @@
 import { View, Text, Button, TextInput } from "react-native";
 import React, { useState } from "react";
-import { auth } from "../Firebase/firebase-setup";
+import { auth } from "../../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignUp({ navigation }) {
