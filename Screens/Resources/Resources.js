@@ -29,19 +29,6 @@ export default function Resources() {
     fetchResources();
   });
 
-  // , {
-  //   method: 'GET',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //     Authorization: cityVanApiKey,
-  //   },
-  //   body: JSON.stringify({
-  //     firstParam: 'yourValue',
-  //     secondParam: 'yourOtherValue',
-  //   });
-  // }
-  // ));
   return (
     <Stack.Navigator>
       <Stack.Screen name="Relaxation Screen 1" component={ResourcesScreen1} />
