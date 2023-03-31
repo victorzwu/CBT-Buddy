@@ -1,17 +1,19 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React from "react";
 import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
-import { cityVanApiKey } from "@env";
+// import { cityVanApiKey } from "@env";
 
-export default function ResourcesScreen1() {
+export default function ResourcesScreen1({ navigation }) {
+
+  cityVanApiKey = '421b202f7b30e206d48c0d91ac5c412b31e84539fb4d2b97e938b24a'
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
     const fetchResources = async () => {
       try {
         const response = await fetch(
-          "https://opendata.vancouver.ca/api/v2/catalog/datasets/business-licences/records?limit=10&offset=0&refine=status%3AIssued&refine=businesssubtype%3ACounselling&timezone=UTC",
+          "https://opendata.vancouver.ca/api/v2/catalog/datasets/business-licences/records?limit=50&offset=0&refine=status%3AIssued&refine=businesssubtype%3ACounselling&timezone=UTC",
           {
             method: "GET",
             headers: {
@@ -23,15 +25,13 @@ export default function ResourcesScreen1() {
         );
         const data = await response.json();
         const businesses = data.records.map((business) => {
-          return (
-            {
+          return {
             name: business.record.fields.businessname,
             city: business.record.fields.city,
             localarea: business.record.fields.localarea,
-          });
+          };
         });
-
-        await setResources(businesses);
+        setResources(businesses);
       } catch (err) {
         console.log("api error: ", err);
       }
@@ -39,17 +39,26 @@ export default function ResourcesScreen1() {
     fetchResources();
   }, []);
 
+  function details(item) {
+    navigation.navigate("Resource Details", (item));
+  }
+
   return (
     <View>
-      {resources && (
-        <FlatList
-          data={resources}
-          renderItem={(resource) => {
-            return <Text>{resource.localarea}</Text>;
-          }}
-        />
-      )}
-      <Text>Hi</Text>
+      <FlatList
+        data={resources}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => details(item)}>
+              <View>
+                <Text>Name: {item.name}</Text>
+                <Text>Local Area: {item.localarea}</Text>
+                <Text>City: {item.city}</Text>
+              </View>
+            </Pressable>
+          );
+        }}
+      />
     </View>
   );
 }
