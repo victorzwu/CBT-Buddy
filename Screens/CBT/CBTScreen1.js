@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function JournalScreen1() {
+export default function CBTScreen1() {
   return (
     <View>
-      <Text>JournalScreen1</Text>
+      <Text>CBTScreen1</Text>
     </View>
   )
 }

@@ -1,13 +1,154 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import JournalScreen1 from './JournalScreen1';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { View, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { COLORS } from '../../color';
+import JournalList from "./JournalList";
+import AddMood from "./AddMood";
+import AddDetail from "./AddDetail";
+import AddPhotoAndLocation from "./AddPhotoAndLocation";
+import JournalEdit from "./JournalEdit";
+import Map from "./Map";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { getFromDB } from "../../Firebase/firestore";
 
 export default function Journal() {
-    const Stack = createNativeStackNavigator();
+  const [formData, setFormData] = useState({
+    mood: "",
+    detail: "",
+    photo: "",
+    location: "",
+    date: "",
+  });
+  const [data, setData] = useState([]);
+
+  const getData = () => {
+    getFromDB().then((res) => {
+      console.log("res = ", res);
+      setData(res);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const Stack = createNativeStackNavigator();
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Screen 1" component={JournalScreen1} />
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        headerStyle: { backgroundColor: COLORS.primary },
+        headerTintColor: "white",
+        tabBarStyle: { backgroundColor: COLORS.primary },
+        tabBarActiveTintColor: COLORS.yellow,
+        tabBarInactiveTintColor: COLORS.white,
+      })}
+    >
+      <Stack.Screen
+        name="JournalList"
+        options={{
+          title: "Journal",
+          headerTitleAlign: "center",
+        }}
+      >
+        {(props) => (
+          <JournalList
+            data={data}
+            getData={getData}
+            setData={setData}
+            formData={formData}
+            setFormData={setFormData}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen
+        name="JournalEdit"
+        options={{
+          title: "Edit",
+        }}
+      >
+        {(props) => (
+          <JournalEdit
+            data={data}
+            getData={getData}
+            setData={setData}
+            formData={formData}
+            setFormData={setFormData}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
+
+      <Stack.Screen
+        name="AddMood"
+        options={{
+          title: "Mood",
+        }}
+      >
+        {(props) => (
+          <AddMood
+            data={data}
+            getData={getData}
+            setData={setData}
+            formData={formData}
+            setFormData={setFormData}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
+
+      <Stack.Screen
+        name="AddDetail"
+        options={{
+          title: "Detail",
+        }}
+      >
+        {(props) => (
+          <AddDetail
+            data={data}
+            setData={setData}
+            getData={getData}
+            formData={formData}
+            setFormData={setFormData}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen
+        name="AddPhotoAndLocation"
+        options={{
+          title: "Photo And Location",
+        }}
+      >
+        {(props) => (
+          <AddPhotoAndLocation
+            data={data}
+            getData={getData}
+            setData={setData}
+            formData={formData}
+            setFormData={setFormData}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
+
+      <Stack.Screen
+        name="Map"
+        options={{
+          title: "Map",
+        }}
+      >
+        {(props) => (
+          <Map
+            data={data}
+            setData={setData}
+            getData={getData}
+            formData={formData}
+            setFormData={setFormData}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
-  )
+  );
 }
