@@ -62,7 +62,7 @@ export default function AddDistortions({ route, navigation }) {
           });
         }}
       >
-        <Text>continue</Text>
+        <AntDesign name="arrowright" size={24} color="white" />
       </RegularButton>
     </View>
   );
