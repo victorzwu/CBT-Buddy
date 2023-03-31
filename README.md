@@ -9,26 +9,32 @@ Complete initial screens of Journal. The initial screen in Journal tab is browsi
 
 #### Mood Page
 Automatically jump to the next entry after selecting the corresponding mood.
+
 <img src="./assets/readme/mood.png" height="30%" width="30%" >
 
 #### Detail Page
 This page allows you to record your thoughts in text form.
+
 <img src="./assets/readme/text.png" height="30%" width="30%" >
 
 #### Photo and Location Page
 Preliminary implementation of the selection of albums or photos, and open the map to manually select the location of the function.
+
 <img src="./assets/readme/camera.png" height="30%" width="30%" >
 
 #### Map Page
 Select location.
+
 <img src="./assets/readme/map.png" height="30%" width="30%" >
 
 #### Journal Page
 Automatically jump to the home page after adding a location.
+
 <img src="./assets/readme/done.png" height="30%" width="30%" >
 
 #### Edit Page
 To implement the update function, click on the corresponding entry on this page to change the corresponding content.
+
 <img src="./assets/readme/edit.png" height="30%" width="30%" >
 
 
