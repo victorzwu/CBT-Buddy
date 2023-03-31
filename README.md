@@ -10,24 +10,36 @@ Complete initial screens of CBT. The initial screen in CBT tab is browsing all C
 #### Add an entry
 
 To add an entry, users could press the plus icon on the top right corner and fill the form. At first they will describe the situation.
+
 <img src="./assets/readme/add_description_1.png" height="30%" width="30%" > <img src="./assets/readme/add_description_2.png" height="30%" width="30%" > <img src="./assets/readme/add_description_3.png" height="30%" width="30%" >
+
 Then they will choose the cognitive distortions.(Right is when the distortion is chosen. There will be many distortions although now there is only one)
+
 <img src="./assets/readme/add_distortions.png" height="30%" width="30%" > <img src="./assets/readme/add_distortions_finished.png" height="30%" width="30%" >
+
 Finally users will write how can reframe the thought.
+
 <img src="./assets/readme/add_solution.png" height="30%" width="30%" >
 Now all information has been filled, and users could review it
 <img src="./assets/readme/review.png" height="30%" width="30%" >
+
 If users press cancel, they will get back to the browsing screen. If they press edit, they will get back to the first screen of describe situation(informations filled before will be kept). If they press confirm. The new entries will be added and they will get back to the browsing screen where the new entry has been added.
+
 <img src="./assets/readme/add_confirm.png" height="30%" width="30%" > <img src="./assets/readme/entries_added.png" height="30%" width="30%" >
+
 ####Edit an entry
 In browsing screen, users could press the card and they will get to the details screen
+
 <img src="./assets/readme/details.png" height="30%" width="30%" >
+
 Users could press Edit button to edit this entry. After editing, they press confirm and get back to the browsing screen where the entry has been edited.
+
 <img src="./assets/readme/edit_confirm.png" height="30%" width="30%" > <img src="./assets/readme/entries_edited.png" height="30%" width="30%" >
 
 #### Delete an entry
 
 In Details page users could also press the Delete button to delete the entry. After confirming delete they will get back to the browsing screen where the entry has been deleted.
+
 <img src="./assets/readme/delete_confirm.png" height="30%" width="30%" > <img src="./assets/readme/entries_deleted.png" height="30%" width="30%" >
 
 ## Introduction
