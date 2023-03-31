@@ -57,6 +57,7 @@ export default function CBT() {
   useEffect(() => {
     async function addAndReset()
     {
+      setDate(new Date().getDate().toString)
       await addEntry(situation, distortion, reframe, date);
       await resetEntry();
     }
