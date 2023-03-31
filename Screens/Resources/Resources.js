@@ -12,18 +12,18 @@ export default function Resources() {
     const fetchResources = async () => {
       try {
         const response = await fetch(
-          "https://opendata.vancouver.ca/api/v2/catalog/datasets/business-licences",
+          "https://opendata.vancouver.ca/api/v2/catalog/datasets/business-licences/records?limit=10&offset=0&refine=status%3AIssued&refine=businesssubtype%3ACounselling&timezone=UTC",
           {
             method: "GET",
             headers: {
               Accept: "application/json",
-              "Content-Type": "application/json",
+              // "Content-Type": "application/json",
               Authorization: cityVanApiKey,
             },
           }
         );
         const data = await response.json();
-        console.log(data);
+        console.log(data.records[0].record);
       } catch (err) {
         console.log("api error: ", err);
       }
