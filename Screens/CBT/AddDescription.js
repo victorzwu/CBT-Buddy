@@ -148,7 +148,7 @@ export default function AddDescription({ navigation, route }) {
             });
           }}
         >
-          <Text>continue</Text>
+          <AntDesign name="arrowright" size={24} color="white" />
         </RegularButton>
       </View>
     );
