@@ -67,7 +67,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
                   alert("ADD Success!");
                   getData();
                   navigation.navigate({
-                    name: "Journal",
+                    name: "JournalList",
                   });
                 }
               } catch (e) {
