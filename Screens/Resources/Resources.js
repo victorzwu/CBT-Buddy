@@ -23,14 +23,17 @@ export default function Resources() {
           }
         );
         const data = await response.json();
-        console.log(data.records[0].record);
+        const test = data.records.map((business) => {
+          return { name: business.record.fields.businessname, city: business.record.fields.city, localarea: business.record.fields.localarea };
+        });
+
+        console.log(test);
       } catch (err) {
         console.log("api error: ", err);
       }
     };
     fetchResources();
-  });
-
+  }, []);
   return (
     <Stack.Navigator>
       <Stack.Screen name="Relaxation Screen 1" component={ResourcesScreen1} />
