@@ -27,7 +27,8 @@ If users press cancel, they will get back to the browsing screen. If they press 
 
 <img src="./assets/readme/add_confirm.png" height="30%" width="30%" > <img src="./assets/readme/entries_added.png" height="30%" width="30%" >
 
-####Edit an entry
+#### Edit an entry
+
 In browsing screen, users could press the card and they will get to the details screen
 
 <img src="./assets/readme/details.png" height="30%" width="30%" >
