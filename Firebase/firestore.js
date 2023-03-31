@@ -6,11 +6,9 @@ import {
   updateDoc,
   getDoc,
   getDocs,
-  query
+  query,
 } from "firebase/firestore";
-import {
-  firestore
-} from "./firebase-setup";
+import { firestore } from "./firebase-setup";
 
 export async function getFromDB() {
   try {
@@ -25,7 +23,7 @@ export async function getFromDB() {
       // console.log("doc = ", doc)
       data.push({
         ...doc.data(),
-        id: doc.id
+        id: doc.id,
       });
     });
     return data;
@@ -34,16 +32,14 @@ export async function getFromDB() {
   }
 }
 
-export async function writeToDB({
-  calories,
-  description,
-  isOverLimit
-}) {
+export async function writeToDB({ data, detail, location, mood, photo }) {
   try {
-    await addDoc(collection(firestore, "Entries"), {
-      calories: calories,
-      description: description,
-      isOverLimit: isOverLimit,
+    await addDoc(collection(firestore, "journals"), {
+      data: data,
+      detail: detail,
+      location: location,
+      mood: mood,
+      photo: photo,
     });
   } catch (err) {
     console.log(err);

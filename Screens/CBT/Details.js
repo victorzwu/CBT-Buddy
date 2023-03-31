@@ -35,7 +35,7 @@ export default function Details({ route, navigation }) {
       <Text>{item.date}</Text>
       <Text>Cognitive distortions</Text>
       {item.distortions.map((distortion) => (
-        <View>
+        <View key={distortion.id}>
           <Image
             source={{
               uri: "https://cdn-icons-png.flaticon.com/512/2970/2970875.png",

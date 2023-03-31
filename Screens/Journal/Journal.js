@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
-import { COLORS } from '../../color';
+import { COLORS } from "../../color";
 import JournalList from "./JournalList";
 import AddMood from "./AddMood";
 import AddDetail from "./AddDetail";

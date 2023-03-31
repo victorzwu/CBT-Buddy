@@ -4,7 +4,6 @@ import Button from "../../Components/Button";
 import { update } from "../../Firebase/firestore";
 import React, { useState } from "react";
 
-
 export default function Com({ formData, setFormData, navigation, getData }) {
   const [value, onChangeText] = useState("");
   return (
