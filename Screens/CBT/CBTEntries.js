@@ -11,6 +11,7 @@ export default function CBTEntries({ navigation }) {
   useEffect(() => {
     onSnapshot(collection(firestore, "CBTEntries"), (querySnapshot) => {
       if (querySnapshot.empty) {
+        setEntries([]);
       } else {
         console.log("start");
         let docs = [];
