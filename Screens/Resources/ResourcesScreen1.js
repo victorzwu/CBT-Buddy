@@ -5,8 +5,7 @@ import { FlatList } from "react-native";
 // import { cityVanApiKey } from "@env";
 
 export default function ResourcesScreen1({ navigation }) {
-
-  cityVanApiKey = '421b202f7b30e206d48c0d91ac5c412b31e84539fb4d2b97e938b24a'
+  cityVanApiKey = "421b202f7b30e206d48c0d91ac5c412b31e84539fb4d2b97e938b24a";
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function ResourcesScreen1({ navigation }) {
   }, []);
 
   function details(item) {
-    navigation.navigate("Resource Details", (item));
+    navigation.navigate("Resource Details", item);
   }
 
   return (
