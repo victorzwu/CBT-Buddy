@@ -62,7 +62,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
                   update(formData.id, {
                     mood: deepData[i].label,
                   });
-                  alert('Edit Success!')
+                  alert("Edit Success!");
                   getData();
                   navigation.goBack();
                 } else {
