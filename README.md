@@ -2,35 +2,6 @@
 
 ## Iteration 1
 
-### Victor Wu
-
-Created the project. Created folders and files for screens and components. Created firebase setup and helper files. Colro helper file. Added dependencies to package.json
-
-Created tab navigation for each feature of app. Nested stack navigators within tab navigation.
-
-<img src="./assets/readme/iteration1/tabnavigation.png" height="30%" width="30%" >
-
-Created login authentication through firebase.
-
-<img src="./assets/readme/iteration1/loginscreen.png" height="30%" width="30%" >
-
-Created sign up through firebase. Profile Screen with signout.
-
-<img src="./assets/readme/iteration1/signupscreen.png" height="30%" width="30%" >
-<img src="./assets/readme/iteration1/profilescreen.png" height="30%" width="30%" >
-
-Use City of Vancouver Open Data to make 3rd party API call and put in a FlatList of Pressables that when clicked will give more information. (Will add more details and styling later.)
-
-<img src="./assets/readme/iteration1/therapyresources.png" height="30%" width="30%" >
-<img src="./assets/readme/iteration1/resourcesdetails.png" height="30%" width="30%" >
-
-
-Created deep breathing relaxation countdown timer that has different time intervals for breathing in, holding your breath, and breathing out.
-
-<img src="./assets/readme/iteration1/deepbreathing.png" height="30%" width="30%" >
-<img src="./assets/readme/iteration1/timedown.png" height="30%" width="30%" >
-<img src="./assets/readme/iteration1/holdyourbreath.png" height="30%" width="30%" >
-
 
 ### Yiwei Tao
 
@@ -67,6 +38,41 @@ To implement the update function, click on the corresponding entry on this page 
 
 <img src="./assets/readme/edit.png" height="30%" width="30%" >
 
+### Victor Wu
+
+#### Overall Work and Firebase/Navigators
+
+Created the project, and created folders and files for screens and components. Created firebase setup and helper files, color helper file. Added dependencies to package.json.
+
+Created tab navigation for each feature of app. Nested Stack navigators within tab navigation for other features of app.
+
+<img src="./assets/readme/iteration1/tabnavigation.png" height="30%" width="30%" >
+
+#### Authentication and Profile Screen
+
+Created login authentication through firebase. Used conditional rendering to require authentication before access to app.
+
+<img src="./assets/readme/iteration1/loginscreen.png" height="30%" width="30%" >
+
+Created sign up through firebase. Profile Screen with signout.
+
+<img src="./assets/readme/iteration1/signupscreen.png" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/profilescreen.png" height="30%" width="30%" >
+
+#### 3rd Party API
+
+Use City of Vancouver Open Data to make 3rd party API call and put in a FlatList of Pressables that when clicked will give more information. (Will add more details and styling later.)
+
+<img src="./assets/readme/iteration1/therapyresources.png" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/resourcesdetails.png" height="30%" width="30%" >
+
+#### Deep Breathing Screen
+
+Created deep breathing relaxation countdown timer that has different time intervals for breathing in, holding your breath, and breathing out.
+
+<img src="./assets/readme/iteration1/deepbreathing.png" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/timedown.png" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/holdyourbreath.png" height="30%" width="30%" >
 
 ### Xilong Cai
 
