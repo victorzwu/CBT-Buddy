@@ -2,6 +2,30 @@
 
 ## Iteration 1
 
+### Victor Wu
+
+Created the project. Created folders and files for screens and components. Created firebase setup and helper files. Colro helper file. Added dependencies to package.json
+
+Created tab navigation for each feature of app. Nested stack navigators within tab navigation.
+<img src="./assets/readme/iteration1/tabnavigation" height="30%" width="30%" >
+
+Created login authentication through firebase.
+<img src="./assets/readme/iteration1/loginscreen" height="30%" width="30%" >
+
+Created sign up through firebase. Profile Screen with signout.
+<img src="./assets/readme/iteration1/signupscreen" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/profilescreen" height="30%" width="30%" >
+
+Use City of Vancouver Open Data to make 3rd party API call and put in a FlatList of Pressables that when clicked will give more information. (Will add more details and styling later.)
+<img src="./assets/readme/iteration1/therapyresources" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/resourcesdetails" height="30%" width="30%" >
+
+
+Created deep breathing relaxation countdown timer that has different time intervals for breathing in, holding your breath, and breathing out.
+<img src="./assets/readme/iteration1/timedown" height="30%" width="30%" >
+<img src="./assets/readme/iteration1/holdyourbreath" height="30%" width="30%" >
+
+
 ### Yiwei Tao
 
 Complete initial screens of Journal. The initial screen in Journal tab is browsing all Journal entries.
