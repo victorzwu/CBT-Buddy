@@ -7,7 +7,7 @@ export default function Relaxation() {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name = "Relaxation Screen 1" component = {RelaxationScreen1}/>
+      <Stack.Screen options = {{headerShown: false}} name = "Relaxation Screen 1" component = {RelaxationScreen1}/>
     </Stack.Navigator>
   )
 }
