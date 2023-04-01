@@ -27,6 +27,7 @@ Use City of Vancouver Open Data to make 3rd party API call and put in a FlatList
 
 Created deep breathing relaxation countdown timer that has different time intervals for breathing in, holding your breath, and breathing out.
 
+<img src="./assets/readme/iteration1/deepbreathing.png" height="30%" width="30%" >
 <img src="./assets/readme/iteration1/timedown.png" height="30%" width="30%" >
 <img src="./assets/readme/iteration1/holdyourbreath.png" height="30%" width="30%" >
 
