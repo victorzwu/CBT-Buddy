@@ -1,12 +1,14 @@
-import { SafeAreaView, Text, Button, TextInput } from "react-native";
+import { SafeAreaView, Text, Button, TextInput, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { auth } from "../../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { COLORS } from "../../color";
 
 export default function SignUp({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
 
   const login = () => {
     navigation.replace("Login");
@@ -24,7 +26,7 @@ export default function SignUp({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style = {styles.container}>
       <Text>Email Address</Text>
       <TextInput
         value={email}
@@ -48,3 +50,10 @@ export default function SignUp({ navigation }) {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.second,
+  },
+});

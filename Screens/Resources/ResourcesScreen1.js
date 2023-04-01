@@ -1,7 +1,8 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import React from "react";
 import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
+import { COLORS } from "../../color";
 // import { cityVanApiKey } from "@env";
 
 export default function ResourcesScreen1({ navigation }) {
@@ -43,12 +44,12 @@ export default function ResourcesScreen1({ navigation }) {
   }
 
   return (
-    <View>
+    <View styles = {styles.container}>
       <FlatList
         data={resources}
         renderItem={({ item }) => {
           return (
-            <Pressable onPress={() => details(item)}>
+            <Pressable style = {styles.pressable} onPress={() => details(item)}>
               <View>
                 <Text>Name: {item.name}</Text>
                 <Text>Local Area: {item.localarea}</Text>
@@ -61,3 +62,28 @@ export default function ResourcesScreen1({ navigation }) {
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.second,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pressable: {
+
+      backgroundColor: COLORS.second,
+      shadowColor: "black",
+      shadowOffset: {
+        width: 1,
+        height: 8,
+      },
+      margin: 10,
+      padding: 30,
+      shadowRadius: 6,
+      shadowOpacity: 0.25,
+      elevation: 16,
+      borderRadius: 4,
+  },
+});

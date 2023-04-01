@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { COLORS } from "../color";
 
 export default function CountDownTimer({ pressedHandler }) {
   const [countdown, setCountdown] = useState(0);
@@ -34,20 +36,38 @@ export default function CountDownTimer({ pressedHandler }) {
 
   return (
     <View>
-      {countdown > 0 ? (
-        <Text style={{ fontSize: 24 }}>{countdown}</Text>
-      ) : cycle === 0 ? (
-        <Text style={{ fontSize: 24 }}>Breathe In...</Text>
-      ) : cycle === 1 ? (
-        <Text style={{ fontSize: 24 }}>Hold Your Breath...</Text>
-      ) : (
-        <Text style={{ fontSize: 24 }}>Breathe out...</Text>
-      )}
-      <Text>Total time elapsed: {totalTime}</Text>
-      <Text>Total breaths: {totalBreaths}</Text>
-      <Pressable onPress={() => pressedHandler()}>
-        <Text>Stop</Text>
-      </Pressable>
+      <View style = {styles.container}>
+        {countdown > 0 ? (
+          <Text style={{ fontSize: 100 }}>{countdown}</Text>
+        ) : cycle === 0 ? (
+          <Text style={{ fontSize: 50 }}>Breathe In...</Text>
+        ) : cycle === 1 ? (
+          <Text style={{ fontSize: 50 }}>Hold Your Breath...</Text>
+        ) : (
+          <Text style={{ fontSize: 50 }}>Breathe out...</Text>
+        )}
+      </View>
+      <View>
+        <Text>Total time elapsed: {totalTime}</Text>
+        <Text>Total breaths: {totalBreaths}</Text>
+        <Pressable style={styles.pressable} onPress={() => pressedHandler()}>
+          <Text>Stop</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pressable: {
+    padding: 20,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: "#f0f0f0",
+    backgroundColor: "#f9f9f9",
+  },
+});
