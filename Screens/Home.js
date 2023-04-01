@@ -9,6 +9,9 @@ import Relaxation from "./Relaxation/Relaxation";
 import Resources from "./Resources/Resources";
 import Profile from "./Profile/Profile";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Home() {
   const Tab = createBottomTabNavigator();
@@ -34,10 +37,53 @@ export default function Home() {
         name="Journal"
         component={Journal}
       />
-      <Tab.Screen name="CBT" component={CBT} options={{ headerShown: false }} />
-      <Tab.Screen name="Relaxation" component={Relaxation} />
-      <Tab.Screen name="Resources" component={Resources} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen
+        name="CBT"
+        component={CBT}
+        options={{
+          headerShown: false,
+          title: "CBT",
+          headerTitleAlign: "center",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="lightbulb" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Relaxation"
+        component={Relaxation}
+        options={{
+          title: "Relaxation",
+          headerTitleAlign: "center",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="meditation" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Resources"
+        component={Resources}
+        options={{
+          headerShown: false,
+          title: "Resources",
+          headerTitleAlign: "center",
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="list" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          title: "Profile",
+          headerTitleAlign: "center",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-circle" size={24} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
