@@ -7,9 +7,10 @@ import React, { useState, useEffect } from "react";
 import { firestore } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
 import { MAP_API_KEY } from "@env";
-
+import { Marker } from "react-native-maps";
 export default function Com({ formData, setFormData, navigation, getData }) {
   const [address, setAddress] = useState(null);
+  const [coordinate, setCoordinate] = useState(null);
 
   useEffect(() => {}, []);
 
@@ -22,6 +23,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
       const data = await response.json();
       const address = data.results[0].formatted_address;
       setAddress(address);
+      setCoordinate(coordinate);
       if (!formData.id) {
         setFormData({
           ...formData,
@@ -87,12 +89,17 @@ export default function Com({ formData, setFormData, navigation, getData }) {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-          />
+          >
+            {coordinate && (
+              <Marker coordinate={coordinate} title={address} />
+            )}
+          </MapView>
         </View>
       </View>
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
