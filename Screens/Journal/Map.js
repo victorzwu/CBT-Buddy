@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import Button from "../../Components/Button";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { COLORS } from "../../color";
 import { update } from "../../Firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
 import { MAP_API_KEY } from "@env";
-import { Marker } from "react-native-maps";
+
 export default function Com({ formData, setFormData, navigation, getData }) {
   const [address, setAddress] = useState(null);
   const [coordinate, setCoordinate] = useState(null);
@@ -35,6 +35,35 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     }
   };
 
+  const getCurrentLocation = async () => {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAP_API_KEY}`;
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          const address = data.results[0].formatted_address;
+          setAddress(address);
+          setCoordinate({ latitude, longitude });
+          if (!formData.id) {
+            setFormData({
+              ...formData,
+              location: address,
+            });
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      (error) => {
+        console.error(error);
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  };
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.box}>
@@ -43,6 +72,16 @@ export default function Com({ formData, setFormData, navigation, getData }) {
           <Text style={styles.curAddress}>
             {address ? address : "no select"}
           </Text>
+        </View>
+        <View style={styles.btnBox}>
+          <TouchableOpacity
+            onPress={() => {
+              getCurrentLocation();
+            }}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Find My Location</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.btnBox}>
           <Button
@@ -76,7 +115,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             title="Confirm"
           />
         </View>
-
+  
         <View style={styles.mapBox}>
           <MapView
             onPress={(e) => {
