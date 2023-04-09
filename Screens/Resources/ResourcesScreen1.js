@@ -37,10 +37,13 @@ export default function ResourcesScreen1({ navigation }) {
         );
         const data = await response.json();
         const businesses = data.records.map((business) => {
+          console.log(business.record.fields.geo_point_2d );
           return {
             name: business.record.fields.businessname,
             city: business.record.fields.city,
             localarea: business.record.fields.localarea,
+            location: business.record.fields.geo_point_2d,
+            address: business.record.fields.unit + "-" + business.record.fields.house + " " + business.record.fields.street + " " +  business.record.fields.postalcode
           };
         });
         setResources(businesses);
@@ -66,6 +69,10 @@ export default function ResourcesScreen1({ navigation }) {
                 <Text>Name: {item.name}</Text>
                 <Text>Local Area: {item.localarea}</Text>
                 <Text>City: {item.city}</Text>
+                <Text>Longitude: {item.location ? item.location.lon : "Unknown" }</Text>
+                <Text>Latitude: {item.location ? item.location.lat : "Unknown" }</Text>
+
+                <Text>Address: {item.address !== "null-null null null" ? item.address : "Unknown"}</Text>
               </View>
             </Pressable>
           );
