@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Button from "../../Components/Button";
 import MapView, { Marker } from "react-native-maps";
 import { COLORS } from "../../color";
@@ -7,10 +13,13 @@ import React, { useState, useEffect } from "react";
 import { firestore } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
 import { MAP_API_KEY } from "@env";
+import * as Location from "expo-location";
 
-export default function Com({ formData, setFormData, navigation, getData }) {
+export default function Map({ formData, setFormData, navigation, getData }) {
   const [address, setAddress] = useState(null);
   const [coordinate, setCoordinate] = useState(null);
+  const [permissionResponse, requestPermission] =
+    Location.useForegroundPermissions();
 
   useEffect(() => {}, []);
 
@@ -21,6 +30,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
       setCoordinate(coordinate);
@@ -35,34 +45,75 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     }
   };
 
-  const getCurrentLocation = async () => {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAP_API_KEY}`;
+  async function verifyPermission() {
+    console.log(permissionResponse);
+    if (permissionResponse.granted) {
+      return true;
+    }
+    const permissionResult = await requestPermission();
+    // // this will be user's choice:
+    return permissionResult.granted;
+  }
+  async function getCurrentLocation() {
+    const permissionReceived = await verifyPermission();
+    if (!permissionReceived) {
+      Alert.alert("You need to give location permission");
+      return;
+    }
+    try {
+      const result = await Location.getCurrentPositionAsync();
+      setCoordinate({
+        latitude: result.coords.latitude,
+        longitude: result.coords.longitude,
+      });
+      const { latitude, longitude } = result.coords;
+      console.log(latitude);
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAP_API_KEY}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      const address = data.results[0].formatted_address;
+      setAddress(address);
+      if (!formData.id) {
+        setFormData({
+          ...formData,
+          location: address,
+        });
+      }
+    } catch (err) {
+      console.log("location handler ", err);
+    }
+  }
 
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
-          const address = data.results[0].formatted_address;
-          setAddress(address);
-          setCoordinate({ latitude, longitude });
-          if (!formData.id) {
-            setFormData({
-              ...formData,
-              location: address,
-            });
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      },
-      (error) => {
-        console.error(error);
-      },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-  };
+  // const getCurrentLocation = async () => {
+  //   console.log(navigator.geolocation);
+  //   navigator.geolocation.getCurrentPosition(
+  //     async (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAPS_API_KEY}`;
+
+  //       try {
+  //         const response = await fetch(url);
+  //         const data = await response.json();
+  //         const address = data.results[0].formatted_address;
+  //         setAddress(address);
+  //         setCoordinate({ latitude, longitude });
+  //         if (!formData.id) {
+  //           setFormData({
+  //             ...formData,
+  //             location: address,
+  //           });
+  //         }
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     },
+  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+  //   );
+  // };
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -115,30 +166,29 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             title="Confirm"
           />
         </View>
-  
+
         <View style={styles.mapBox}>
           <MapView
             onPress={(e) => {
               handleMapPress(e.nativeEvent.coordinate);
             }}
             style={styles.mapView}
-            initialRegion={{
-              latitude: 49.22796918780358,
-              longitude: -123.00663209296373,
+            region={{
+              latitude: coordinate ? coordinate.latitude : 49.22796918780358,
+              longitude: coordinate
+                ? coordinate.longitude
+                : -123.00663209296373,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
           >
-            {coordinate && (
-              <Marker coordinate={coordinate} title={address} />
-            )}
+            {coordinate && <Marker coordinate={coordinate} title={address} />}
           </MapView>
         </View>
       </View>
     </ScrollView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

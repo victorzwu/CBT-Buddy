@@ -41,9 +41,9 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 
   const takePicture = async () => {
     let result = await ImagePicker.launchCameraAsync();
-    if (!result.cancelled) {
+    if (!result.canceled) {
       // setImage(result.uri);
-      let uri = result.uri;
+      let uri = result.assets[0].uri;
       let imgBlob = await getImageBlob(uri);
       let uuid = moment().valueOf();
       const storageRef = ref(storage, `${uuid}_img`);
@@ -79,8 +79,9 @@ export default function Com({ formData, setFormData, navigation, getData }) {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      let uri = result.uri;
+    if (!result.canceled) {
+      // let uri = result.uri;
+      let uri = result.assets[0].uri;
       let imgBlob = await getImageBlob(uri);
       let uuid = moment().valueOf();
       const storageRef = ref(storage, `${uuid}_img`);
