@@ -1,15 +1,25 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Button from "../../Components/Button";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { COLORS } from "../../color";
 import { update } from "../../Firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
 import { MAP_API_KEY } from "@env";
+import * as Location from "expo-location";
 
-export default function Com({ formData, setFormData, navigation, getData }) {
+export default function Map({ formData, setFormData, navigation, getData }) {
   const [address, setAddress] = useState(null);
+  const [coordinate, setCoordinate] = useState(null);
+  const [permissionResponse, requestPermission] =
+    Location.useForegroundPermissions();
 
   useEffect(() => {}, []);
 
@@ -20,8 +30,10 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
+      setCoordinate(coordinate);
       if (!formData.id) {
         setFormData({
           ...formData,
@@ -33,6 +45,47 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     }
   };
 
+  async function verifyPermission() {
+    console.log(permissionResponse);
+    if (permissionResponse.granted) {
+      return true;
+    }
+    const permissionResult = await requestPermission();
+    // // this will be user's choice:
+    return permissionResult.granted;
+  }
+  async function getCurrentLocation() {
+    const permissionReceived = await verifyPermission();
+    if (!permissionReceived) {
+      Alert.alert("You need to give location permission");
+      return;
+    }
+    try {
+      const result = await Location.getCurrentPositionAsync();
+      setCoordinate({
+        latitude: result.coords.latitude,
+        longitude: result.coords.longitude,
+      });
+      const { latitude, longitude } = result.coords;
+      console.log(latitude);
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAP_API_KEY}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      const address = data.results[0].formatted_address;
+      setAddress(address);
+      if (!formData.id) {
+        setFormData({
+          ...formData,
+          location: address,
+        });
+      }
+    } catch (err) {
+      console.log("location handler ", err);
+    }
+  }
+
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.box}>
@@ -41,6 +94,16 @@ export default function Com({ formData, setFormData, navigation, getData }) {
           <Text style={styles.curAddress}>
             {address ? address : "no select"}
           </Text>
+        </View>
+        <View style={styles.btnBox}>
+          <TouchableOpacity
+            onPress={() => {
+              getCurrentLocation();
+            }}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Find My Location</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.btnBox}>
           <Button
@@ -81,13 +144,17 @@ export default function Com({ formData, setFormData, navigation, getData }) {
               handleMapPress(e.nativeEvent.coordinate);
             }}
             style={styles.mapView}
-            initialRegion={{
-              latitude: 49.22796918780358,
-              longitude: -123.00663209296373,
+            region={{
+              latitude: coordinate ? coordinate.latitude : 49.22796918780358,
+              longitude: coordinate
+                ? coordinate.longitude
+                : -123.00663209296373,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-          />
+          >
+            {coordinate && <Marker coordinate={coordinate} title={address} />}
+          </MapView>
         </View>
       </View>
     </ScrollView>
@@ -129,7 +196,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   curAddress: {
-    color: COLORS.primary,
+    color: COLORS.textColor,
     textAlign: "center",
+  },
+  button: {
+    backgroundColor: '#F0FFFF',
+    borderRadius: 20,
+    padding: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'plum',
+    fontWeight: 'bold',
+    fontSize: 12,
   },
 });
