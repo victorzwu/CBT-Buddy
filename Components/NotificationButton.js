@@ -30,7 +30,7 @@ export default function NotificationButton() {
           body: "It's time to write in your journal.",
           data: { url: "https://www.google.com" },
         },
-        trigger: { seconds: 60, repeats: true },
+        trigger: { seconds: 5 },
       });
     } catch (err) {
       console.log("notification err:", err);
@@ -39,7 +39,7 @@ export default function NotificationButton() {
 
   return (
       <Pressable title="Notify" onPress={scheduleNotificationHandler}>
-        <Ionicons name="notifications-outline" size={24} color="black" />
+        <Ionicons name="notifications-outline" size={24} color="white" />
       </Pressable>
   );
 }

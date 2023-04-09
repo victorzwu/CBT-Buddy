@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React, {useEffect} from "react";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../color";
 import CBT from "./CBT/CBT";
@@ -12,9 +12,26 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Notifications from "expo-notifications";
+
 
 export default function Home() {
   const Tab = createBottomTabNavigator();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationResponseReceivedListener(
+      (response) => {
+        try {
+          navigation.navigate("Journal");
+        } catch (err) {
+          console.log("linking err: ", err);
+        }
+      }
+    );
+    return () => subscription.remove();
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={({ navigation }) => ({
