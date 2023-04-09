@@ -23,19 +23,21 @@ export default function Resources({ navigation }) {
       <Stack.Screen
         name="Therapy Resources"
         component={ResourcesScreen1}
-        options={{
-          headerRight: () => {
-            return (
-              <Ionicons
-                name="location-outline"
-                size={24}
-                color="white"
-                onPress={() =>
-                  navigation.navigate("Map", { screen: "Resources" })
-                }
-              />
-            );
-          },
+        options={() => {
+          return {
+            headerRight: () => {
+              return (
+                <Ionicons
+                  name="location-outline"
+                  size={24}
+                  color="white"
+                  onPress={() =>
+                    navigation.navigate("Map", { screen: "Resources" })
+                  }
+                />
+              );
+            },
+          };
         }}
       />
       <Stack.Screen name="Resource Details" component={ResourceDetails} />

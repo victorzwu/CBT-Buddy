@@ -133,7 +133,6 @@ export default function Map({ route, formData, setFormData, navigation, getData 
                 }
                 if(route.params.screen === "Resources")
                 {
-                  console.log("happened");
                   navigation.navigate("Resources", {coordinate: coordinate});
                 }
               } catch (e) {
