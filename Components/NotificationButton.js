@@ -28,9 +28,8 @@ export default function NotificationButton() {
         content: {
           title: "CBT Buddy",
           body: "It's time to write in your journal.",
-          data: { url: "https://www.google.com" },
         },
-        trigger: { seconds: 5 },
+        trigger: { seconds: 5, repeats: false },
       });
     } catch (err) {
       console.log("notification err:", err);
@@ -38,7 +37,7 @@ export default function NotificationButton() {
   };
 
   return (
-      <Pressable title="Notify" onPress={scheduleNotificationHandler}>
+      <Pressable title="Notify" onPress={() => scheduleNotificationHandler}>
         <Ionicons name="notifications-outline" size={24} color="white" />
       </Pressable>
   );
