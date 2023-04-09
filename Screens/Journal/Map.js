@@ -85,35 +85,6 @@ export default function Map({ formData, setFormData, navigation, getData }) {
     }
   }
 
-  // const getCurrentLocation = async () => {
-  //   console.log(navigator.geolocation);
-  //   navigator.geolocation.getCurrentPosition(
-  //     async (position) => {
-  //       const { latitude, longitude } = position.coords;
-  //       const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAPS_API_KEY}`;
-
-  //       try {
-  //         const response = await fetch(url);
-  //         const data = await response.json();
-  //         const address = data.results[0].formatted_address;
-  //         setAddress(address);
-  //         setCoordinate({ latitude, longitude });
-  //         if (!formData.id) {
-  //           setFormData({
-  //             ...formData,
-  //             location: address,
-  //           });
-  //         }
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     },
-  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  //   );
-  // };
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -225,7 +196,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   curAddress: {
-    color: COLORS.primary,
+    color: COLORS.textColor,
     textAlign: "center",
+  },
+  button: {
+    backgroundColor: '#F0FFFF',
+    borderRadius: 20,
+    padding: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'plum',
+    fontWeight: 'bold',
+    fontSize: 12,
   },
 });

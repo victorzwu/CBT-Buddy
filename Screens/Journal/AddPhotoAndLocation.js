@@ -39,6 +39,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     })();
   }, []);
 
+
   const takePicture = async () => {
     let result = await ImagePicker.launchCameraAsync();
     if (!result.canceled) {
