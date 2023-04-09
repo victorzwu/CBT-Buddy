@@ -4,10 +4,22 @@ import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { COLORS } from "../../color";
 // import { cityVanApiKey } from "@env";
+import { getFromDB } from "../../Firebase/firestore";
 
 export default function ResourcesScreen1({ navigation }) {
   cityVanApiKey = "421b202f7b30e206d48c0d91ac5c412b31e84539fb4d2b97e938b24a";
   const [resources, setResources] = useState([]);
+
+  useEffect(() => {
+    async function locationCheck() {
+      const locationData = await getFromDB().location;
+      if(!locationData)
+      {
+        navigation.navigate("Map");
+      }
+    }
+    locationCheck();
+  }, []);
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -44,12 +56,12 @@ export default function ResourcesScreen1({ navigation }) {
   }
 
   return (
-    <View styles = {styles.container}>
+    <View styles={styles.container}>
       <FlatList
         data={resources}
         renderItem={({ item }) => {
           return (
-            <Pressable style = {styles.pressable} onPress={() => details(item)}>
+            <Pressable style={styles.pressable} onPress={() => details(item)}>
               <View>
                 <Text>Name: {item.name}</Text>
                 <Text>Local Area: {item.localarea}</Text>
@@ -63,7 +75,6 @@ export default function ResourcesScreen1({ navigation }) {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -72,18 +83,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   pressable: {
-
-      backgroundColor: COLORS.second,
-      shadowColor: "black",
-      shadowOffset: {
-        width: 1,
-        height: 8,
-      },
-      margin: 10,
-      padding: 30,
-      shadowRadius: 6,
-      shadowOpacity: 0.25,
-      elevation: 16,
-      borderRadius: 4,
+    backgroundColor: COLORS.second,
+    shadowColor: "black",
+    shadowOffset: {
+      width: 1,
+      height: 8,
+    },
+    margin: 10,
+    padding: 30,
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
+    elevation: 16,
+    borderRadius: 4,
   },
 });

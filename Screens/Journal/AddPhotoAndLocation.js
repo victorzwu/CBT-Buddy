@@ -88,7 +88,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
       const storageRef = ref(storage, `${uuid}_img`);
       uploadBytes(storageRef, imgBlob)
         .then((snapshot) => {
-          console.log("Uploaded a blob!");
+          // console.log("Uploaded a blob!");
           setFormData({
             ...formData,
             photo: `${uuid}_img`,
@@ -144,9 +144,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
         <Text style={styles.itemTip}>Tap the map</Text>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate({
-              name: "Map",
-            });
+            navigation.navigate("Map", {screen: "Journal"});
           }}
           style={styles.itemMap}
         >

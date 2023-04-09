@@ -21,15 +21,15 @@ export default function NotificationButton() {
       return;
     }
     try {
-        // const trigger = new Date(Date.now() + 60 * 60 * 1000);
-        // trigger.setMinutes(0);
-        // trigger.setSeconds(0);
+      // const trigger = new Date(Date.now() + 60 * 60 * 1000);
+      // trigger.setMinutes(0);
+      // trigger.setSeconds(0);
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "CBT Buddy",
-          body: "It's time to write in your journal.",
+          body: "It's time to write in your journal",
         },
-        trigger: { seconds: 5, repeats: false },
+        trigger: { seconds: 5 },
       });
     } catch (err) {
       console.log("notification err:", err);
@@ -37,8 +37,13 @@ export default function NotificationButton() {
   };
 
   return (
-      <Pressable title="Notify" onPress={() => scheduleNotificationHandler}>
-        <Ionicons name="notifications-outline" size={24} color="white" />
-      </Pressable>
+    <Ionicons
+      name="notifications-outline"
+      size={24}
+      color="white"
+      onPress={() => {
+        scheduleNotificationHandler();
+      }}
+    />
   );
 }

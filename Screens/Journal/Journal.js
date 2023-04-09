@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { getFromDB } from "../../Firebase/firestore";
 import NotificationButton from "../../Components/NotificationButton";
 
-export default function Journal() {
+export default function Journal({navigation}) {
   const [formData, setFormData] = useState({
     mood: "",
     detail: "",
@@ -48,7 +48,7 @@ export default function Journal() {
         name="JournalList"
         options={{
           headerRight: () => {
-            return <NotificationButton />;
+            return (<NotificationButton />);
           },
           title: "Journal",
           headerTitleAlign: "center",
