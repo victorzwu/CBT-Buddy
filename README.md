@@ -2,42 +2,6 @@
 
 ## Iteration 1
 
-
-### Yiwei Tao
-
-Complete initial screens of Journal. The initial screen in Journal tab is browsing all Journal entries.
-<img src="./assets/readme/initial.png" height="30%" width="30%" >
-
-#### Mood Page
-Automatically jump to the next entry after selecting the corresponding mood.
-
-<img src="./assets/readme/mood.png" height="30%" width="30%" >
-
-#### Detail Page
-This page allows you to record your thoughts in text form.
-
-<img src="./assets/readme/text.png" height="30%" width="30%" >
-
-#### Photo and Location Page
-Preliminary implementation of the selection of albums or photos, and open the map to manually select the location of the function.
-
-<img src="./assets/readme/camera.png" height="30%" width="30%" >
-
-#### Map Page
-Choose your own preferred geographic location.
-
-<img src="./assets/readme/map.png" height="30%" width="30%" >
-
-#### Journal Page
-Automatically jump to the home page after adding a location.
-
-<img src="./assets/readme/done.png" height="30%" width="30%" >
-
-#### Edit Page
-To implement the update function, click on the corresponding entry on this page to change the corresponding content.
-
-<img src="./assets/readme/edit.png" height="30%" width="30%" >
-
 ### Victor Wu
 
 #### Overall Work and Firebase/Navigators
@@ -73,6 +37,41 @@ Created deep breathing relaxation countdown timer that has different time interv
 <img src="./assets/readme/iteration1/deepbreathing.png" height="30%" width="30%" >
 <img src="./assets/readme/iteration1/timedown.png" height="30%" width="30%" >
 <img src="./assets/readme/iteration1/holdyourbreath.png" height="30%" width="30%" >
+
+### Yiwei Tao
+
+Complete initial screens of Journal. The initial screen in Journal tab is browsing all Journal entries.
+<img src="./assets/readme/initial.png" height="30%" width="30%" >
+
+#### Mood Page
+Automatically jump to the next entry after selecting the corresponding mood.
+
+<img src="./assets/readme/mood.png" height="30%" width="30%" >
+
+#### Detail Page
+This page allows you to record your thoughts in text form.
+
+<img src="./assets/readme/text.png" height="30%" width="30%" >
+
+#### Photo and Location Page
+Preliminary implementation of the selection of albums or photos, and open the map to manually select the location of the function.
+
+<img src="./assets/readme/camera.png" height="30%" width="30%" >
+
+#### Map Page
+Choose your own preferred geographic location.
+
+<img src="./assets/readme/map.png" height="30%" width="30%" >
+
+#### Journal Page
+Automatically jump to the home page after adding a location.
+
+<img src="./assets/readme/done.png" height="30%" width="30%" >
+
+#### Edit Page
+To implement the update function, click on the corresponding entry on this page to change the corresponding content.
+
+<img src="./assets/readme/edit.png" height="30%" width="30%" >
 
 ### Xilong Cai
 

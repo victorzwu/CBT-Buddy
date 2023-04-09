@@ -9,6 +9,7 @@ import JournalEdit from "./JournalEdit";
 import Map from "./Map";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { getFromDB } from "../../Firebase/firestore";
+import NotificationButton from "../../Components/NotificationButton";
 
 export default function Journal() {
   const [formData, setFormData] = useState({
@@ -46,6 +47,9 @@ export default function Journal() {
       <Stack.Screen
         name="JournalList"
         options={{
+          headerRight: () => {
+            return <NotificationButton />;
+          },
           title: "Journal",
           headerTitleAlign: "center",
         }}
