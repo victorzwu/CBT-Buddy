@@ -31,6 +31,7 @@ export default function ResourcesScreen1({ navigation, route }) {
           latitude: result.coords.latitude,
           longitude: result.coords.longitude,
         });
+        console.log(location)
       } catch (err) {
         console.log("location handler: ", err);
       }
@@ -99,7 +100,7 @@ export default function ResourcesScreen1({ navigation, route }) {
                   business.record.fields.geo_point_2d.lat,
                   business.record.fields.geo_point_2d.lon,
                   location.latitude,
-                  location.latitude
+                  location.longitude
                 )
               : 0,
           };
