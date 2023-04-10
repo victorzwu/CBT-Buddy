@@ -15,7 +15,7 @@ export default function RelaxationScreen1() {
     <View style = {styles.container}>
       {!pressed && (
         <Pressable style = {styles.pressable} onPress={() => pressedHandler()}>
-          <Text>Click Here to Practice Deep Breathing</Text>
+          <Text style = {styles.pressableText}>Click Here to Practice Deep Breathing</Text>
         </Pressable>
       )}
       {pressed && (
@@ -29,7 +29,7 @@ export default function RelaxationScreen1() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -37,7 +37,11 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
     borderWidth: 1,
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary,
+    borderColor: COLORS.darksilver,
+    backgroundColor: COLORS.darksilver,
   },
+  pressableText:
+  {
+    color: COLORS.white
+  }
 });

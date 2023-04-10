@@ -8,8 +8,8 @@ import AddDistortions from "./AddDistortions";
 import AddChallenge from "./AddChallenge";
 import Review from "./Review";
 import { useNavigation } from "@react-navigation/native";
-import { color } from "../../style/helper";
 import Details from "./Details";
+import { COLORS } from "../../color";
 
 export default function CBT() {
   const Stack = createNativeStackNavigator();
@@ -17,9 +17,8 @@ export default function CBT() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: color.header,
-        },
+        headerStyle: { backgroundColor: COLORS.primary },
+        headerTintColor: "white",
       }}
     >
       <Stack.Screen
