@@ -31,7 +31,7 @@ export default function ResourcesScreen1({ navigation, route }) {
           latitude: result.coords.latitude,
           longitude: result.coords.longitude,
         });
-        console.log(location)
+        console.log(location);
       } catch (err) {
         console.log("location handler: ", err);
       }
@@ -40,13 +40,15 @@ export default function ResourcesScreen1({ navigation, route }) {
     }
   };
 
-  useEffect(()=>{
-    if(route.params)
-    {
-      console.log(route.params)
-      setLocation({latitude: route.params.coordinate.latitude, longitude: route.params.coordinate.longitude})
+  useEffect(() => {
+    if (route.params) {
+      console.log(route.params);
+      setLocation({
+        latitude: route.params.coordinate.latitude,
+        longitude: route.params.coordinate.longitude,
+      });
     }
-  }, [route])
+  }, [route]);
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -87,14 +89,16 @@ export default function ResourcesScreen1({ navigation, route }) {
             city: business.record.fields.city,
             localarea: business.record.fields.localarea,
             // location: business.record.fields.geo_point_2d,
-            address:
-              business.record.fields.unit +
-              "-" +
-              business.record.fields.house +
-              " " +
-              business.record.fields.street +
-              " " +
+            address: [
+              // business.record.fields.unit,
+              business.record.fields.house,
+              business.record.fields.street,
               business.record.fields.postalcode,
+            ]
+              .filter(function (val) {
+                return val;
+              })
+              .join(" "),
             distance: location
               ? calculateDistance(
                   business.record.fields.geo_point_2d.lat,
@@ -136,13 +140,8 @@ export default function ResourcesScreen1({ navigation, route }) {
                 <Text>
                   Latitude: {item.location ? item.location.lat : "Unknown"}
                 </Text> */}
-                <Text> Distance: {item.distance}</Text>
-                <Text>
-                  Address:{" "}
-                  {item.address !== "null-null null null"
-                    ? item.address
-                    : "Unknown"}
-                </Text>
+                <Text>Distance: {item.distance.toFixed(2)} km</Text>
+                <Text>Address: {item.address}</Text>
               </View>
             </Pressable>
           );
