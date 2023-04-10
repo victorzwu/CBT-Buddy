@@ -31,7 +31,7 @@ export default function ResourcesScreen1({ navigation, route }) {
           latitude: result.coords.latitude,
           longitude: result.coords.longitude,
         });
-        console.log(location);
+        // console.log(location);
       } catch (err) {
         console.log("location handler: ", err);
       }
@@ -42,7 +42,7 @@ export default function ResourcesScreen1({ navigation, route }) {
 
   useEffect(() => {
     if (route.params) {
-      console.log(route.params);
+      // console.log(route.params);
       setLocation({
         latitude: route.params.coordinate.latitude,
         longitude: route.params.coordinate.longitude,
@@ -125,28 +125,30 @@ export default function ResourcesScreen1({ navigation, route }) {
   return (
     <View styles={styles.container}>
       <Button title="Locate Me" onPress={() => findLocation()} />
-      <FlatList
-        data={resources}
-        renderItem={({ item }) => {
-          return (
-            <Pressable style={styles.pressable} onPress={() => details(item)}>
-              <View>
-                <Text>Name: {item.name}</Text>
-                <Text>Local Area: {item.localarea}</Text>
-                <Text>City: {item.city}</Text>
-                {/* <Text>
+      {location && (
+        <FlatList
+          data={resources}
+          renderItem={({ item }) => {
+            return (
+              <Pressable style={styles.pressable} onPress={() => details(item)}>
+                <View>
+                  <Text>Name: {item.name}</Text>
+                  <Text>Local Area: {item.localarea}</Text>
+                  <Text>City: {item.city}</Text>
+                  {/* <Text>
                   Longitude: {item.location ? item.location.lon : "Unknown"}
                 </Text>
                 <Text>
                   Latitude: {item.location ? item.location.lat : "Unknown"}
                 </Text> */}
-                <Text>Distance: {item.distance.toFixed(2)} km</Text>
-                <Text>Address: {item.address}</Text>
-              </View>
-            </Pressable>
-          );
-        }}
-      />
+                  <Text>Distance: {item.distance.toFixed(2)} km</Text>
+                  <Text>Address: {item.address}</Text>
+                </View>
+              </Pressable>
+            );
+          }}
+        />
+      )}
     </View>
   );
 }
