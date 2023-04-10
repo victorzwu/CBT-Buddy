@@ -6,6 +6,7 @@ import ResourcesScreen1 from "./ResourcesScreen1";
 import ResourceDetails from "./ResourceDetails";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../color";
+import ResourceMap from "./ResourceMap";
 
 export default function Resources({ navigation }) {
   const Stack = createNativeStackNavigator();
@@ -32,7 +33,7 @@ export default function Resources({ navigation }) {
                   size={24}
                   color="white"
                   onPress={() =>
-                    navigation.navigate("Map", { screen: "Resources" })
+                    navigation.navigate("Resource Map", { screen: "Resources" })
                   }
                 />
               );
@@ -40,6 +41,7 @@ export default function Resources({ navigation }) {
           };
         }}
       />
+      <Stack.Screen name="Resource Map" component={ResourceMap} />
       <Stack.Screen name="Resource Details" component={ResourceDetails} />
     </Stack.Navigator>
   );

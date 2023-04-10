@@ -34,7 +34,7 @@ export default function Map({ route, formData, setFormData, navigation, getData 
       const address = data.results[0].formatted_address;
       setAddress(address);
       setCoordinate(coordinate);
-      if (!formData.id) {
+      if (formData && !formData.id) {
         setFormData({
           ...formData,
           location: address,
@@ -133,7 +133,7 @@ export default function Map({ route, formData, setFormData, navigation, getData 
                 }
                 if(route.params.screen === "Resources")
                 {
-                  navigation.navigate("Resources", {coordinate: coordinate});
+                  navigation.navigate("Therapy Resources", {coordinate: coordinate});
                 }
               } catch (e) {
                 console.error("Error adding document: ", e);
