@@ -55,20 +55,20 @@ export default function ResourcesScreen1({ navigation, route }) {
       function calculateDistance(lat1, lon1, lat2, lon2) {
         const earthRadius = 6371; // Radius of the earth in km
         const dLat = deg2rad(lat2 - lat1);
-        const dLon = deg2rad(lon2 - lon1); 
+        const dLon = deg2rad(lon2 - lon1);
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(deg2rad(lat1)) *
             Math.cos(deg2rad(lat2)) *
             Math.sin(dLon / 2) *
             Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         const distance = earthRadius * c; // Distance in km
         return distance;
       }
-      
+
       function deg2rad(deg) {
-        return deg * (Math.PI / 180)
+        return deg * (Math.PI / 180);
       }
       try {
         const response = await fetch(
@@ -86,14 +86,20 @@ export default function ResourcesScreen1({ navigation, route }) {
         const businesses = data.records.map((business) => {
           // console.log(business.record.fields.geo_point_2d);
           return {
-            name: business.record.fields.businessname,
+            name: business.record.fields.businesstradename
+              ? business.record.fields.businesstradename
+              : business.record.fields.businessname,
             city: business.record.fields.city,
             localarea: business.record.fields.localarea,
             // location: business.record.fields.geo_point_2d,
             address: [
-              // business.record.fields.unit,
+              business.record.fields.unit
+                ? business.record.fields.unit + "-"
+                : null,
               business.record.fields.house,
-              business.record.fields.street,
+              business.record.fields.street + ",",
+              business.record.fields.city + ",",
+              business.record.fields.province + ",",
               business.record.fields.postalcode,
             ]
               .filter(function (val) {
@@ -133,17 +139,32 @@ export default function ResourcesScreen1({ navigation, route }) {
             return (
               <Pressable style={styles.pressable} onPress={() => details(item)}>
                 <View>
-                  <Text>Name: {item.name}</Text>
-                  <Text>Local Area: {item.localarea}</Text>
-                  <Text>City: {item.city}</Text>
+                  <Text style ={styles.nameText} >
+                    <Text>{item.name}{"\n"}</Text>
+                  </Text>
+                  <Text>
+                    <Text style={styles.boldText}>Local Area: </Text>
+                    <Text>{item.localarea}</Text>
+                  </Text>
+                  <Text>
+                    <Text style={styles.boldText}>City: </Text>
+                    <Text>{item.city}</Text>
+                  </Text>
+                  <Text>
+                    <Text style={styles.boldText}>Distance: </Text>
+                    <Text>{item.distance.toFixed(2)} km</Text>
+                  </Text>
+                  <Text>
+                    <Text style={styles.boldText}>Address: </Text>
+                    <Text>{item.address}</Text>
+                  </Text>
+
                   {/* <Text>
                   Longitude: {item.location ? item.location.lon : "Unknown"}
                 </Text>
                 <Text>
                   Latitude: {item.location ? item.location.lat : "Unknown"}
                 </Text> */}
-                  <Text>Distance: {item.distance.toFixed(2)} km</Text>
-                  <Text>Address: {item.address}</Text>
                 </View>
               </Pressable>
             );
@@ -168,11 +189,21 @@ const styles = StyleSheet.create({
       width: 1,
       height: 8,
     },
-    margin: 10,
+    marginHorizontal: 30,
+    marginVertical:15,
     padding: 30,
     shadowRadius: 6,
     shadowOpacity: 0.25,
     elevation: 16,
     borderRadius: 4,
   },
+  nameText:{
+    fontSize: 30,
+    fontWeight: 900,
+    fontFamily: "Futura"
+  },
+  boldText:
+  {
+    fontWeight: "bold",
+  }
 });
