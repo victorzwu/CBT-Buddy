@@ -30,7 +30,7 @@ export default function Map({ route, formData, setFormData, navigation, getData 
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
       setCoordinate(coordinate);
@@ -46,7 +46,7 @@ export default function Map({ route, formData, setFormData, navigation, getData 
   };
 
   async function verifyPermission() {
-    console.log(permissionResponse);
+    // console.log(permissionResponse);
     if (permissionResponse.granted) {
       return true;
     }
@@ -67,11 +67,11 @@ export default function Map({ route, formData, setFormData, navigation, getData 
         longitude: result.coords.longitude,
       });
       const { latitude, longitude } = result.coords;
-      console.log(latitude);
+      // console.log(latitude);
       const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${MAP_API_KEY}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
       if (!formData.id) {
