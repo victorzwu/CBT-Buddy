@@ -23,7 +23,7 @@ export default function Journal({ navigation }) {
 
   const getData = () => {
     getFromDB().then((res) => {
-      console.log("res = ", res);
+      // console.log("res = ", res);
       setData(res);
     });
   };
