@@ -47,7 +47,7 @@ export default function CBT() {
         }}
       />
       <Stack.Screen name="Edit CBT Entry" component={EditCBTEntry} />
-      <Stack.Navigator name="Describe the situation">
+      <Stack.Screen name="Describe the situation">
         {(props) => (
           <AddDescription
             situation={situation}
@@ -75,7 +75,7 @@ export default function CBT() {
             {...props}
           />
         )}
-      </Stack.Navigator>
+      </Stack.Screen>
       <Stack.Screen name="Cognitive Distortions">
         {(props) => (
           <AddDistortions
