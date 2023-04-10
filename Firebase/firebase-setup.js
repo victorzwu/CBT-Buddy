@@ -13,6 +13,7 @@ import {
   storageBucket,
   messagingSenderId,
   appId,
+  storageLink
 } from "@env";
 
 // Your web app's Firebase configuration
@@ -35,4 +36,4 @@ export const auth = initializeAuth(CBTBuddy, {
 });
 
 //export storage
-export const storage = getStorage(CBTBuddy, "gs://journal-5dfda.appspot.com");
+export const storage = getStorage(CBTBuddy, storageLink);
