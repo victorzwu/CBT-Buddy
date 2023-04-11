@@ -57,7 +57,7 @@ export default function Details({ route, navigation }) {
       <Text>{item.solution}</Text>
       <RegularButton
         pressHandler={() => {
-          navigation.navigate("Edit CBT Entry", {
+          navigation.navigate("Edit Entry", {
             item: item,
           });
         }}

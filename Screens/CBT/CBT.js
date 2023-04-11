@@ -11,6 +11,8 @@ import { useNavigation } from "@react-navigation/native";
 import Details from "./Details";
 import { COLORS } from "../../color";
 import Map from "./Map";
+import DetailsandEdit from "./EditEntry";
+import EditEntry from "./EditEntry";
 
 export default function CBT() {
   const Stack = createNativeStackNavigator();
@@ -24,6 +26,17 @@ export default function CBT() {
   const [date, setDate] = useState(new Date());
   const [selectedDistortions, setSelectedDistortions] = useState([]);
   const [solution, setSolution] = useState("");
+  function reset() {
+    setSituation("");
+    setAction("");
+    setLocation("");
+    setAddress("");
+    setPartner("");
+    setEmotion("");
+    setDate(new Date());
+    setSelectedDistortions([]);
+    setSolution("");
+  }
   return (
     <Stack.Navigator
       screenOptions={{
@@ -87,6 +100,7 @@ export default function CBT() {
           />
         )}
       </Stack.Screen>
+      <Stack.Screen name="Edit Entry" component={EditEntry} />
       <Stack.Screen name="Challenge">
         {(props) => (
           <AddChallenge
@@ -98,9 +112,35 @@ export default function CBT() {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen name="Review" component={Review} />
+      <Stack.Screen name="Review">
+        {(props) => (
+          <Review
+            solution={solution}
+            situation={situation}
+            action={action}
+            date={date}
+            location={location}
+            address={address}
+            partner={partner}
+            emotion={emotion}
+            selectedDistortions={selectedDistortions}
+            reset={reset}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
       <Stack.Screen name="Details" component={Details} />
-      <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen name="Map">
+        {(props) => (
+          <Map
+            location={location}
+            address={address}
+            changeLocation={(newLocation) => setLocation(newLocation)}
+            changeAddress={(newAddress) => setAddress(newAddress)}
+            {...props}
+          />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }

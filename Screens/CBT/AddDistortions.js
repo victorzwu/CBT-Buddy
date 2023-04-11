@@ -11,9 +11,6 @@ export default function AddDistortions({
   selectedDistortions,
   changeDistortions,
 }) {
-  useEffect(() => {
-    console.log("distortion ", route.params);
-  });
   const [allDistortions, setAllDistortions] = useState([]);
   const [currentSelectedDistortions, setCurrentSelectedDistortions] =
     useState(selectedDistortions);

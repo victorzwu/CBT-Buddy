@@ -14,7 +14,6 @@ import * as Location from "expo-location";
 
 export default function Map({
   navigation,
-  route,
   address,
   changeAddress,
   location,

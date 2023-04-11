@@ -104,7 +104,7 @@ export default function AddDescription({
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={partner}
+          value={currentPartner}
           onChangeText={(newPartner) => {
             setCurrentPartner(newPartner);
             changePartner(newPartner);
@@ -120,7 +120,7 @@ export default function AddDescription({
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={emotion}
+          value={currentPartner}
           onChangeText={(newEmotion) => {
             setCurrentEmotion(newEmotion);
             changeEmotion(newEmotion);

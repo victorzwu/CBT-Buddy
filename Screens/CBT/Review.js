@@ -3,10 +3,20 @@ import React, { useEffect } from "react";
 import { addCBTEntry } from "../../Firebase/fireStoreHelper";
 import RegularButton from "../../Components/RegularButton";
 
-export default function Review({ route, navigation }) {
-  useEffect(() => {
-    console.log("review:", route.params);
-  });
+export default function Review({
+  route,
+  navigation,
+  situation,
+  action,
+  emotion,
+  location,
+  date,
+  address,
+  partner,
+  selectedDistortions,
+  reset,
+  solution,
+}) {
   function cancelHandler() {
     Alert.alert(
       "Cancel adding",
@@ -32,18 +42,18 @@ export default function Review({ route, navigation }) {
       {
         text: "Yes",
         onPress: () => {
-          console.log(new Date(route.params.date));
           const newEntry = {
-            situation: route.params.situation,
-            location: route.params.location,
-            address: route.params.address,
-            solution: route.params.solution,
-            emotion: route.params.emotion,
-            partner: route.params.partner,
-            date: new Date(route.params.date),
-            distortions: route.params.distortions,
-            action: route.params.action,
+            situation: situation,
+            location: location,
+            address: address,
+            solution: solution,
+            emotion: emotion,
+            partner: partner,
+            date: date,
+            distortions: selectedDistortions,
+            action: action,
           };
+          reset();
           addCBTEntry(newEntry);
           navigation.navigate("CBT Entries");
         },
@@ -53,19 +63,27 @@ export default function Review({ route, navigation }) {
   return (
     <View>
       <Text>What was the situation</Text>
-      <Text>{route.params.situation}</Text>
+      <Text>{situation}</Text>
       <Text>What were you doing</Text>
-      <Text>{route.params.action}</Text>
+      <Text>{action}</Text>
       <Text>Where were you</Text>
-      <Text>{route.params.address}</Text>
+      <Text>{address}</Text>
       <Text>Who were you with</Text>
-      <Text>{route.params.partner}</Text>
+      <Text>{partner}</Text>
       <Text>What emotion did you experience</Text>
-      <Text>{route.params.emotion}</Text>
+      <Text>{emotion}</Text>
       <Text>When did it happen</Text>
-      <Text>{route.params.date}</Text>
+      <Text>
+        {date.toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        })}
+      </Text>
       <Text>Cognitive distortions</Text>
-      {route.params.distortions.map((distortion) => (
+      {selectedDistortions.map((distortion) => (
         <View key={distortion.id}>
           <Image
             source={{
@@ -77,13 +95,13 @@ export default function Review({ route, navigation }) {
         </View>
       ))}
       <Text>How can you reframe or redirect this thought</Text>
-      <Text>{route.params.solution}</Text>
+      <Text>{solution}</Text>
       <RegularButton pressHandler={cancelHandler}>
         <Text>Cancel</Text>
       </RegularButton>
       <RegularButton
         pressHandler={() => {
-          navigation.navigate("Describe the situation", { ...route.params });
+          navigation.navigate("Describe the situation");
         }}
       >
         <Text>Edit</Text>
