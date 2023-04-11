@@ -1,5 +1,49 @@
 # CBT-Buddy
 
+## Iteration 2
+
+### Victor Wu
+
+Add location button to resources, which uses latitude and longitude from Vancouver City Open Data API to calculate distance between current location and past location (my simulator's location is in San Francisco). Add button which reuses Map component from Journal to allow users to select a location on the map to find nearby therapy resources. Added address to resources and styling.
+
+<img src="./assets/readme/iteration2/therapy_resources_locate.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration2/therapy_resources_distance.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration2/resource_map.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration2/resource_select_location.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration2/resource_distance.png" height="30%" width="30%" >
+
+Add notification button to Journal. Asks for permission to send notifications when pressed for the first time. When pressed, it opens the app and navigates the user to the Journal page. Right now, it is 5 seconds, but in the future users can schedule when they want the notifications to occur. Added styling to Journal.
+
+<img src="./assets/readme/iteration2/notification_permission.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration2/local_notification.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration2/journal_styling.png" height="30%" width="30%" >
+
+Add styling to relaxation page
+
+<img src="./assets/readme/iteration2/relaxation_styling.png" height="30%" width="30%" >
+
+### Yiwei Tao
+
+#### Authentication styling
+
+Updated the style of the user login screen.
+
+<img src="./assets/readme/iteration2/signIn.png" height="30%" width="30%" >
+<img src="./assets/readme/iteration2/signUp.png" height="30%" width="30%" >
+
+#### Map screen
+
+Add the function of locating the current position.
+
+<img src="./assets/readme/iteration2/located.png" height="30%" width="30%" >
+
+
 ## Iteration 1
 
 ### Victor Wu

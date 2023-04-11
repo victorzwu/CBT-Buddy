@@ -5,6 +5,7 @@ import { color } from "../../style/helper";
 import { useState, useEffect } from "react";
 import { onSnapshot, collection } from "firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
+import { COLORS } from "../../color";
 
 export default function CBTEntries({ navigation }) {
   const [entries, setEntries] = useState([]);
@@ -54,7 +55,7 @@ export default function CBTEntries({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#dcd",
+    backgroundColor: COLORS.background,
     paddingTop: 15,
   },
   scrollViewContentContainer: {

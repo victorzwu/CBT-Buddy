@@ -16,9 +16,6 @@ export default function Resources({ navigation }) {
       screenOptions={() => ({
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
-        tabBarStyle: { backgroundColor: COLORS.primary },
-        tabBarActiveTintColor: COLORS.yellow,
-        tabBarInactiveTintColor: COLORS.white,
       })}
     >
       <Stack.Screen

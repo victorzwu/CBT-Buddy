@@ -49,9 +49,7 @@ export default function Com({
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate({
-              name: "Map",
-            });
+            navigation.navigate("Map", { screen: "Journal" });
           }}
           style={styles.locatonBox}
         >
@@ -72,9 +70,7 @@ export default function Com({
               height: 200,
             }}
             source={{
-              uri: `https://firebasestorage.googleapis.com/v0/b/journal-5dfda.appspot.com/o/${
-                formData.photo
-              }?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
+              uri: `https://firebasestorage.googleapis.com/v0/b/journal-5dfda.appspot.com/o/${formData.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
             }}
           />
         </TouchableOpacity>
@@ -96,7 +92,7 @@ export default function Com({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   cardBox: {
     alignItems: "center",
