@@ -33,7 +33,6 @@ Add notification button to Journal. Asks for permission to send notifications wh
 Add styling to relaxation page
 
 <img src="./assets/readme/iteration2/relaxation_styling.png" height="30%" width="30%" >
-## Iteration 1
 
 ### Yiwei Tao
 
@@ -73,6 +72,8 @@ Automatically jump to the home page after adding a location.
 To implement the update function, click on the corresponding entry on this page to change the corresponding content.
 
 <img src="./assets/readme/edit.png" height="30%" width="30%" >
+
+## Iteration 1
 
 ### Victor Wu
 
