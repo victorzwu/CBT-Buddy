@@ -1,6 +1,5 @@
 import { View, Pressable, StyleSheet } from "react-native";
 import React from "react";
-import { color } from "../style/helper";
 
 export default function RegularButton({ style, pressHandler, children }) {
   return (
@@ -20,6 +19,6 @@ export default function RegularButton({ style, pressHandler, children }) {
 }
 
 const styles = StyleSheet.create({
-  buttonStyle: { justifyContent: "center", backgroundColor: color.button },
+  buttonStyle: { justifyContent: "center", backgroundColor: "blue" },
   pressedStyle: { backgroundColor: "purple", opacity: 0.5 },
 });

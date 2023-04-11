@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import React from "react";
 import CBTEntry from "../../Components/CBTEntry";
-import { color } from "../../style/helper";
 import { useState, useEffect } from "react";
 import { onSnapshot, collection } from "firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   entryStyle: {
-    backgroundColor: color.entry,
+    backgroundColor: "white",
     width: 300,
     borderRadius: 3,
     padding: 10,

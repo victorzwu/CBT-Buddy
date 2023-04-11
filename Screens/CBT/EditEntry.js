@@ -1,10 +1,9 @@
 import { View, Text } from "react-native";
 import React, { useState } from "react";
-import Details from "./Details";
 import EditCBTEntry from "./EditCBTEntry";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { color } from "../../style/helper";
 import Map from "./Map";
+import { COLORS } from "../../color";
 
 export default function EditEntry({ navigation, route }) {
   const entry = route.params.item;
@@ -24,7 +23,7 @@ export default function EditEntry({ navigation, route }) {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: color.header,
+          backgroundColor: COLORS.primary,
         },
       }}
     >

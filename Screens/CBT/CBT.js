@@ -9,7 +9,6 @@ import AddChallenge from "./AddChallenge";
 import Review from "./Review";
 import { useNavigation } from "@react-navigation/native";
 import Details from "./Details";
-import { COLORS } from "../../color";
 import Map from "./Map";
 import EditEntry from "./EditEntry";
 
@@ -58,7 +57,6 @@ export default function CBT() {
           },
         }}
       />
-      <Stack.Screen name="Edit CBT Entry" component={EditCBTEntry} />
       <Stack.Screen name="Describe the situation">
         {(props) => (
           <AddDescription

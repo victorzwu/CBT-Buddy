@@ -8,8 +8,6 @@ Complete part of styling, and add datetime picker and map for location, together
 
 <img src="./assets/readme/datetime.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
 
-## Iteration 2
-
 ### Victor Wu
 
 Add location button to resources, which uses latitude and longitude from Vancouver City Open Data API to calculate distance between current location and past location (my simulator's location is in San Francisco). Add button which reuses Map component from Journal to allow users to select a location on the map to find nearby therapy resources. Added address to resources and styling.
