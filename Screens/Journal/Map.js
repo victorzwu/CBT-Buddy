@@ -15,7 +15,13 @@ import { addDoc, collection } from "firebase/firestore";
 import { MAPS_API_KEY } from "@env";
 import * as Location from "expo-location";
 
-export default function Map({ formData, setFormData, navigation, getData }) {
+export default function Map({
+  route,
+  formData,
+  setFormData,
+  navigation,
+  getData,
+}) {
   const [address, setAddress] = useState(null);
   const [coordinate, setCoordinate] = useState(null);
   const [permissionResponse, requestPermission] =
@@ -138,8 +144,7 @@ export default function Map({ formData, setFormData, navigation, getData }) {
           <Button
             onPress={async () => {
               try {
-                if(route.params.screen === "Journal")
-                {
+                if (route.params.screen === "Journal") {
                   if (formData.id) {
                     update(formData.id, {
                       location: address,
@@ -160,9 +165,10 @@ export default function Map({ formData, setFormData, navigation, getData }) {
                     navigation.navigate("JournalList");
                   }
                 }
-                if(route.params.screen === "Resources")
-                {
-                  navigation.navigate("Therapy Resources", {coordinate: coordinate});
+                if (route.params.screen === "Resources") {
+                  navigation.navigate("Therapy Resources", {
+                    coordinate: coordinate,
+                  });
                 }
               } catch (e) {
                 console.error("Error adding document: ", e);
@@ -234,15 +240,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    backgroundColor: '#F0FFFF',
+    backgroundColor: "#F0FFFF",
     borderRadius: 20,
     padding: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    color: 'plum',
-    fontWeight: 'bold',
+    color: "plum",
+    fontWeight: "bold",
     fontSize: 12,
   },
 });
