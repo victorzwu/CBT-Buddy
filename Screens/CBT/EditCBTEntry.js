@@ -1,16 +1,20 @@
-import { View, Text, TextInput, FlatList, Alert } from "react-native";
+import { View, Text, TextInput, FlatList, Alert, Button } from "react-native";
 import React, { useState, useEffect } from "react";
 import { updateCBTEntry } from "../../Firebase/fireStoreHelper";
 import Distortion from "../../Components/Distortion";
 import RegularButton from "../../Components/RegularButton";
 import { onSnapshot, collection } from "firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
+import DatetimePicker from "../../Components/DatetimePicker";
 
 export default function EditCBTEntry({ route, navigation }) {
   const item = route.params.item;
   const [situation, setSituation] = useState(item.situation);
   const [action, setAction] = useState(item.action);
-  const [location, setLocation] = useState(item.location);
+  const [location, setLocation] = useState(
+    route.params.location || item.location
+  );
+  const [address, setAddress] = useState(route.params.address || item.address);
   const [partner, setPartner] = useState(item.partner);
   const [emotion, setEmotion] = useState(item.emotion);
   const [date, setDate] = useState(item.date);
@@ -54,6 +58,7 @@ export default function EditCBTEntry({ route, navigation }) {
             situation: situation,
             action: action,
             location: location,
+
             partner: partner,
             emotion: emotion,
             date: date,
@@ -92,16 +97,18 @@ export default function EditCBTEntry({ route, navigation }) {
         placeholder="Type here..."
       />
       <Text>Where were you</Text>
-      <TextInput
-        multiline={true}
-        numberOfLines={5}
-        textAlignVertical="top"
-        value={location}
-        onChangeText={(newLocation) => {
-          setLocation(newLocation);
+      <Button
+        onPress={() => {
+          navigation.navigate("Map", {
+            name: "Edit CBT Entry",
+            location: location,
+            address: address,
+            ...route.params,
+          });
         }}
-        placeholder="Type here..."
+        title="choose your location"
       />
+      <Text>{address}</Text>
       <Text>Who were you with</Text>
       <TextInput
         multiline={true}
@@ -125,18 +132,7 @@ export default function EditCBTEntry({ route, navigation }) {
         placeholder="Type here..."
       />
       <Text>When did it happen</Text>
-      <View>
-        <TextInput
-          multiline={true}
-          numberOfLines={5}
-          textAlignVertical="top"
-          value={date}
-          onChangeText={(newDate) => {
-            setDate(newDate);
-          }}
-          placeholder="Type here..."
-        />
-      </View>
+      <DatetimePicker changeDatetimeHandler={(date) => setDate(date)} />
       <Text>Cognitive distortions</Text>
       <FlatList
         data={allDistortions}

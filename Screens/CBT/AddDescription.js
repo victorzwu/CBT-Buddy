@@ -2,25 +2,29 @@ import { View, Text, TextInput, Button } from "react-native";
 import React, { useState, useEffect } from "react";
 import RegularButton from "../../Components/RegularButton";
 import { AntDesign } from "@expo/vector-icons";
+import DatetimePicker from "../../Components/DatetimePicker";
 
-export default function AddDescription({ navigation, route }) {
+export default function AddDescription({
+  navigation,
+  situation,
+  changeSituation,
+  action,
+  changeAction,
+  address,
+  partner,
+  changePartner,
+  emotion,
+  changeEmotion,
+  date,
+  changeDate,
+}) {
   const [page, setPage] = useState(1);
-  const [situation, setSituation] = useState(
-    (route.params && route.params.situation) || ""
-  );
-  const [action, setAction] = useState(
-    (route.params && route.params.action) || ""
-  );
-  const [location, setLocation] = useState(
-    (route.params && route.params.location) || ""
-  );
-  const [partner, setPartner] = useState(
-    (route.params && route.params.partner) || ""
-  );
-  const [emotion, setEmotion] = useState(
-    (route.params && route.params.emotion) || ""
-  );
-  const [date, setDate] = useState((route.params && route.params.date) || "");
+  const [currentSituation, setCurrentSituation] = useState(situation);
+  const [currentAction, setCurrentAction] = useState(action);
+  const [currentAddress, setCurrentAddress] = useState(address);
+  const [currentPartner, setCurrentPartner] = useState(partner);
+  const [currentEmotion, setCurrentEmotion] = useState(emotion);
+  const [currentDate, setCurrentDate] = useState(date);
   if (page == 1) {
     return (
       <View>
@@ -29,9 +33,10 @@ export default function AddDescription({ navigation, route }) {
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={situation}
+          value={currentSituation}
           onChangeText={(newSituation) => {
-            setSituation(newSituation);
+            setCurrentSituation(newSituation);
+            changeSituation(newSituation);
           }}
           placeholder="Type here..."
         />
@@ -40,9 +45,10 @@ export default function AddDescription({ navigation, route }) {
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={action}
+          value={currentAction}
           onChangeText={(newAction) => {
-            setAction(newAction);
+            setCurrentAction(newAction);
+            changeAction(newAction);
           }}
           placeholder="Type here..."
         />
@@ -60,18 +66,12 @@ export default function AddDescription({ navigation, route }) {
       <View>
         <Text>When did it happen?</Text>
         <Text>Enter the date and approximate time.</Text>
-        <View>
-          <TextInput
-            multiline={true}
-            numberOfLines={5}
-            textAlignVertical="top"
-            value={date}
-            onChangeText={(newDate) => {
-              setDate(newDate);
-            }}
-            placeholder="Type here..."
-          />
-        </View>
+        <DatetimePicker
+          changeDatetimeHandler={(newDate) => {
+            setCurrentDate(newDate);
+            changeDate(newDate);
+          }}
+        />
         <RegularButton
           pressHandler={() => {
             setPage(page - 1);
@@ -92,16 +92,13 @@ export default function AddDescription({ navigation, route }) {
     return (
       <View>
         <Text>Where were you?</Text>
-        <TextInput
-          multiline={true}
-          numberOfLines={5}
-          textAlignVertical="top"
-          value={location}
-          onChangeText={(newLocation) => {
-            setLocation(newLocation);
+        <Button
+          onPress={() => {
+            navigation.navigate("Map");
           }}
-          placeholder="Type here..."
+          title="choose your location"
         />
+        {address && <Text>{address}</Text>}
         <Text>Who were you with?</Text>
         <TextInput
           multiline={true}
@@ -109,7 +106,8 @@ export default function AddDescription({ navigation, route }) {
           textAlignVertical="top"
           value={partner}
           onChangeText={(newPartner) => {
-            setPartner(newPartner);
+            setCurrentPartner(newPartner);
+            changePartner(newPartner);
           }}
           placeholder="Type here..."
         />
@@ -124,7 +122,8 @@ export default function AddDescription({ navigation, route }) {
           textAlignVertical="top"
           value={emotion}
           onChangeText={(newEmotion) => {
-            setEmotion(newEmotion);
+            setCurrentEmotion(newEmotion);
+            changeEmotion(newEmotion);
           }}
           placeholder="Type here..."
         />
@@ -137,18 +136,10 @@ export default function AddDescription({ navigation, route }) {
         </RegularButton>
         <RegularButton
           pressHandler={() => {
-            navigation.navigate("Cognitive Distortions", {
-              situation: situation,
-              action: action,
-              location: location,
-              emotion: emotion,
-              partner: partner,
-              date: date,
-              ...route.params,
-            });
+            navigation.navigate("Cognitive Distortions");
           }}
         >
-          <AntDesign name="arrowright" size={24} color="white" />
+          <Text>Continue</Text>
         </RegularButton>
       </View>
     );

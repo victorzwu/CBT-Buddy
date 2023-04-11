@@ -32,30 +32,19 @@ export default function Review({ route, navigation }) {
       {
         text: "Yes",
         onPress: () => {
+          console.log(new Date(route.params.date));
           const newEntry = {
             situation: route.params.situation,
             location: route.params.location,
+            address: route.params.address,
             solution: route.params.solution,
             emotion: route.params.emotion,
             partner: route.params.partner,
-            date: route.params.date,
+            date: new Date(route.params.date),
             distortions: route.params.distortions,
             action: route.params.action,
           };
           addCBTEntry(newEntry);
-          // const {
-          //   situation,
-          //   location,
-          //   solution,
-          //   emotion,
-          //   partner,
-          //   date,
-          //   distortions,
-          //   action,
-          //   ...newParams
-          // } = navigation.getParam();
-
-          // navigation.setParams(newParams);
           navigation.navigate("CBT Entries");
         },
       },
@@ -68,7 +57,7 @@ export default function Review({ route, navigation }) {
       <Text>What were you doing</Text>
       <Text>{route.params.action}</Text>
       <Text>Where were you</Text>
-      <Text>{route.params.location}</Text>
+      <Text>{route.params.address}</Text>
       <Text>Who were you with</Text>
       <Text>{route.params.partner}</Text>
       <Text>What emotion did you experience</Text>
