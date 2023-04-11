@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CBTEntries from "./CBTEntries";
 import AddEntryButton from "../../Components/AddEntryButton";
-import EditCBTEntry from "./EditCBTEntry";
+import { COLORS } from "../../color";
 import AddDescription from "./AddDescription";
 import AddDistortions from "./AddDistortions";
 import AddChallenge from "./AddChallenge";
@@ -11,7 +11,6 @@ import { useNavigation } from "@react-navigation/native";
 import Details from "./Details";
 import { COLORS } from "../../color";
 import Map from "./Map";
-import DetailsandEdit from "./EditEntry";
 import EditEntry from "./EditEntry";
 
 export default function CBT() {
