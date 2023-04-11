@@ -6,6 +6,7 @@ import { COLORS } from "../../color";
 // import { cityVanApiKey } from "@env";
 import { getFromDB } from "../../Firebase/firestore";
 import * as Location from "expo-location";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ResourcesScreen1({ navigation, route }) {
   cityVanApiKey = "421b202f7b30e206d48c0d91ac5c412b31e84539fb4d2b97e938b24a";
@@ -129,6 +130,8 @@ export default function ResourcesScreen1({ navigation, route }) {
     navigation.navigate("Resource Details", item);
   }
 
+  function addToFavorites(item) {}
+
   return (
     <View styles={styles.container}>
       {!location && <Button title="Locate Me" onPress={() => findLocation()} />}
@@ -140,14 +143,22 @@ export default function ResourcesScreen1({ navigation, route }) {
             return (
               <Pressable style={styles.pressable} onPress={() => details(item)}>
                 <View>
+                  <View style={{ alignItems: "flex-end" }}>
+                    <Ionicons
+                      name="ios-star"
+                      size={24}
+                      color="grey"
+                      onPress={() => addToFavorites(item)}
+                    />
+                  </View>
                   <Text style={styles.nameText}>
-                    <Text>
-                      {item.name}
-                      {"\n"}
-                    </Text>
+                    <Text>{item.name}</Text>
                   </Text>
+                  <Text style={{ fontSize: 2 }}> {"\n"}</Text>
+                  <Text style={styles.addressText}>{item.address}</Text>
+
                   <Text>
-                    <Text style={styles.boldText}>Local Area: </Text>
+                    <Text style={styles.boldText}>{"\n"}Local Area: </Text>
                     <Text>{item.localarea}</Text>
                   </Text>
                   <Text>
@@ -160,7 +171,6 @@ export default function ResourcesScreen1({ navigation, route }) {
                   </Text>
                   <Text>
                     <Text style={styles.boldText}>Address: </Text>
-                    <Text>{item.address}</Text>
                   </Text>
 
                   {/* <Text>
@@ -208,5 +218,9 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "bold",
+  },
+  addressText: {
+    fontSize: 12,
+    color: COLORS.darksilver,
   },
 });

@@ -7,6 +7,8 @@ import ResourceDetails from "./ResourceDetails";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../color";
 import ResourceMap from "./ResourceMap";
+import { EvilIcons } from "@expo/vector-icons";
+import ResourceFavorites from "./ResourceFavorites";
 
 export default function Resources({ navigation }) {
   const Stack = createNativeStackNavigator();
@@ -35,11 +37,22 @@ export default function Resources({ navigation }) {
                 />
               );
             },
+            headerLeft: () => {
+              return (
+                <EvilIcons
+                  name="star"
+                  size={24}
+                  color="white"
+                  onPress={() => navigation.navigate("Resource Favorites")}
+                />
+              );
+            },
           };
         }}
       />
       <Stack.Screen name="Resource Map" component={ResourceMap} />
       <Stack.Screen name="Resource Details" component={ResourceDetails} />
+      <Stack.Screen name="Resource Favorites" component={ResourceFavorites} />
     </Stack.Navigator>
   );
 }

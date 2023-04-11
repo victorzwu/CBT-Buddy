@@ -1,4 +1,11 @@
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  StyleSheet,
+} from "react-native";
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-setup";
@@ -53,7 +60,7 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -65,7 +72,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     marginBottom: 32,
-    color: COLORS.text,
+    marginRight: 255,
+    color: COLORS.white,
   },
   input: {
     width: "100%",
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   signupText: {
-    color: COLORS.text,
+    color: COLORS.white,
     marginTop: 16,
     textDecorationLine: "underline",
   },
