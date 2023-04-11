@@ -1,4 +1,11 @@
-import { SafeAreaView, Text, Button, TextInput, StyleSheet } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  Button,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import React, { useState } from "react";
 import { auth } from "../../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -26,14 +33,13 @@ export default function SignUp({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.label}>Email Address</Text>
+      <Text style={styles.title}>Register</Text>
       <TextInput
         style={styles.input}
         value={email}
         onChangeText={(text) => setEmail(text)}
         placeholder="Enter Email"
       />
-      <Text style={styles.label}>Password</Text>
       <TextInput
         style={styles.input}
         value={password}
@@ -41,7 +47,6 @@ export default function SignUp({ navigation }) {
         placeholder="Enter Password"
         secureTextEntry={true}
       />
-      <Text style={styles.label}>Confirm password</Text>
       <TextInput
         style={styles.input}
         value={confirmPassword}
@@ -49,8 +54,14 @@ export default function SignUp({ navigation }) {
         placeholder="Confirm Password"
         secureTextEntry={true}
       />
-      <Button style={styles.button} title="Register" onPress={signUp} />
-      <Button title="Already Registered? Login" onPress={login} />
+      <TouchableOpacity style={styles.button} onPress={signUp}>
+        <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={login}>
+          <Text style={styles.signupText}>
+          Already Registered? Login
+          </Text>
+        </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -58,9 +69,16 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 32,
+    marginRight: 225,
+    color: COLORS.white,
   },
   input: {
     width: "80%",
@@ -78,6 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
   },
+  
   button: {
     backgroundColor: COLORS.primary,
     width: "80%",
@@ -86,5 +105,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 16,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  signupText: {
+    color: COLORS.white,
+    marginTop: 16,
+    textDecorationLine: "underline",
   },
 });
