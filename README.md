@@ -1,5 +1,23 @@
 # CBT-Buddy
 
+## Iteration 2
+
+### Yiwei Tao
+
+#### Authentication styling
+
+Updated the style of the user login screen.
+
+<img src="./assets/readme/iteration2/signIn.png" height="30%" width="30%" >
+<img src="./assets/readme/iteration2/signUp.png" height="30%" width="30%" >
+
+#### Map screen
+
+Add the function of locating the current position.
+
+<img src="./assets/readme/iteration2/located.png" height="30%" width="30%" >
+
+
 ## Iteration 1
 
 ### Victor Wu

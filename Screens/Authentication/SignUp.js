@@ -9,7 +9,6 @@ export default function SignUp({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-
   const login = () => {
     navigation.replace("Login");
   };
@@ -26,26 +25,31 @@ export default function SignUp({ navigation }) {
   };
 
   return (
-    <SafeAreaView style = {styles.container}>
-      <Text>Email Address</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.label}>Email Address</Text>
       <TextInput
+        style={styles.input}
         value={email}
         onChangeText={(text) => setEmail(text)}
         placeholder="Enter Email"
       />
-      <Text>Password</Text>
+      <Text style={styles.label}>Password</Text>
       <TextInput
+        style={styles.input}
         value={password}
         onChangeText={(text) => setPassword(text)}
         placeholder="Enter Password"
+        secureTextEntry={true}
       />
-      <Text>Confirm password</Text>
+      <Text style={styles.label}>Confirm password</Text>
       <TextInput
+        style={styles.input}
         value={confirmPassword}
         onChangeText={(text) => setConfirmPassword(text)}
         placeholder="Confirm Password"
+        secureTextEntry={true}
       />
-      <Button title="Register" onPress={signUp} />
+      <Button style={styles.button} title="Register" onPress={signUp} />
       <Button title="Already Registered? Login" onPress={login} />
     </SafeAreaView>
   );
@@ -55,5 +59,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.second,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    width: "80%",
+    height: 48,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    marginBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
+    fontSize: 16,
+    color: COLORS.text,
+  },
+  label: {
+    color: COLORS.text,
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  button: {
+    backgroundColor: COLORS.primary,
+    width: "80%",
+    height: 48,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 16,
   },
 });
