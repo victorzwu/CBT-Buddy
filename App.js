@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
@@ -44,14 +44,18 @@ export default function App() {
 
   const AppStack = (
     <>
-      <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
     </>
   );
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      {isAuthenticated ? AppStack : AuthStack}
+        {isAuthenticated ? AppStack : AuthStack}
       </Stack.Navigator>
     </NavigationContainer>
   );

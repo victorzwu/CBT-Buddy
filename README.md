@@ -2,6 +2,12 @@
 
 ## Iteration 2
 
+### Xilong Cai
+
+Complete part of styling, and add datetime picker and map for location, together with the data type in firestore
+
+<img src="./assets/readme/datetime.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
 ### Victor Wu
 
 Add location button to resources, which uses latitude and longitude from Vancouver City Open Data API to calculate distance between current location and past location (my simulator's location is in San Francisco). Add button which reuses Map component from Journal to allow users to select a location on the map to find nearby therapy resources. Added address to resources and styling.
@@ -32,17 +38,40 @@ Add styling to relaxation page
 
 #### Authentication styling
 
-Updated the style of the user login screen.
+#### Mood Page
+
+Automatically jump to the next entry after selecting the corresponding mood.
 
 <img src="./assets/readme/iteration2/signIn.png" height="30%" width="30%" >
 <img src="./assets/readme/iteration2/signUp.png" height="30%" width="30%" >
 
-#### Map screen
+#### Detail Page
+
+This page allows you to record your thoughts in text form.
 
 Add the function of locating the current position.
 
-<img src="./assets/readme/iteration2/located.png" height="30%" width="30%" >
+#### Photo and Location Page
 
+Preliminary implementation of the selection of albums or photos, and open the map to manually select the location of the function.
+
+#### Map Page
+
+Choose your own preferred geographic location.
+
+<img src="./assets/readme/map.png" height="30%" width="30%" >
+
+#### Journal Page
+
+Automatically jump to the home page after adding a location.
+
+<img src="./assets/readme/done.png" height="30%" width="30%" >
+
+#### Edit Page
+
+To implement the update function, click on the corresponding entry on this page to change the corresponding content.
+
+<img src="./assets/readme/edit.png" height="30%" width="30%" >
 
 ## Iteration 1
 
@@ -88,31 +117,37 @@ Complete initial screens of Journal. The initial screen in Journal tab is browsi
 <img src="./assets/readme/initial.png" height="30%" width="30%" >
 
 #### Mood Page
+
 Automatically jump to the next entry after selecting the corresponding mood.
 
 <img src="./assets/readme/mood.png" height="30%" width="30%" >
 
 #### Detail Page
+
 This page allows you to record your thoughts in text form.
 
 <img src="./assets/readme/text.png" height="30%" width="30%" >
 
 #### Photo and Location Page
+
 Preliminary implementation of the selection of albums or photos, and open the map to manually select the location of the function.
 
 <img src="./assets/readme/camera.png" height="30%" width="30%" >
 
 #### Map Page
+
 Choose your own preferred geographic location.
 
 <img src="./assets/readme/map.png" height="30%" width="30%" >
 
 #### Journal Page
+
 Automatically jump to the home page after adding a location.
 
 <img src="./assets/readme/done.png" height="30%" width="30%" >
 
 #### Edit Page
+
 To implement the update function, click on the corresponding entry on this page to change the corresponding content.
 
 <img src="./assets/readme/edit.png" height="30%" width="30%" >

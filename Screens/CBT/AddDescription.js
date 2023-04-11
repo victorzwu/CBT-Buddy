@@ -1,156 +1,213 @@
-import { View, Text, TextInput, Button } from "react-native";
-import React, { useState, useEffect } from "react";
-import RegularButton from "../../Components/RegularButton";
+import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import DatetimePicker from "../../Components/DatetimePicker";
+import { COLORS } from "../../color";
+import Button from "../../Components/Button";
 
-export default function AddDescription({ navigation, route }) {
+export default function AddDescription({
+  navigation,
+  situation,
+  changeSituation,
+  action,
+  changeAction,
+  address,
+  partner,
+  changePartner,
+  emotion,
+  changeEmotion,
+  date,
+  changeDate,
+}) {
   const [page, setPage] = useState(1);
-  const [situation, setSituation] = useState(
-    (route.params && route.params.situation) || ""
-  );
-  const [action, setAction] = useState(
-    (route.params && route.params.action) || ""
-  );
-  const [location, setLocation] = useState(
-    (route.params && route.params.location) || ""
-  );
-  const [partner, setPartner] = useState(
-    (route.params && route.params.partner) || ""
-  );
-  const [emotion, setEmotion] = useState(
-    (route.params && route.params.emotion) || ""
-  );
-  const [date, setDate] = useState((route.params && route.params.date) || "");
+  const [currentSituation, setCurrentSituation] = useState(situation);
+  const [currentAction, setCurrentAction] = useState(action);
+  const [currentAddress, setCurrentAddress] = useState(address);
+  const [currentPartner, setCurrentPartner] = useState(partner);
+  const [currentEmotion, setCurrentEmotion] = useState(emotion);
+  const [currentDate, setCurrentDate] = useState(date);
   if (page == 1) {
     return (
-      <View>
-        <Text>What was the situation?</Text>
+      <ScrollView style={styles.container}>
+        <Text style={styles.tit}>What was the situation?</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={situation}
+          value={currentSituation}
           onChangeText={(newSituation) => {
-            setSituation(newSituation);
+            setCurrentSituation(newSituation);
+            changeSituation(newSituation);
           }}
           placeholder="Type here..."
         />
-        <Text>What were you doing?</Text>
+        <Text style={styles.tit}>What were you doing?</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={action}
+          value={currentAction}
           onChangeText={(newAction) => {
-            setAction(newAction);
+            setCurrentAction(newAction);
+            changeAction(newAction);
           }}
           placeholder="Type here..."
         />
-        <RegularButton
-          pressHandler={() => {
-            setPage(page + 1);
-          }}
-        >
-          <AntDesign name="arrowright" size={24} color="white" />
-        </RegularButton>
-      </View>
+        <View style={styles.btnBox}>
+          <Button
+            onPress={() => {
+              setPage(page + 1);
+            }}
+          >
+            <AntDesign name="arrowright" size={24} color="white" />
+          </Button>
+        </View>
+      </ScrollView>
     );
   } else if (page == 2) {
     return (
-      <View>
-        <Text>When did it happen?</Text>
-        <Text>Enter the date and approximate time.</Text>
-        <View>
-          <TextInput
-            multiline={true}
-            numberOfLines={5}
-            textAlignVertical="top"
-            value={date}
-            onChangeText={(newDate) => {
-              setDate(newDate);
+      <ScrollView style={styles.container}>
+        <Text style={styles.tit}>When did it happen?</Text>
+        <Text style={styles.tip}>Enter the date and approximate time.</Text>
+        <DatetimePicker
+          changeDatetimeHandler={(newDate) => {
+            setCurrentDate(newDate);
+            changeDate(newDate);
+          }}
+        />
+        <View style={styles.btnBox}>
+          <Button
+            onPress={() => {
+              setPage(page - 1);
             }}
-            placeholder="Type here..."
-          />
+          >
+            <AntDesign name="arrowleft" size={24} color="white" />
+          </Button>
+          <Button
+            onPress={() => {
+              setPage(page + 1);
+            }}
+          >
+            <AntDesign name="arrowright" size={24} color="white" />
+          </Button>
         </View>
-        <RegularButton
-          pressHandler={() => {
-            setPage(page - 1);
-          }}
-        >
-          <AntDesign name="arrowleft" size={24} color="white" />
-        </RegularButton>
-        <RegularButton
-          pressHandler={() => {
-            setPage(page + 1);
-          }}
-        >
-          <AntDesign name="arrowright" size={24} color="white" />
-        </RegularButton>
-      </View>
+      </ScrollView>
     );
   } else {
     return (
-      <View>
-        <Text>Where were you?</Text>
+      <ScrollView alwaysBounceVertical={true} style={styles.container}>
+        <Text style={styles.tit}>Where were you?</Text>
+        <View style={styles.btnBox}>
+          <Button
+            onPress={() => {
+              navigation.navigate("Map");
+            }}
+            title="choose your location"
+          />
+        </View>
+        {address && (
+          <Text style={styles.description}>Your location: {address}</Text>
+        )}
+        <Text style={styles.tit}>Who were you with?</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={location}
-          onChangeText={(newLocation) => {
-            setLocation(newLocation);
-          }}
-          placeholder="Type here..."
-        />
-        <Text>Who were you with?</Text>
-        <TextInput
-          multiline={true}
-          numberOfLines={5}
-          textAlignVertical="top"
-          value={partner}
+          value={currentPartner}
           onChangeText={(newPartner) => {
-            setPartner(newPartner);
+            setCurrentPartner(newPartner);
+            changePartner(newPartner);
           }}
           placeholder="Type here..."
         />
-        <Text>What emotion did you experience?</Text>
-        <Text>
+        <Text style={styles.tit}>What was your emotion?</Text>
+        <Text style={styles.tip}>
           Recognize the emotion; try and capture it in one word - happy, sad or
           angry.
         </Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
-          value={emotion}
+          value={currentPartner}
           onChangeText={(newEmotion) => {
-            setEmotion(newEmotion);
+            setCurrentEmotion(newEmotion);
+            changeEmotion(newEmotion);
           }}
           placeholder="Type here..."
         />
-        <RegularButton
-          pressHandler={() => {
-            setPage(page - 1);
-          }}
-        >
-          <AntDesign name="arrowleft" size={24} color="white" />
-        </RegularButton>
-        <RegularButton
-          pressHandler={() => {
-            navigation.navigate("Cognitive Distortions", {
-              situation: situation,
-              action: action,
-              location: location,
-              emotion: emotion,
-              partner: partner,
-              date: date,
-              ...route.params,
-            });
-          }}
-        >
-          <AntDesign name="arrowright" size={24} color="white" />
-        </RegularButton>
-      </View>
+        <View style={styles.btnBox}>
+          <Button
+            onPress={() => {
+              setPage(page - 1);
+            }}
+          >
+            <AntDesign name="arrowleft" size={24} color="white" />
+          </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("Cognitive Distortions");
+            }}
+          >
+            <Text style={styles.btnText}>Continue</Text>
+          </Button>
+        </View>
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  tit: {
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+    paddingVertical: 20,
+  },
+  itemBox: {
+    paddingHorizontal: 20,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: COLORS.second,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  input: {
+    borderColor: "#ddd",
+    borderWidth: 1,
+    padding: 10,
+    color: COLORS.textColor,
+    height: 200,
+    margin: 15,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  description: {
+    color: COLORS.textColor,
+    fontSize: 13,
+  },
+  tip: {
+    fontSize: 15,
+    paddingBottom: 5,
+    color: COLORS.grey,
+  },
+  btnText: {
+    fontSize: 20,
+    color: "white",
+  },
+});

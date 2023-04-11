@@ -6,16 +6,14 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
 import Distortion from "../../Components/Distortion";
 
-export default function AddDistortions({ route, navigation }) {
-  useEffect(() => {
-    console.log("distortion ", route.params);
-  });
+export default function AddDistortions({
+  navigation,
+  selectedDistortions,
+  changeDistortions,
+}) {
   const [allDistortions, setAllDistortions] = useState([]);
-  const [selectedDistortions, setSelectedDistortions] = useState(
-    route.params.distortions
-      ? route.params.distortions.map((distortion) => distortion.id)
-      : []
-  );
+  const [currentSelectedDistortions, setCurrentSelectedDistortions] =
+    useState(selectedDistortions);
   useEffect(() => {
     onSnapshot(collection(firestore, "CBTDistortions"), (querySnapshot) => {
       if (querySnapshot.empty) {
@@ -29,13 +27,18 @@ export default function AddDistortions({ route, navigation }) {
     });
   }, []);
   function handleOnPress(item) {
-    if (selectedDistortions.includes(item.id)) {
-      const newDistortions = selectedDistortions.filter(
-        (listItem) => listItem !== item.id
+    const currentIds = currentSelectedDistortions.map((distortion) => {
+      return distortion.id;
+    });
+    if (currentIds.includes(item.id)) {
+      const newDistortions = currentSelectedDistortions.filter(
+        (listItem) => listItem.id !== item.id
       );
-      setSelectedDistortions([...newDistortions]);
+      setCurrentSelectedDistortions([...newDistortions]);
+      changeDistortions([...newDistortions]);
     } else {
-      setSelectedDistortions([...selectedDistortions, item.id]);
+      setCurrentSelectedDistortions([...currentSelectedDistortions, item]);
+      changeDistortions([...currentSelectedDistortions, item]);
     }
   }
   return (
@@ -46,7 +49,11 @@ export default function AddDistortions({ route, navigation }) {
         renderItem={({ item }) => (
           <Distortion
             onPress={() => handleOnPress(item)}
-            selected={selectedDistortions.includes(item.id)}
+            selected={currentSelectedDistortions
+              .map((distortion) => {
+                return distortion.id;
+              })
+              .includes(item.id)}
             item={item}
           />
         )}
@@ -54,15 +61,10 @@ export default function AddDistortions({ route, navigation }) {
       />
       <RegularButton
         pressHandler={() => {
-          navigation.navigate("Challenge", {
-            distortions: allDistortions.filter((distortion) => {
-              return selectedDistortions.includes(distortion.id);
-            }),
-            ...route.params,
-          });
+          navigation.navigate("Challenge");
         }}
       >
-        <AntDesign name="arrowright" size={24} color="white" />
+        <Text>Continue</Text>
       </RegularButton>
     </View>
   );

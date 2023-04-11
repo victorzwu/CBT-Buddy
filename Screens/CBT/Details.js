@@ -26,13 +26,21 @@ export default function Details({ route, navigation }) {
       <Text>What were you doing</Text>
       <Text>{item.action}</Text>
       <Text>Where were you</Text>
-      <Text>{item.location}</Text>
+      <Text>{item.address}</Text>
       <Text>Who were you with</Text>
       <Text>{item.partner}</Text>
       <Text>What emotion did you experience</Text>
       <Text>{item.emotion}</Text>
       <Text>When did it happen</Text>
-      <Text>{item.date}</Text>
+      <Text>
+        {new Date(item.date.seconds * 1000).toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        })}
+      </Text>
       <Text>Cognitive distortions</Text>
       {item.distortions.map((distortion) => (
         <View key={distortion.id}>
@@ -49,7 +57,7 @@ export default function Details({ route, navigation }) {
       <Text>{item.solution}</Text>
       <RegularButton
         pressHandler={() => {
-          navigation.navigate("Edit CBT Entry", {
+          navigation.navigate("Edit Entry", {
             item: item,
           });
         }}

@@ -3,13 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import RegularButton from "../../Components/RegularButton";
 
-export default function AddChallenge({ route, navigation }) {
-  useEffect(() => {
-    console.log("challenge ", route.params);
-  });
-  const [solution, setSolution] = useState(
-    (route.params && route.params.solution) || ""
-  );
+export default function AddChallenge({ navigation, solution, changeSolution }) {
+  const [currentSolution, setCurrentSolution] = useState(solution);
   return (
     <View>
       <Text>How can you reframe or redirect this thought</Text>
@@ -17,18 +12,16 @@ export default function AddChallenge({ route, navigation }) {
         multiline={true}
         numberOfLines={5}
         textAlignVertical="top"
-        value={solution}
+        value={currentSolution}
         onChangeText={(newSolution) => {
-          setSolution(newSolution);
+          setCurrentSolution(newSolution);
+          changeSolution(newSolution);
         }}
         placeholder="Type here..."
       />
       <RegularButton
         pressHandler={() => {
-          navigation.navigate("Review", {
-            solution: solution,
-            ...route.params,
-          });
+          navigation.navigate("Review");
         }}
       >
         <Text>continue</Text>

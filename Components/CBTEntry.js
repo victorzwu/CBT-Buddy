@@ -1,12 +1,20 @@
 import { View, Text, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function CBTEntry({ entryContent }) {
   return (
     <View>
       <View>
         <Text>Date</Text>
-        <Text>{entryContent.date}</Text>
+        <Text>
+          {new Date(entryContent.date.seconds * 1000).toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })}
+        </Text>
         <Text>Situation</Text>
         <Text>{entryContent.situation}</Text>
       </View>
