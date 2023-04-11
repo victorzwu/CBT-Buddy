@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
-import React, {useEffect} from "react";
+import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../color";
@@ -13,7 +13,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Notifications from "expo-notifications";
-
 
 export default function Home() {
   const Tab = createBottomTabNavigator();
@@ -33,22 +32,14 @@ export default function Home() {
   }, []);
 
   return (
-    <Tab.Navigator
-      screenOptions={({ navigation }) => ({
-        headerStyle: { backgroundColor: COLORS.primary },
-        headerTintColor: "white",
-        tabBarStyle: { backgroundColor: COLORS.primary },
-        tabBarActiveTintColor: COLORS.yellow,
-        tabBarInactiveTintColor: COLORS.white,
-      })}
-    >
+    <Tab.Navigator screenOptions={styles.tabBar}>
       <Tab.Screen
         options={{
           headerShown: false,
           title: "Journal",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="journal-whills" size={24} color={color} />
+            <FontAwesome5 name="journal-whills" size={30} color={color} />
           ),
         }}
         name="Journal"
@@ -62,7 +53,7 @@ export default function Home() {
           title: "CBT",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="lightbulb" size={24} color={color} />
+            <FontAwesome5 name="lightbulb" size={30} color={color} />
           ),
         }}
       />
@@ -73,7 +64,7 @@ export default function Home() {
           title: "Relaxation",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="meditation" size={24} color={color} />
+            <MaterialCommunityIcons name="meditation" size={30} color={color} />
           ),
         }}
       />
@@ -85,7 +76,7 @@ export default function Home() {
           title: "Resources",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="list" size={24} color={color} />
+            <Feather name="list" size={30} color={color} />
           ),
         }}
       />
@@ -97,10 +88,22 @@ export default function Home() {
           title: "Profile",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle" size={24} color={color} />
+            <Ionicons name="person-circle" size={30} color={color} />
           ),
         }}
       />
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    headerStyle: { backgroundColor: COLORS.primary },
+    headerTintColor: "white",
+    tabBarStyle: { backgroundColor: COLORS.primary, height: "12%", padding: 10 },
+    tabBarActiveTintColor: COLORS.yellow,
+    tabBarInactiveTintColor: COLORS.white,
+    tabBarLabelStyle: {fontSize: 15},
+
+  },
+});

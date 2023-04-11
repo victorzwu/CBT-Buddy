@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import React from "react";
 import CountDownTimer from "../../Components/CountDownTimer";
 import { useState } from "react";
@@ -15,7 +15,8 @@ export default function RelaxationScreen1() {
     <View style = {styles.container}>
       {!pressed && (
         <Pressable style = {styles.pressable} onPress={() => pressedHandler()}>
-          <Text>Click Here to Practice Deep Breathing</Text>
+          <Image style = {styles.icon} source={require("../../assets/icons/breathing.png")}/>
+          <Text style = {styles.pressableText}>Deep Breathing</Text>
         </Pressable>
       )}
       {pressed && (
@@ -29,7 +30,7 @@ export default function RelaxationScreen1() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -37,7 +38,22 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
     borderWidth: 1,
+    height: 200,
+    width: 200,
     borderColor: COLORS.primary,
     backgroundColor: COLORS.primary,
+    alignItems: "center",
+    justifyContent: "center"
   },
+  pressableText:
+  {
+    color: COLORS.white
+  },
+  icon:
+  {
+    height: 100,
+    width: 100,
+    margin: 20,
+    marginRight: 30,
+  }
 });

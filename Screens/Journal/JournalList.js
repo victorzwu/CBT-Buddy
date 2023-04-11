@@ -106,6 +106,7 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   btnBox: {
     flexDirection: "row",
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 30,
     padding: 15,
+    backgroundColor: COLORS.grey,
   },
   cardTop: {
     flexDirection: "row",
@@ -157,6 +159,6 @@ const styles = StyleSheet.create({
   location: {
     fontSize: 10,
     paddingBottom: 5,
-    color: COLORS.grey,
+    color: COLORS.darksilver,
   },
 });

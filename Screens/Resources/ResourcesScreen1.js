@@ -131,16 +131,20 @@ export default function ResourcesScreen1({ navigation, route }) {
 
   return (
     <View styles={styles.container}>
-      <Button title="Locate Me" onPress={() => findLocation()} />
+      {!location && <Button title="Locate Me" onPress={() => findLocation()} />}
       {location && (
         <FlatList
+          style={{ backgroundColor: COLORS.background }}
           data={resources}
           renderItem={({ item }) => {
             return (
               <Pressable style={styles.pressable} onPress={() => details(item)}>
                 <View>
-                  <Text style ={styles.nameText} >
-                    <Text>{item.name}{"\n"}</Text>
+                  <Text style={styles.nameText}>
+                    <Text>
+                      {item.name}
+                      {"\n"}
+                    </Text>
                   </Text>
                   <Text>
                     <Text style={styles.boldText}>Local Area: </Text>
@@ -178,32 +182,31 @@ export default function ResourcesScreen1({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
   pressable: {
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.grey,
     shadowColor: "black",
     shadowOffset: {
       width: 1,
       height: 8,
     },
     marginHorizontal: 30,
-    marginVertical:15,
+    marginVertical: 15,
     padding: 30,
     shadowRadius: 6,
     shadowOpacity: 0.25,
     elevation: 16,
     borderRadius: 4,
   },
-  nameText:{
+  nameText: {
     fontSize: 30,
     fontWeight: 900,
-    fontFamily: "Futura"
+    fontFamily: "Futura",
   },
-  boldText:
-  {
+  boldText: {
     fontWeight: "bold",
-  }
+  },
 });
