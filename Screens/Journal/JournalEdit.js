@@ -10,6 +10,7 @@ import {
 import { COLORS } from "../../color";
 import React, { useState } from "react";
 import moment from "moment";
+import { storageBucket } from "@env";
 
 export default function Com({
   navigation,
@@ -70,8 +71,9 @@ export default function Com({
               height: 200,
             }}
             source={{
-              uri: `https://firebasestorage.googleapis.com/v0/b/journal-5dfda.appspot.com/o/${formData.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
+              uri: `https://firebasestorage.googleapis.com/v0/b/${storageBucket}/o/${formData.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
             }}
+            
           />
         </TouchableOpacity>
         <TouchableOpacity
