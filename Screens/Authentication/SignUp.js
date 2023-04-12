@@ -1,11 +1,4 @@
-import {
-  SafeAreaView,
-  Text,
-  Button,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { SafeAreaView, Text, Button, TextInput, StyleSheet, ImageBackground,   TouchableOpacity} from "react-native";
 import React, { useState } from "react";
 import { auth } from "../../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -32,29 +25,32 @@ export default function SignUp({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Register</Text>
-      <TextInput
-        style={styles.input}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-        placeholder="Enter Email"
-      />
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-        placeholder="Enter Password"
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={styles.input}
-        value={confirmPassword}
-        onChangeText={(text) => setConfirmPassword(text)}
-        placeholder="Confirm Password"
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.button} onPress={signUp}>
+    <ImageBackground source={require("../../assets/background.png")} style={styles.background}>
+      <SafeAreaView style={styles.container}>
+        {/* <Text style={styles.label}>Email Address</Text> */}
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          placeholder="Enter Email Address"
+        />
+        {/* <Text style={styles.label}>Password</Text> */}
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          placeholder="Enter your Password"
+          secureTextEntry={true}
+        />
+        {/* <Text style={styles.label}>Confirm password</Text> */}
+        <TextInput
+          style={styles.input}
+          value={confirmPassword}
+          onChangeText={(text) => setConfirmPassword(text)}
+          placeholder="Confirm the Password"
+          secureTextEntry={true}
+        />
+        <TouchableOpacity style={styles.button} onPress={signUp}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={login}>
@@ -63,42 +59,41 @@ export default function SignUp({ navigation }) {
           </Text>
         </TouchableOpacity>
     </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 32,
-    marginRight: 225,
-    color: COLORS.white,
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    alignItems: "center"
   },
   input: {
-    width: "80%",
-    height: 48,
+    width: "100%",
+    height: 35,
     backgroundColor: "#fff",
-    borderRadius: 5,
-    marginBottom: 16,
-    paddingLeft: 16,
-    paddingRight: 16,
-    fontSize: 16,
+    borderRadius: 20,
+    marginBottom: 15,
+    paddingLeft: 40,
+    paddingRight: 40,
+    fontSize: 18,
+    marginBottom: 30,
     color: COLORS.text,
   },
-  label: {
-    color: COLORS.text,
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  
+  // label: {
+  //   color: COLORS.text,
+  //   fontSize: 18,
+  //   marginBottom: 10,
+  // },
   button: {
-    backgroundColor: COLORS.primary,
+    // backgroundColor: COLORS.darksilver,
     width: "80%",
     height: 48,
     borderRadius: 5,

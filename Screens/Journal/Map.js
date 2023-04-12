@@ -39,7 +39,7 @@ export default function Map({
       console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
-      setCoordinate(coordinate);
+      setCoordinate(coordinate); 
       if (formData && !formData.id) {
         setFormData({
           ...formData,
