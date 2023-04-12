@@ -80,7 +80,7 @@ export default function Map({
       console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
-      if (!formData.id) {
+      if (formData && !formData.id) {
         setFormData({
           ...formData,
           location: address,
