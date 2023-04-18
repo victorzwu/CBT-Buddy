@@ -1,8 +1,17 @@
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-setup";
 import { COLORS } from "../../color";
+import * as LocalAuthentication from "expo-local-authentication";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -18,6 +27,36 @@ export default function Login({ navigation }) {
 
   function signUp() {
     navigation.replace("SignUp");
+  }
+
+  async function onBiometric() {
+    try {
+      const isCompatible = await LocalAuthentication.hasHardwareAsync();
+      if (!isCompatible) {
+        throw new Error("Your device isn't compatible.");
+      }
+
+      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+      if (!isEnrolled) {
+        throw new Error("No Faces / Fingers found.");
+      }
+
+      const result = await LocalAuthentication.authenticateAsync();
+
+      if (result.success) {
+        const storedData = await SecureStore.getItemAsync("user");
+        const userData = JSON.parse(storedData);
+        if (userData !== null) {
+          await signInWithEmailAndPassword(
+            auth,
+            userData.email,
+            userData.password
+          );
+        }
+      }
+    } catch (err) {
+      console.log("biometric error", err);
+    }
   }
 
   return (
@@ -44,6 +83,11 @@ export default function Login({ navigation }) {
           <TouchableOpacity style={styles.button} onPress={login}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={onBiometric}>
+            <Text style={styles.buttonText}>Biometric Authentiation</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={signUp}>
             <Text style={styles.signupText}>
               Not registered yet? Create an account
