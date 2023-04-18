@@ -1,4 +1,12 @@
-import { SafeAreaView, Text, Button, TextInput, StyleSheet, ImageBackground,   TouchableOpacity} from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  Button,
+  TextInput,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import { auth } from "../../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -19,13 +27,23 @@ export default function SignUp({ navigation }) {
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      await SecureStore.setItemAsync(
+        "user",
+        JSON.stringify({
+          email: email,
+          password: password,
+        })
+      );
     } catch (err) {
       console.log("Auth error ", err);
     }
   };
 
   return (
-    <ImageBackground source={require("../../assets/background.png")} style={styles.background}>
+    <ImageBackground
+      source={require("../../assets/background.png")}
+      style={styles.background}
+    >
       <SafeAreaView style={styles.container}>
         {/* <Text style={styles.label}>Email Address</Text> */}
         <TextInput
@@ -51,14 +69,12 @@ export default function SignUp({ navigation }) {
           secureTextEntry={true}
         />
         <TouchableOpacity style={styles.button} onPress={signUp}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={login}>
-          <Text style={styles.signupText}>
-          Already Registered? Login
-          </Text>
+          <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-    </SafeAreaView>
+        <TouchableOpacity onPress={login}>
+          <Text style={styles.signupText}>Already Registered? Login</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </ImageBackground>
   );
 }
@@ -73,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   input: {
     width: "100%",
