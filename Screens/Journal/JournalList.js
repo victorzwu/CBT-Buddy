@@ -88,7 +88,7 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
                 <Button
                   onPress={async () => {
                     await deleteFromDB(v.id);
-                    alert("Delete succeeded!");
+                    Alert.alert("Congratulations","Delete succeeded!");
                     getData();
                   }}
                 >

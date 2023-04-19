@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TextInput, Alert} from "react-native";
 import { COLORS } from "../../color";
 import Button from "../../Components/Button";
 import { update } from "../../Firebase/firestore";
@@ -31,7 +31,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
               update(formData.id, {
                 detail: value,
               });
-              alert("Edit Success!");
+              Alert.alert("Edit Success!");
               getData();
               navigation.goBack();
             } else {
