@@ -5,6 +5,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import { COLORS } from "../../color";
 import { update } from "../../Firebase/firestore";
@@ -62,7 +63,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
                   update(formData.id, {
                     mood: deepData[i].label,
                   });
-                  alert("Edit Success!");
+                  Alert.alert("Wow", "Edit Success!");
                   getData();
                   navigation.goBack();
                 } else {

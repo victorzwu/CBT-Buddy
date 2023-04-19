@@ -5,6 +5,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState, useEffect } from "react";
@@ -60,7 +61,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             update(formData.id, {
               photo: `${uuid}_img`,
             });
-            alert("Edit Success!");
+            Alert.alert('WOW', "Edit Success!");
             getData();
             navigation.goBack();
           }
@@ -98,7 +99,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             update(formData.id, {
               photo: `${uuid}_img`,
             });
-            alert("Edit Success!");
+            Alert.alert("WOW","Edit Success!");
             getData();
             navigation.goBack();
           }
