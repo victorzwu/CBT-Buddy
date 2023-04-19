@@ -170,4 +170,16 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     textAlign: "center",
   },
+  button: {
+    backgroundColor: "#F0FFFF",
+    borderRadius: 20,
+    padding: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "plum",
+    fontWeight: "bold",
+    fontSize: 12,
+  },
 });

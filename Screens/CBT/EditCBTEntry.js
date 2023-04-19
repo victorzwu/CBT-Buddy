@@ -14,6 +14,7 @@ import RegularButton from "../../Components/RegularButton";
 import { onSnapshot, collection } from "firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
 import DatetimePicker from "../../Components/DatetimePicker";
+import { distortions } from "../../Contexts/DistortionsContext";
 
 export default function EditCBTEntry({
   id,
@@ -43,32 +44,20 @@ export default function EditCBTEntry({
   const [date, setDate] = useState(originalDate);
   // const [distortions, setDistortions] = useState(item.distortions);
   const [solution, setSolution] = useState(originalSolution);
-  const [allDistortions, setAllDistortions] = useState([]);
+  const [allDistortions, setAllDistortions] = useState(distortions);
   const [selectedDistortions, setSelectedDistortions] = useState(
     originalSelectedDistortions
   );
-  useEffect(() => {
-    onSnapshot(collection(firestore, "CBTDistortions"), (querySnapshot) => {
-      if (querySnapshot.empty) {
-      } else {
-        let docs = [];
-        querySnapshot.docs.forEach((snap) => {
-          docs.push({ ...snap.data(), id: snap.id });
-        });
-        setAllDistortions(docs);
-      }
-    });
-  }, []);
   function handleOnPress(item) {
     if (
       selectedDistortions
         .map((item) => {
-          return item.id;
+          return item.name;
         })
-        .includes(item.id)
+        .includes(item.name)
     ) {
       const newDistortions = selectedDistortions.filter(
-        (listItem) => listItem.id !== item.id
+        (listItem) => listItem.name !== item.name
       );
       setSelectedDistortions([...newDistortions]);
     } else {
@@ -163,11 +152,11 @@ export default function EditCBTEntry({
               onPress={() => handleOnPress(item)}
               selected={selectedDistortions
                 .map((item) => {
-                  return item.id;
+                  return item.name;
                 })
-                .includes(item.id)}
+                .includes(item.name)}
               item={item}
-              key={item.id}
+              key={item.name}
             />
           );
         })}
