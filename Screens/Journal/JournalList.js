@@ -5,6 +5,7 @@ import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { deleteFromDB } from "../../Firebase/firestore";
 import moment from "moment";
+import { storageBucket } from "@env";
 
 export default function Com({ navigation, route, data, getData, setFormData }) {
   const moodObj = {
@@ -60,7 +61,7 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
                         height: 80,
                       }}
                       source={{
-                        uri: `https://firebasestorage.googleapis.com/v0/b/journal-5dfda.appspot.com/o/${v.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
+                        uri: `https://firebasestorage.googleapis.com/v0/b/${storageBucket}/o/${v.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
                       }}
                     />
                   </View>
@@ -88,7 +89,6 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
                 <Button
                   onPress={async () => {
                     await deleteFromDB(v.id);
-                    Alert.alert("Congratulations","Delete succeeded!");
                     getData();
                   }}
                 >
@@ -119,12 +119,19 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "80%",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: COLORS.grey,
+    borderRadius: 10,
     marginBottom: 30,
     padding: 15,
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.white,
+    shadowColor: "black",
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 1,
+      height: 8,
+    },
   },
   cardTop: {
     flexDirection: "row",

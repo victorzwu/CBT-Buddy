@@ -39,6 +39,7 @@ export default function Journal({ navigation }) {
       screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
+        headerShadowVisible: false
       })}
     >
       <Stack.Screen
@@ -67,7 +68,7 @@ export default function Journal({ navigation }) {
       <Stack.Screen
         name="JournalEdit"
         options={{
-          title: "Edit",
+          title: "Edit an entry",
         }}
       >
         {(props) => (

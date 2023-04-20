@@ -8,7 +8,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
   const [value, onChangeText] = useState("");
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.tit}>What do you want to say today</Text>
+      <Text style={styles.tit}>What do you want to say today?</Text>
 
       <View style={styles.itemBox}>
         <TextInput
@@ -31,7 +31,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
               update(formData.id, {
                 detail: value,
               });
-              Alert.alert("Edit Success!");
+              // Alert.alert("Edit Success!");
               getData();
               navigation.goBack();
             } else {
@@ -50,12 +50,14 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
     paddingVertical: 20,
+    color: COLORS.darksilver
   },
   itemBox: {
     paddingHorizontal: 20,
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
     padding: 10,
     color: COLORS.textColor,
     height: 400,
+    backgroundColor: COLORS.white,
+    borderRadius: 10,
+    fontSize: 20,
   },
   btnBox: {
     flexDirection: "row",

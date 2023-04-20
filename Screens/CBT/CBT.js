@@ -40,6 +40,7 @@ export default function CBT() {
       screenOptions={{
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
+        headerShadowVisible: false
       }}
     >
       <Stack.Screen

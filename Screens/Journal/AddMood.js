@@ -15,7 +15,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
   const [listData, setListData] = useState([
     {
       icon: require("../../assets/emoji/general.png"),
-      label: "General",
+      label: "Normal",
       checked: false,
     },
     {
@@ -46,7 +46,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
   ]);
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.tit}>How are you felling totay?</Text>
+      <Text style={styles.tit}>How are you feeling today?</Text>
 
       <View style={styles.itemBox}>
         {listData.map((v, i) => {
@@ -63,7 +63,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
                   update(formData.id, {
                     mood: deepData[i].label,
                   });
-                  Alert.alert("Wow", "Edit Success!");
+                  // Alert.alert("Wow", "Edit Success!");
                   getData();
                   navigation.goBack();
                 } else {
@@ -93,12 +93,14 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
     paddingVertical: 20,
+    color: COLORS.darksilver,
   },
   itemBox: {
     paddingHorizontal: 20,
@@ -107,9 +109,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.white,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: COLORS.grey,
     marginBottom: 10,
     paddingHorizontal: 10,
+    shadowColor: "black",
+    shadowRadius: 2,
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 1,
+      height: 4,
+    },
+
   },
   itemIcon: {
     width: 30,

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState, useEffect } from "react";
@@ -255,6 +256,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   submitBtn: {
-    marginRight: 80,
+    marginRight:80, 
   },
 });
