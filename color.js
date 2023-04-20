@@ -7,11 +7,11 @@ export const COLORS = {
   primary: '#000B4F',
   second: '#bae7ff',
   danger: '#fa541c',
-  white: '#ffffff',
-  yellow: "#ffd700",
-  textColor: '#666666',
-  background: "#20368F",
-  grey: "#EBEBEB",
-  darksilver: "#6D6D6D",
+  white: 'white',
+  yellow: "#569DAA",
+  textColor: '#577D86',
+  background: "#87CBB9",
+  grey: "#577D86",
+  darksilver: "#569DAA"
 
 }
