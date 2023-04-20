@@ -99,7 +99,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             update(formData.id, {
               photo: `${uuid}_img`,
             });
-            Alert.alert("WOW","Edit Success!");
+            // Alert.alert("WOW","Edit Success!");
             getData();
             navigation.goBack();
           }
@@ -120,29 +120,29 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.tit}>Photo And Location</Text>
+      <Text style={styles.tit}>Any additions you would like to add?</Text>
       <View style={styles.itemBox}>
-        <Text style={styles.itemTip}>Tap the photo</Text>
+        <Text style={styles.itemTip}>Add a photo from your library</Text>
         <TouchableOpacity onPress={pickImage} style={styles.item}>
           {image ? (
             <Image source={{ uri: image }} style={styles.image} />
           ) : (
-            <FontAwesome name="photo" size={80} color={COLORS.primary} />
+            <FontAwesome name="photo" size={80} color={COLORS.darksilver} />
           )}
         </TouchableOpacity>
       </View>
       <View style={styles.itemBox}>
-        <Text style={styles.itemTip}>Tap the camera</Text>
+        <Text style={styles.itemTip}>Take a picture</Text>
         <TouchableOpacity onPress={takePicture} style={styles.item}>
           {cameraImage ? (
             <Image source={{ uri: cameraImage }} style={styles.image} />
           ) : (
-            <AntDesign name="camera" size={100} color={COLORS.primary} />
+            <AntDesign name="camera" size={100} color={COLORS.darksilver} />
           )}
         </TouchableOpacity>
       </View>
       <View style={styles.itemBox}>
-        <Text style={styles.itemTip}>Tap the map</Text>
+        <Text style={styles.itemTip}>Add a location</Text>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Map", {screen: "Journal"});
@@ -163,12 +163,14 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
     paddingTop: 30,
+    color: COLORS.darksilver
   },
   itemBox: {
     alignItems: "center",
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderWidth: 4,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.darksilver,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderWidth: 4,
-    borderColor: COLORS.yellow,
+    borderColor: COLORS.darksilver,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,

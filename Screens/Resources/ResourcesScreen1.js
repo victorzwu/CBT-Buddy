@@ -199,7 +199,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   pressable: {
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.grey,
+    borderWidth: 2,
     shadowColor: "black",
     shadowOffset: {
       width: 1,

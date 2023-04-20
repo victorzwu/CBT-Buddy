@@ -20,7 +20,7 @@ export default function Com({
   formData,
   setFormData,
 }) {
-  console.log("formData = ", formData);
+  // console.log("formData = ", formData);
   const moodObj = {
     General: require("../../assets/emoji/general.png"),
     Happy: require("../../assets/emoji/happy.png"),
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 10,
+    backgroundColor: COLORS.background,
   },
   cardBox: {
     alignItems: "center",
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   },
   locatonBox: {},
   locaton: {
-    color: COLORS.grey,
+    color: COLORS.darksilver,
   },
   coverBox: {
     paddingVertical: 20,

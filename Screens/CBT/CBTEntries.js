@@ -13,7 +13,6 @@ export default function CBTEntries({ navigation }) {
       if (querySnapshot.empty) {
         setEntries([]);
       } else {
-        console.log("start");
         let docs = [];
         querySnapshot.docs.forEach((snap) => {
           docs.push({ ...snap.data(), id: snap.id });

@@ -63,7 +63,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
                   update(formData.id, {
                     mood: deepData[i].label,
                   });
-                  Alert.alert("Wow", "Edit Success!");
+                  // Alert.alert("Wow", "Edit Success!");
                   getData();
                   navigation.goBack();
                 } else {
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     paddingVertical: 20,
+    color: COLORS.darksilver,
   },
   itemBox: {
     paddingHorizontal: 20,
@@ -108,9 +109,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
-    backgroundColor: COLORS.second,
+    backgroundColor: COLORS.white,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: COLORS.grey,
     marginBottom: 10,
     paddingHorizontal: 10,
+    shadowColor: "black",
+    shadowRadius: 2,
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 1,
+      height: 4,
+    },
+
   },
   itemIcon: {
     width: 30,

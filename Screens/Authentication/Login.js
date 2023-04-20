@@ -12,16 +12,18 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-setup";
 import { COLORS } from "../../color";
 import * as LocalAuthentication from "expo-local-authentication";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [failed, setFailed] = useState(false);
 
   const login = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
+      setFailed(true);
       console.log("login err ", err);
     }
   };
@@ -67,17 +69,34 @@ export default function Login({ navigation }) {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.form}>
-          <Text style={styles.title}>Welcome CBT-Buddy!</Text>
+          <Text style={styles.title}>Welcome to CBT Buddy!</Text>
           <TextInput
             style={styles.input}
             value={email}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => {
+              setEmail(text);
+              if (failed) {
+                setFailed(false);
+              }
+            }}
             placeholder="Email"
           />
+          <View style={styles.failureContainer}>
+            {failed && (
+              <Text style={styles.failureText}>
+                Your email or password is incorrect.
+              </Text>
+            )}
+          </View>
           <TextInput
             style={styles.input}
             value={password}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => {
+              setPassword(text);
+              if (failed) {
+                setFailed(false);
+              }
+            }}
             placeholder="Password"
             secureTextEntry={true}
           />
@@ -117,17 +136,18 @@ const styles = StyleSheet.create({
     marginTop: "1%",
   },
   title: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 32,
-    color: COLORS.text,
+    color: COLORS.textColor,
+
   },
   input: {
     width: "100%",
     height: 48,
     backgroundColor: "#fff",
+    margin: 5,
     borderRadius: 5,
-    marginBottom: 16,
     paddingLeft: 16,
     paddingRight: 16,
     fontSize: 16,
@@ -148,6 +168,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  failureContainer: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  failureText: {
+    color: COLORS.white,
+  },
+
   signupText: {
     color: COLORS.white,
     marginTop: 16,
