@@ -7,14 +7,18 @@ import {
   getDoc,
   getDocs,
   query,
+  where
 } from "firebase/firestore";
 import { firestore } from "./firebase-setup";
+import { auth } from "./firebase-setup";
+
 
 export async function getFromDB() {
+  // console.log("aaa = ", auth.currentUser.email)
   try {
     let data = [];
     const collectionUsers = collection(firestore, "journals");
-    const q = query(collectionUsers);
+    const q = query(collectionUsers, where("email", "==", auth.currentUser.email));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       return data;
