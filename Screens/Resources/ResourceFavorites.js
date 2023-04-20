@@ -78,9 +78,9 @@ export default function ResourceFavorites() {
 
                   <View style={{ flex: 1, alignItems: "flex-end" }}>
                     <Ionicons
-                      name="ios-star"
+                      name="remove"
                       size={24}
-                      color="yellow"
+                      color="black"
                       onPress={() => starPressed(item)}
                     />
                   </View>

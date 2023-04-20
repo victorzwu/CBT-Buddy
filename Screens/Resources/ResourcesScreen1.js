@@ -140,7 +140,7 @@ export default function ResourcesScreen1({ navigation, route }) {
 
   function starPressed(item) {
     addFavoriteResource(item);
-    Alert.alert("Added to your favorites!")
+    Alert.alert("Added to your favorites")
   }
 
   return (

@@ -39,7 +39,7 @@ export async function addFavoriteResource(resource) {
       ...resource,
       user: auth.currentUser.uid,
     });
-    console.log(docRef.id);
+    // console.log(docRef.id);
   } catch (err) {
     console.log(err);
   }
