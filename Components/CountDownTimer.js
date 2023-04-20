@@ -38,13 +38,13 @@ export default function CountDownTimer() {
     <View style={styles.container}>
       <View style = {styles.breathingContainer}>
         {countdown > 0 ? (
-          <Text style={{ fontSize: 100 }}>{countdown}</Text>
+          <Text style={{ fontSize: 300 }}>{countdown}</Text>
         ) : cycle === 0 ? (
-          <Text style={{ fontSize: 50 }}>Breathe In...</Text>
+          <Text style={{ fontSize: 70 }}>Breathe In</Text>
         ) : cycle === 1 ? (
-          <Text style={{ fontSize: 30 }}>Hold Your Breath...</Text>
+          <Text style={{ fontSize: 100 }}>Hold</Text>
         ) : (
-          <Text style={{ fontSize: 50 }}>Breathe out...</Text>
+          <Text style={{ fontSize: 70 }}>Breathe Out</Text>
         )}
       </View>
       <View style = {styles.total}>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 10,
+    marginTop: 150,
   },
   total:
   {

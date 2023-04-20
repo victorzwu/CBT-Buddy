@@ -61,6 +61,7 @@ export default function Home() {
         name="Relaxation"
         component={Relaxation}
         options={{
+          headerShown: false,
           title: "Relaxation",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
@@ -104,9 +105,12 @@ const styles = StyleSheet.create({
       backgroundColor: COLORS.primary,
       height: "12%",
       padding: 10,
+      borderTopWidth: 0,
+      borderTopColor: "transparent",
     },
     tabBarActiveTintColor: COLORS.yellow,
     tabBarInactiveTintColor: COLORS.white,
     tabBarLabelStyle: { fontSize: 15 },
+
   },
 });

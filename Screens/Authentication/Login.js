@@ -17,13 +17,15 @@ import * as SecureStore from "expo-secure-store";
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [failed, setFailed] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false);
+  const [biometricFailed, setBiometricFailed] = useState(false);
+  const [biometricFailText, setBiometricFailText] = useState(false);
 
   const login = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
-      setFailed(true);
+      setLoginFailed(true);
       console.log("login err ", err);
     }
   };
@@ -58,6 +60,8 @@ export default function Login({ navigation }) {
         }
       }
     } catch (err) {
+      setBiometricFailed(true);
+      setBiometricFailText(err.message);
       console.log("biometric error", err);
     }
   }
@@ -75,14 +79,17 @@ export default function Login({ navigation }) {
             value={email}
             onChangeText={(text) => {
               setEmail(text);
-              if (failed) {
-                setFailed(false);
+              if (loginFailed) {
+                setLoginFailed(false);
+              }
+              if (biometricFailed) {
+                setBiometricFailed(false);
               }
             }}
             placeholder="Email"
           />
           <View style={styles.failureContainer}>
-            {failed && (
+            {loginFailed && (
               <Text style={styles.failureText}>
                 Your email or password is incorrect.
               </Text>
@@ -93,8 +100,11 @@ export default function Login({ navigation }) {
             value={password}
             onChangeText={(text) => {
               setPassword(text);
-              if (failed) {
-                setFailed(false);
+              if (loginFailed) {
+                setLoginFailed(false);
+              }
+              if (biometricFailed) {
+                setBiometricFailed(false);
               }
             }}
             placeholder="Password"
@@ -107,6 +117,14 @@ export default function Login({ navigation }) {
           <TouchableOpacity style={styles.button} onPress={onBiometric}>
             <Text style={styles.buttonText}>Biometric Authentiation</Text>
           </TouchableOpacity>
+
+          <View style={styles.failureContainer}>
+            {biometricFailed && (
+              <Text style={styles.failureText}>
+                {biometricFailText}
+              </Text>
+            )}
+          </View>
 
           <TouchableOpacity onPress={signUp}>
             <Text style={styles.signupText}>

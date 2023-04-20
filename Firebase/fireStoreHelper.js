@@ -6,6 +6,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { firestore } from "./firebase-setup";
+import { auth } from "./firebase-setup";
 
 export async function addCBTEntry(cbtEntry) {
   try {
@@ -34,16 +35,19 @@ export async function deleteCBTEntry(cbtEntryId) {
 
 export async function addFavoriteResource(resource) {
   try {
-    const docRef = await addDoc(collection(firestore, "favorites"), resource);
-    console.log(docRef.id);
+    const docRef = await addDoc(collection(firestore, "favorites"), {
+      ...resource,
+      user: auth.currentUser.uid,
+    });
+    // console.log(docRef.id);
   } catch (err) {
     console.log(err);
   }
 }
 
-export async function deleteFavoriteResource(resource) {
+export async function deleteFavoriteResource(id) {
   try {
-    await deleteDoc(doc(firestore, "favorites", resource));
+    await deleteDoc(doc(firestore, "favorites", id));
   } catch (err) {
     console.log(err);
   }
