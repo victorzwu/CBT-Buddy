@@ -12,6 +12,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-setup";
 import { COLORS } from "../../color";
 import * as LocalAuthentication from "expo-local-authentication";
+import * as SecureStore from 'expo-secure-store';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
