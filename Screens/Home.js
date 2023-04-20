@@ -61,6 +61,7 @@ export default function Home() {
         name="Relaxation"
         component={Relaxation}
         options={{
+          headerShown: false,
           title: "Relaxation",
           headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
