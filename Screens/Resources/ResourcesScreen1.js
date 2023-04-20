@@ -15,15 +15,21 @@ export default function ResourcesScreen1({ navigation, route }) {
   const [permissionResponse, requestPermission] =
     Location.useForegroundPermissions();
 
+  useEffect(() => {
+    findLocation();
+  }, [permissionResponse]);
+
   const verifyPermission = async () => {
-    if (permissionResponse.granted) {
-      return true;
+    if (permissionResponse) {
+      if (permissionResponse.granted) {
+        return true;
+      }
+      const permissionResult = await requestPermission();
+      return permissionResult.granted;
     }
-    const permissionResult = await requestPermission();
-    return permissionResult.granted;
   };
 
-  const findLocation = async () => {
+  async function findLocation() {
     const permissionReceived = verifyPermission();
     if (permissionReceived) {
       try {
@@ -39,7 +45,7 @@ export default function ResourcesScreen1({ navigation, route }) {
     } else {
       Alert.alert("need location permission");
     }
-  };
+  }
 
   useEffect(() => {
     if (route.params) {
@@ -134,7 +140,6 @@ export default function ResourcesScreen1({ navigation, route }) {
 
   return (
     <View styles={styles.container}>
-      {!location && <Button title="Locate Me" onPress={() => findLocation()} />}
       {location && (
         <FlatList
           style={{ backgroundColor: COLORS.background }}
@@ -142,8 +147,26 @@ export default function ResourcesScreen1({ navigation, route }) {
           renderItem={({ item }) => {
             return (
               <Pressable style={styles.pressable} onPress={() => details(item)}>
-                <View>
-                  <View style={{ alignItems: "flex-end" }}>
+                <View style={styles.card}>
+                  <View style={styles.cardWordContainer}>
+                    <Text style={styles.nameText}>
+                      <Text>{item.name}</Text>
+                    </Text>
+                    <Text style={{ fontSize: 2 }}> {"\n"}</Text>
+                    <Text style={styles.addressText}>{item.address}</Text>
+
+                    <Text>
+                      <Text style={styles.boldText}>{"\n"}Local Area: </Text>
+                      <Text>{item.localarea}</Text>
+                    </Text>
+
+                    <Text>
+                      <Text style={styles.boldText}>Distance: </Text>
+                      <Text>{item.distance.toFixed(2)} km</Text>
+                    </Text>
+                  </View>
+
+                  <View style={{ flex: 1, alignItems: "flex-end" }}>
                     <Ionicons
                       name="ios-star"
                       size={24}
@@ -151,27 +174,6 @@ export default function ResourcesScreen1({ navigation, route }) {
                       onPress={() => addToFavorites(item)}
                     />
                   </View>
-                  <Text style={styles.nameText}>
-                    <Text>{item.name}</Text>
-                  </Text>
-                  <Text style={{ fontSize: 2 }}> {"\n"}</Text>
-                  <Text style={styles.addressText}>{item.address}</Text>
-
-                  <Text>
-                    <Text style={styles.boldText}>{"\n"}Local Area: </Text>
-                    <Text>{item.localarea}</Text>
-                  </Text>
-                  <Text>
-                    <Text style={styles.boldText}>City: </Text>
-                    <Text>{item.city}</Text>
-                  </Text>
-                  <Text>
-                    <Text style={styles.boldText}>Distance: </Text>
-                    <Text>{item.distance.toFixed(2)} km</Text>
-                  </Text>
-                  <Text>
-                    <Text style={styles.boldText}>Address: </Text>
-                  </Text>
 
                   {/* <Text>
                   Longitude: {item.location ? item.location.lon : "Unknown"}
@@ -209,10 +211,13 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.25,
     elevation: 16,
-    borderRadius: 4,
+    borderRadius: 15,
+    flex: 1
   },
+  card: { flexDirection: "row", flex: 1 },
+  cardWordContainer: { flexDirection: "column", flex: 8 },
   nameText: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 900,
     fontFamily: "Futura",
   },

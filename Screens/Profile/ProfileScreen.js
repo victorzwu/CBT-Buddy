@@ -4,6 +4,7 @@ import { auth } from "../../Firebase/firebase-setup";
 import { signOut } from "firebase/auth";
 import Button from "../../Components/Button";
 import * as ImagePicker from "expo-image-picker";
+import { COLORS } from "../../color";
 
 export default function ProfileScreen() {
   const [avatar, setAvatar] = useState("");
@@ -60,7 +61,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },

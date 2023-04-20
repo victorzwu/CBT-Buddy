@@ -50,6 +50,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 20,
@@ -74,6 +75,8 @@ const styles = StyleSheet.create({
     padding: 10,
     color: COLORS.textColor,
     height: 400,
+    backgroundColor: COLORS.grey,
+    fontSize: 20,
   },
   btnBox: {
     flexDirection: "row",

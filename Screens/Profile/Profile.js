@@ -11,6 +11,7 @@ export default function Profile() {
       screenOptions={() => ({
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
+        headerShadowVisible: false
       })}
     >
       <Stack.Screen name="Profile Screen" component={ProfileScreen} />

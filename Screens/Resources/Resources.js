@@ -18,6 +18,7 @@ export default function Resources({ navigation }) {
       screenOptions={() => ({
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
+        headerShadowVisible: false
       })}
     >
       <Stack.Screen
