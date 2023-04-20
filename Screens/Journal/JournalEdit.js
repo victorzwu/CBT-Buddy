@@ -22,7 +22,7 @@ export default function Com({
 }) {
   // console.log("formData = ", formData);
   const moodObj = {
-    General: require("../../assets/emoji/general.png"),
+    Normal: require("../../assets/emoji/general.png"),
     Happy: require("../../assets/emoji/happy.png"),
     Sad: require("../../assets/emoji/sad.png"),
     Anger: require("../../assets/emoji/anger.png"),

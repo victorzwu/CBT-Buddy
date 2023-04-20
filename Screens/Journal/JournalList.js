@@ -9,7 +9,7 @@ import { storageBucket } from "@env";
 
 export default function Com({ navigation, route, data, getData, setFormData }) {
   const moodObj = {
-    General: require("../../assets/emoji/general.png"),
+    Normal: require("../../assets/emoji/general.png"),
     Happy: require("../../assets/emoji/happy.png"),
     Sad: require("../../assets/emoji/sad.png"),
     Anger: require("../../assets/emoji/anger.png"),
