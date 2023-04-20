@@ -39,6 +39,7 @@ export default function Journal({ navigation }) {
       screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
+        headerShadowVisible: false
       })}
     >
       <Stack.Screen

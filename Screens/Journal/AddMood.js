@@ -15,7 +15,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
   const [listData, setListData] = useState([
     {
       icon: require("../../assets/emoji/general.png"),
-      label: "General",
+      label: "Normal",
       checked: false,
     },
     {
@@ -46,7 +46,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
   ]);
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.tit}>How are you felling totay?</Text>
+      <Text style={styles.tit}>How are you feeling today?</Text>
 
       <View style={styles.itemBox}>
         {listData.map((v, i) => {
@@ -93,6 +93,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 20,

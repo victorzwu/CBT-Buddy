@@ -100,10 +100,13 @@ const styles = StyleSheet.create({
   tabBar: {
     headerStyle: { backgroundColor: COLORS.primary },
     headerTintColor: "white",
-    tabBarStyle: { backgroundColor: COLORS.primary, height: "12%", padding: 10 },
+    tabBarStyle: {
+      backgroundColor: COLORS.primary,
+      height: "12%",
+      padding: 10,
+    },
     tabBarActiveTintColor: COLORS.yellow,
-    tabBarInactiveTintColor: COLORS.white,
-    tabBarLabelStyle: {fontSize: 15},
-
+    tabBarInactiveTintColor: COLORS.grey,
+    tabBarLabelStyle: { fontSize: 15 },
   },
 });
