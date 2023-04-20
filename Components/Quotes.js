@@ -68,7 +68,10 @@ const styles = StyleSheet.create({
   quote: {
     fontSize: 30,
   },
-  author: {},
+  author: {
+    marginTop: 20,
+    fontSize: 20,
+  },
   card: {
     backgroundColor: COLORS.white,
     borderColor: COLORS.grey,
