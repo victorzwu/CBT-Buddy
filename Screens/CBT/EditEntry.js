@@ -27,7 +27,7 @@ export default function EditEntry({ navigation, route }) {
         },
       }}
     >
-      <Stack.Screen name="Edit CBT Entry">
+      <Stack.Screen name="Edit CBT Entry" options={{ headerShown: false }}>
         {(props) => (
           <EditCBTEntry
             originalSituation={situation}
@@ -65,7 +65,7 @@ export default function EditEntry({ navigation, route }) {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen name="Map">
+      <Stack.Screen name="Map" options={{ headerShown: false }}>
         {(props) => (
           <Map
             location={location}

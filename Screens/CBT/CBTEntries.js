@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   entryStyle: {
     backgroundColor: "white",
-    width: 300,
+    width: 330,
     borderRadius: 3,
     padding: 10,
     marginTop: 10,
@@ -70,5 +70,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowOffset: { width: 0, height: 0 },
   },
-  pressedStyle: { backgroundColor: "purple", opacity: 0.5 },
+  pressedStyle: { backgroundColor: COLORS.primary, opacity: 0.5 },
 });

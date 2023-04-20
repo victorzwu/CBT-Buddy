@@ -1,5 +1,6 @@
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import React from "react";
+import { COLORS } from "../color";
 
 export default function Distortion({ item, selected, onPress }) {
   const uris = {
@@ -34,7 +35,7 @@ export default function Distortion({ item, selected, onPress }) {
 const styles = StyleSheet.create({
   container: {},
   listItem: {
-    backgroundColor: "#252628",
+    backgroundColor: COLORS.primary,
     marginBottom: 10,
     borderRadius: 5,
     overflow: "hidden",

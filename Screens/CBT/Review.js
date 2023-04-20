@@ -1,4 +1,12 @@
-import { View, Text, Image, Alert, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Alert,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import React from "react";
 import { addCBTEntry } from "../../Firebase/fireStoreHelper";
 import Button from "../../Components/Button";
@@ -81,39 +89,79 @@ export default function Review({
   return (
     <ScrollView>
       <Text style={styles.tit}>What was the situation</Text>
-      <Text style={styles.description}>{situation}</Text>
+      {situation ? (
+        <Text style={styles.description}>{situation}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <Text style={styles.tit}>What were you doing</Text>
-      <Text style={styles.description}>{action}</Text>
+      {action ? (
+        <Text style={styles.description}>{action}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <Text style={styles.tit}>Where were you</Text>
-      <Text style={styles.description}>{address}</Text>
+      {address ? (
+        <Text style={styles.description}>{address}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <Text style={styles.tit}>Who were you with</Text>
-      <Text style={styles.description}>{partner}</Text>
+      {partner ? (
+        <Text style={styles.description}>{partner}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <Text style={styles.tit}>What emotion did you experience</Text>
-      <Text style={styles.description}>{emotion}</Text>
+      {emotion ? (
+        <Text style={styles.description}>{emotion}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <Text style={styles.tit}>When did it happen</Text>
-      <Text style={styles.description}>
-        {date.toLocaleString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-        })}
-      </Text>
+      {date ? (
+        <Text style={styles.description}>
+          {date.toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })}
+        </Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <Text style={styles.tit}>Cognitive distortions</Text>
-      {selectedDistortions.map((distortion) => (
-        <View key={distortion.name}>
-          <Image
-            source={uris[distortion.uri]}
-            style={{ width: 100, height: 100 }}
-          />
-          <Text>{distortion.text}</Text>
-        </View>
-      ))}
+      {selectedDistortions.length > 0 ? (
+        <FlatList
+          data={selectedDistortions}
+          horizontal
+          renderItem={({ item }) => (
+            <View key={item.name} style={{ paddingRight: 10 }}>
+              <Image
+                source={uris[item.uri]}
+                style={{ width: 100, height: 100 }}
+              />
+              <Text style={{ fontSize: 22, color: COLORS.primary }}>
+                {item.name}
+              </Text>
+              <Text>{item.text}</Text>
+            </View>
+          )}
+          keyExtractor={(item) => item.name}
+        />
+      ) : (
+        <Text style={styles.tip}>None</Text>
+      )}
       <Text style={styles.tit}>
         How can you reframe or redirect this thought
       </Text>
-      <Text style={styles.description}>{solution}</Text>
+      {solution ? (
+        <Text style={styles.description}>{solution}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
       <View style={styles.btnBox}>
         <Button onPress={cancelHandler}>
           <Text style={styles.btnText}>Cancel</Text>
@@ -169,13 +217,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   description: {
-    color: COLORS.textColor,
-    fontSize: 13,
+    color: COLORS.primary,
+    fontSize: 18,
   },
   tip: {
     fontSize: 15,
     paddingBottom: 5,
-    color: COLORS.grey,
+    color: COLORS.darksilver,
   },
   btnText: {
     fontSize: 20,

@@ -1,10 +1,25 @@
-import { View, Text, Image, Alert } from "react-native";
-import React from "react";
-import RegularButton from "../../Components/RegularButton";
+import {
+  View,
+  Text,
+  Image,
+  Alert,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import Button from "../../Components/Button";
 import { deleteCBTEntry } from "../../Firebase/fireStoreHelper";
+import { COLORS } from "../../color";
 
 export default function Details({ route, navigation }) {
   const item = route.params.entry;
+  const [distortions, setDistortions] = useState(
+    route.params.entry.distortions
+  );
+  useEffect(() => {
+    console.log(distortions);
+  }, []);
   const uris = {
     FILTERING: require("../../assets/distortions/FILTERING.png"),
     CATASTROPHIZING: require("../../assets/distortions/CATASTROPHIZING.png"),
@@ -37,19 +52,39 @@ export default function Details({ route, navigation }) {
     ]);
   }
   return (
-    <View>
-      <Text>What was the situation</Text>
-      <Text>{item.situation}</Text>
-      <Text>What were you doing</Text>
-      <Text>{item.action}</Text>
-      <Text>Where were you</Text>
-      <Text>{item.address}</Text>
-      <Text>Who were you with</Text>
-      <Text>{item.partner}</Text>
-      <Text>What emotion did you experience</Text>
-      <Text>{item.emotion}</Text>
-      <Text>When did it happen</Text>
-      <Text>
+    <ScrollView>
+      <Text style={styles.tit}>What was the situation</Text>
+      {item.situation ? (
+        <Text style={styles.description}>{item.situation}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
+      <Text style={styles.tit}>What were you doing</Text>
+      {item.action ? (
+        <Text style={styles.description}>{item.action}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
+      <Text style={styles.tit}>Where were you</Text>
+      {item.address ? (
+        <Text style={styles.description}>{item.address}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
+      <Text style={styles.tit}>Who were you with</Text>
+      {item.partner ? (
+        <Text style={styles.description}>{item.partner}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
+      <Text style={styles.tit}>What emotion did you experience</Text>
+      {item.emotion ? (
+        <Text style={styles.description}>{item.emotion}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
+      <Text style={styles.tit}>When did it happen</Text>
+      <Text style={styles.description}>
         {new Date(item.date.seconds * 1000).toLocaleString("en-US", {
           year: "numeric",
           month: "long",
@@ -58,30 +93,103 @@ export default function Details({ route, navigation }) {
           minute: "numeric",
         })}
       </Text>
-      <Text>Cognitive distortions</Text>
-      {item.distortions.map((distortion) => (
-        <View key={distortion.id}>
-          <Image
-            source={uris[distortion.uri]}
-            style={{ width: 100, height: 100 }}
-          />
-          <Text>{distortion.text}</Text>
-        </View>
-      ))}
-      <Text>How can you reframe or redirect this thought</Text>
-      <Text>{item.solution}</Text>
-      <RegularButton
-        pressHandler={() => {
-          navigation.navigate("Edit Entry", {
-            item: item,
-          });
-        }}
-      >
-        <Text>Edit</Text>
-      </RegularButton>
-      <RegularButton pressHandler={() => deleteHandler(item.id)}>
-        <Text>Delete</Text>
-      </RegularButton>
-    </View>
+      <Text style={styles.tit}>Cognitive distortions</Text>
+      {item.distortions.length > 0 ? (
+        <FlatList
+          data={item.distortions}
+          horizontal
+          renderItem={({ item }) => (
+            <View style={styles.disBox}>
+              <Image
+                source={uris[item.uri]}
+                style={{ width: 100, height: 100 }}
+              />
+              <Text style={{ fontSize: 22, color: COLORS.primary }}>
+                {item.name}
+              </Text>
+              <Text>{item.text}</Text>
+            </View>
+          )}
+          keyExtractor={(item) => item.name}
+        />
+      ) : (
+        <Text style={styles.tip}>None</Text>
+      )}
+      <Text style={styles.tit}>
+        How can you reframe or redirect this thought
+      </Text>
+      {item.solution ? (
+        <Text style={styles.description}>{item.solution}</Text>
+      ) : (
+        <Text style={styles.tip}>Empty</Text>
+      )}
+      <View style={styles.btnBox}>
+        <Button
+          onPress={() => {
+            navigation.navigate("Edit Entry", {
+              item: item,
+            });
+          }}
+        >
+          <Text style={styles.btnText}>Edit</Text>
+        </Button>
+        <Button onPress={() => deleteHandler(item.id)}>
+          <Text style={styles.btnText}>Delete</Text>
+        </Button>
+      </View>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  tit: {
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingVertical: 20,
+  },
+  disBox: {
+    marginRight: 15,
+  },
+  itemBox: {
+    paddingHorizontal: 20,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: COLORS.second,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  input: {
+    borderColor: "#ddd",
+    borderWidth: 1,
+    padding: 10,
+    color: COLORS.textColor,
+    height: 200,
+    margin: 15,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  description: {
+    color: COLORS.primary,
+    fontSize: 18,
+  },
+  tip: {
+    fontSize: 15,
+    paddingBottom: 5,
+    color: COLORS.darksilver,
+  },
+  btnText: {
+    fontSize: 20,
+    color: "white",
+  },
+});

@@ -1,5 +1,6 @@
-import { View, Text, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, Image, StyleSheet, FlatList } from "react-native";
+import React from "react";
+import { COLORS } from "../color";
 
 export default function CBTEntry({ entryContent }) {
   const uris = {
@@ -22,8 +23,8 @@ export default function CBTEntry({ entryContent }) {
   return (
     <View>
       <View>
-        <Text>Date</Text>
-        <Text>
+        <Text style={styles.tit}>Date</Text>
+        <Text style={styles.description}>
           {new Date(entryContent.date.seconds * 1000).toLocaleString("en-US", {
             year: "numeric",
             month: "long",
@@ -32,20 +33,80 @@ export default function CBTEntry({ entryContent }) {
             minute: "numeric",
           })}
         </Text>
-        <Text>Situation</Text>
-        <Text>{entryContent.situation}</Text>
+        <Text style={styles.tit}>Situation</Text>
+        {entryContent.situation ? (
+          <Text style={styles.description}>{entryContent.situation}</Text>
+        ) : (
+          <Text style={styles.tip}>Empty</Text>
+        )}
       </View>
-      <View>
-        {entryContent.distortions.map((distortion) => (
-          <View key={distortion.name}>
-            <Image
-              source={uris[distortion.uri]}
-              style={{ width: 100, height: 100 }}
-            />
-            <Text>{distortion.name}</Text>
-          </View>
-        ))}
-      </View>
+      <Text style={styles.tit}>Cognitive Distortions</Text>
+      {entryContent.distortions.length > 0 ? (
+        <View
+          style={{ flexDirection: "row", flexWrap: "wrap", paddingTop: 10 }}
+        >
+          {entryContent.distortions.map((distortion) => (
+            <View key={distortion.name} style={{ padding: 1 }}>
+              <Image
+                source={uris[distortion.uri]}
+                style={{ width: 100, height: 100 }}
+              />
+            </View>
+          ))}
+        </View>
+      ) : (
+        <Text style={styles.tip}>None</Text>
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  tit: {
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingVertical: 20,
+  },
+  itemBox: {
+    paddingHorizontal: 20,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: COLORS.second,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  input: {
+    borderColor: "#ddd",
+    borderWidth: 1,
+    padding: 10,
+    color: COLORS.textColor,
+    height: 200,
+    margin: 15,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  description: {
+    color: COLORS.primary,
+    fontSize: 18,
+  },
+  tip: {
+    fontSize: 15,
+    paddingBottom: 5,
+    color: COLORS.darksilver,
+  },
+  btnText: {
+    fontSize: 20,
+    color: "white",
+  },
+});
