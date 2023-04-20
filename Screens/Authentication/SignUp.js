@@ -11,6 +11,8 @@ import React, { useState } from "react";
 import { auth } from "../../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { COLORS } from "../../color";
+import * as SecureStore from 'expo-secure-store';
+
 
 export default function SignUp({ navigation }) {
   const [email, setEmail] = useState("");
