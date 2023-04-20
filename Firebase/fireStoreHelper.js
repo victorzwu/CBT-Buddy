@@ -31,3 +31,20 @@ export async function deleteCBTEntry(cbtEntryId) {
     console.log(err);
   }
 }
+
+export async function addFavoriteResource(resource) {
+  try {
+    const docRef = await addDoc(collection(firestore, "favorites"), resource);
+    console.log(docRef.id);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function deleteFavoriteResource(resource) {
+  try {
+    await deleteDoc(doc(firestore, "favorites", resource));
+  } catch (err) {
+    console.log(err);
+  }
+}
