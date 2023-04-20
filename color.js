@@ -11,5 +11,5 @@ export const COLORS = {
   textColor: '#666666',
   background: "#aadfdc",
   grey: "#EBEBEB",
-  darksilver: "#6D6D6D"
+  darksilver: "#828282"
 }

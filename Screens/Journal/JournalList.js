@@ -119,12 +119,19 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "80%",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
+    borderWidth: 10,
+    borderColor: COLORS.grey,
+    borderRadius: 10,
     marginBottom: 30,
     padding: 15,
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.white,
+    shadowColor: "black",
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 1,
+      height: 8,
+    },
   },
   cardTop: {
     flexDirection: "row",
