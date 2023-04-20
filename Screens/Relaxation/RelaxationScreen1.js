@@ -3,6 +3,8 @@ import React from "react";
 import CountDownTimer from "../../Components/CountDownTimer";
 import { useState } from "react";
 import { COLORS } from "../../color";
+import { AntDesign } from "@expo/vector-icons";
+import Quotes from "../../Components/Quotes";
 
 export default function RelaxationScreen1() {
   const [breathingModalVisible, setBreathingModalVisible] = useState(false);
@@ -44,12 +46,12 @@ export default function RelaxationScreen1() {
         }}
       >
         <View style={styles.breathingContainer}>
-          <View style = {styles.countdownContainer}>
-          <CountDownTimer seconds={10} pressedHandler={breathingPressed} />
+          <View style={styles.countdownContainer}>
+            <CountDownTimer seconds={10} pressedHandler={breathingPressed} />
           </View>
-          <View style = {styles.stopContainer}>
+          <View style={styles.stopContainer}>
             <Pressable style={styles.stop} onPress={() => breathingPressed()}>
-              <Text>Stop</Text>
+              <AntDesign name="closesquare" size={50} color="black" />
             </Pressable>
           </View>
         </View>
@@ -64,10 +66,15 @@ export default function RelaxationScreen1() {
           setModalVisible(!modalVisible);
         }}
       >
-        <View>
-          <Pressable style={styles.stop} onPress={() => quotesPressed()}>
-            <Text>Stop</Text>
-          </Pressable>
+        <View style={styles.breathingContainer}>
+          <View style={styles.countdownContainer}>
+            <Quotes />
+          </View>
+          <View style = {styles.stopContainer}>
+            <Pressable onPress={() => quotesPressed()}>
+              <AntDesign name="closesquare" size={50} color="black" />
+            </Pressable>
+          </View>
         </View>
       </Modal>
     </View>
@@ -86,36 +93,36 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   stopContainer: {
-    flex: 1, 
+    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     marginTop: 30,
   },
-  countdownContainer:
-  {
-    flex: 7
+  countdownContainer: {
+    flex: 7,
   },
   pressable: {
     padding: 20,
     margin: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     height: 200,
     width: 200,
-    borderColor: COLORS.darksilver,
-    backgroundColor: COLORS.darksilver,
+    borderColor: COLORS.grey,
+    backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+    shadowColor: "black",
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 1,
+      height: 4,
+    },
   },
-  stop: {
-    padding: 20,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: "#f0f0f0",
-    backgroundColor: "#f9f9f9",
-  },
+
   pressableText: {
-    color: COLORS.white,
+    color: COLORS.textColor,
   },
   breathingIcon: {
     height: 100,

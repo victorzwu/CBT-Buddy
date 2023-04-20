@@ -88,7 +88,6 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
                 <Button
                   onPress={async () => {
                     await deleteFromDB(v.id);
-                    Alert.alert("Congratulations","Delete succeeded!");
                     getData();
                   }}
                 >
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "80%",
-    borderWidth: 10,
+    borderWidth: 2,
     borderColor: COLORS.grey,
     borderRadius: 10,
     marginBottom: 30,

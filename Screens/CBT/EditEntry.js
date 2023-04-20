@@ -23,7 +23,7 @@ export default function EditEntry({ navigation, route }) {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: COLORS.primary,
+          backgroundColor: COLORS.background,
         },
       }}
     >

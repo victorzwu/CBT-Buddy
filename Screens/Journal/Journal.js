@@ -68,7 +68,7 @@ export default function Journal({ navigation }) {
       <Stack.Screen
         name="JournalEdit"
         options={{
-          title: "Edit",
+          title: "Edit an entry",
         }}
       >
         {(props) => (

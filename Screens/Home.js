@@ -99,14 +99,14 @@ export default function Home() {
 const styles = StyleSheet.create({
   tabBar: {
     headerStyle: { backgroundColor: COLORS.primary },
-    headerTintColor: "white",
+    headerTintColor: COLORS.white,
     tabBarStyle: {
       backgroundColor: COLORS.primary,
       height: "12%",
       padding: 10,
     },
     tabBarActiveTintColor: COLORS.yellow,
-    tabBarInactiveTintColor: COLORS.grey,
+    tabBarInactiveTintColor: COLORS.white,
     tabBarLabelStyle: { fontSize: 15 },
   },
 });
