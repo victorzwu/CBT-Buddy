@@ -4,12 +4,12 @@ export const COLORS = {
   // thirdColor: '#C1D3FE',
   // fourthColor: '#B6CCFE',
   // fifthColor: '#ABC4FF',
-  primary: '#000B4F',
+  primary: '#aadfdc',
   second: '#bae7ff',
   white: '#ffffff',
-  yellow: "#ffd700",
+  yellow: "#6D6D6D",
   textColor: '#666666',
-  background: "#20368F",
+  background: "#aadfdc",
   grey: "#EBEBEB",
   darksilver: "#6D6D6D"
 }
