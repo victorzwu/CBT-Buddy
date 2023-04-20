@@ -255,6 +255,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   submitBtn: {
-    marginRight:80, 
+    marginRight: 80,
   },
 });
