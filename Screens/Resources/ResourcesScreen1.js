@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Button } from "react-native";
+import { View, Text, Pressable, StyleSheet, Button, Alert } from "react-native";
 import React from "react";
 import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
@@ -7,6 +7,7 @@ import { COLORS } from "../../color";
 import { getFromDB } from "../../Firebase/firestore";
 import * as Location from "expo-location";
 import { Ionicons } from "@expo/vector-icons";
+import { addFavoriteResource, deleteFavoriteResource } from "../../Firebase/fireStoreHelper";
 
 export default function ResourcesScreen1({ navigation, route }) {
   cityVanApiKey = "421b202f7b30e206d48c0d91ac5c412b31e84539fb4d2b97e938b24a";
@@ -121,6 +122,7 @@ export default function ResourcesScreen1({ navigation, route }) {
                   location.longitude
                 )
               : 0,
+            favorite: false,
           };
         });
         businesses.sort((a, b) => a.distance - b.distance);
@@ -136,10 +138,13 @@ export default function ResourcesScreen1({ navigation, route }) {
     navigation.navigate("Resource Details", item);
   }
 
-  function addToFavorites(item) {}
+  function starPressed(item) {
+    addFavoriteResource(item);
+    Alert.alert("Added to your favorites!")
+  }
 
   return (
-    <View styles={styles.container}>
+    <View>
       {location && (
         <FlatList
           style={{ backgroundColor: COLORS.background }}
@@ -168,19 +173,12 @@ export default function ResourcesScreen1({ navigation, route }) {
 
                   <View style={{ flex: 1, alignItems: "flex-end" }}>
                     <Ionicons
-                      name="ios-star"
+                      name="add"
                       size={24}
-                      color="grey"
-                      onPress={() => addToFavorites(item)}
+                      color={"black"}
+                      onPress={() => starPressed(item)}
                     />
                   </View>
-
-                  {/* <Text>
-                  Longitude: {item.location ? item.location.lon : "Unknown"}
-                </Text>
-                <Text>
-                  Latitude: {item.location ? item.location.lat : "Unknown"}
-                </Text> */}
                 </View>
               </Pressable>
             );
@@ -214,7 +212,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     elevation: 16,
     borderRadius: 15,
-    flex: 1
+    flex: 1,
   },
   card: { flexDirection: "row", flex: 1 },
   cardWordContainer: { flexDirection: "column", flex: 8 },
