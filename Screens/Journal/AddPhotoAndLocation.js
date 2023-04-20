@@ -5,7 +5,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState, useEffect } from "react";
@@ -14,6 +14,9 @@ import { COLORS } from "../../color";
 import { update } from "../../Firebase/firestore";
 import { AntDesign, FontAwesome5, FontAwesome } from "@expo/vector-icons";
 import { ref, uploadBytes } from "firebase/storage";
+import Button from "../../Components/Button";
+import { firestore, auth } from "../../Firebase/firebase-setup";
+import { addDoc, collection } from "firebase/firestore";
 import moment from "moment";
 
 export default function Com({ formData, setFormData, navigation, getData }) {
@@ -40,7 +43,6 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     })();
   }, []);
 
-
   const takePicture = async () => {
     let result = await ImagePicker.launchCameraAsync();
     if (!result.canceled) {
@@ -61,7 +63,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             update(formData.id, {
               photo: `${uuid}_img`,
             });
-            Alert.alert('WOW', "Edit Success!");
+            Alert.alert("WOW", "Edit Success!");
             getData();
             navigation.goBack();
           }
@@ -99,7 +101,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             update(formData.id, {
               photo: `${uuid}_img`,
             });
-            Alert.alert("WOW","Edit Success!");
+            Alert.alert("WOW", "Edit Success!");
             getData();
             navigation.goBack();
           }
@@ -145,7 +147,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
         <Text style={styles.itemTip}>Tap the map</Text>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Map", {screen: "Journal"});
+            navigation.navigate("Map", { screen: "Journal" });
           }}
           style={styles.itemMap}
         >
@@ -155,6 +157,52 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             color={COLORS.yellow}
           />
         </TouchableOpacity>
+      </View>
+      <View style={styles.btnBox}>
+        <Button
+          onPress={async () => {
+            // auth
+            // auth.currentUser.email
+            await addDoc(collection(firestore, "journals"), {
+              ...formData,
+              email: auth.currentUser.email,
+            });
+            Alert.alert("Congratulations", "ADD Success!");
+            getData();
+            navigation.navigate("JournalList");
+            // setFormData({
+            //   ...formData,
+            //   detail: value,
+            // });
+            // if (formData.id) {
+            //   update(formData.id, {
+            //     detail: value,
+            //   });
+            //   Alert.alert("Edit Success!");
+            //   getData();
+            //   navigation.goBack();
+            // } else {
+            //   navigation.navigate({
+            //     name: "AddPhotoAndLocation",
+            //   });
+            // }
+          }}
+          title="Submit"
+        />
+        <View style={styles.submitBtn}></View>
+        <Button
+          onPress={() => {
+            setImage(null);
+            setCameraImage(null);
+            setFormData({
+              ...formData,
+              location: "",
+              photo: "",
+            });
+          }}
+          danger
+          title="Reset"
+        ></Button>
       </View>
     </ScrollView>
   );
@@ -199,5 +247,14 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  submitBtn: {
+    marginRight:80, 
   },
 });

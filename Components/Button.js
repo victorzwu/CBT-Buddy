@@ -2,18 +2,20 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import React from "react";
 import { COLORS } from "../color";
 
-export default function Button({ title, onPress, children }) {
+export default function Button({ title, onPress, children, danger }) {
   return (
     <View>
       <Pressable
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
       >
-        <View style={styles.container}>
+        <View style={[styles.container, {
+          backgroundColor: danger ? COLORS.danger : COLORS.primary
+        }]}>
           {children ? children : (
           <Text style={styles.title}>{title}</Text>
           )}
-        </View>
+        </View> 
       </Pressable>
     </View>
   );
@@ -22,7 +24,6 @@ export default function Button({ title, onPress, children }) {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
-    backgroundColor: COLORS.primary,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,

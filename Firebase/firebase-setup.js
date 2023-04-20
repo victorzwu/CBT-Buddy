@@ -25,11 +25,10 @@ const firebaseConfig = {
   messagingSenderId: messagingSenderId,
   appId: appId,
 };
-
 // Initialize Firebase
 const CBTBuddy = initializeApp(firebaseConfig);
 export const firestore = getFirestore(CBTBuddy);
-
+ 
 //create authentication token
 export const auth = initializeAuth(CBTBuddy, {
   persistence: getReactNativePersistence(AsyncStorage),

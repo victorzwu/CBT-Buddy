@@ -6,10 +6,12 @@ export const COLORS = {
   // fifthColor: '#ABC4FF',
   primary: '#000B4F',
   second: '#bae7ff',
+  danger: '#fa541c',
   white: '#ffffff',
   yellow: "#ffd700",
   textColor: '#666666',
   background: "#20368F",
   grey: "#EBEBEB",
-  darksilver: "#6D6D6D"
+  darksilver: "#6D6D6D",
+
 }

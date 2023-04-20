@@ -4,7 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert, 
+  Alert,
 } from "react-native";
 import Button from "../../Components/Button";
 import MapView, { Marker } from "react-native-maps";
@@ -40,7 +40,7 @@ export default function Map({
       console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
-      setCoordinate(coordinate); 
+      setCoordinate(coordinate);
       if (formData && !formData.id) {
         setFormData({
           ...formData,
@@ -143,38 +143,39 @@ export default function Map({
         </View>
         <View style={styles.btnBox}>
           <Button
-   onPress={async () => {
-    try {
-      if (route.params.screen === "Journal") {
-        if (formData.id) {
-          update(formData.id, {
-            location: address,
-          });
-          setFormData({
-            ...formData,
-            location: address,
-          });
-          Alert.alert("Congratulations", "Edit Success!");
-          getData();
-          navigation.goBack();
-        } else {
-          await addDoc(collection(firestore, "journals"), {
-            ...formData,
-          });
-          Alert.alert("Congratulations", "ADD Success!");
-          getData();
-          navigation.navigate("JournalList");
-        }
-      }
-      if (route.params.screen === "Resources") {
-        navigation.navigate("Therapy Resources", {
-          coordinate: coordinate,
-        });
-      }
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }}
+            onPress={async () => {
+              try {
+                if (route.params.screen === "Journal") {
+                  if (formData.id) {
+                    update(formData.id, {
+                      location: address,
+                    });
+                    setFormData({
+                      ...formData,
+                      location: address,
+                    });
+                    Alert.alert("Congratulations", "Edit Success!");
+                    getData();
+                    navigation.goBack();
+                  } else {
+                    navigation.goBack();
+                    // await addDoc(collection(firestore, "journals"), {
+                    //   ...formData,
+                    // });
+                    // Alert.alert("Congratulations", "ADD Success!");
+                    // getData();
+                    // navigation.navigate("JournalList");
+                  }
+                }
+                if (route.params.screen === "Resources") {
+                  navigation.navigate("Therapy Resources", {
+                    coordinate: coordinate,
+                  });
+                }
+              } catch (e) {
+                console.error("Error adding document: ", e);
+              }
+            }}
             title="Confirm"
           />
         </View>
