@@ -10,7 +10,7 @@ export default function Button({ title, onPress, children, danger }) {
         style={({ pressed }) => pressed && styles.pressed}
       >
         <View style={[styles.container, {
-          backgroundColor: danger ? COLORS.danger : COLORS.primary
+          backgroundColor: danger ? COLORS.danger : COLORS.lime
         }]}>
           {children ? children : (
           <Text style={styles.title}>{title}</Text>
