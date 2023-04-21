@@ -6,5 +6,7 @@ export const COLORS = {
   textColor: '#577D86',
   background: "#87CBB9",
   grey: "#577D86",
-  darksilver: "#569DAA"
+  darksilver: "#569DAA",
+  danger: "#FA8072",
+  lime: "#32CD32"
 }

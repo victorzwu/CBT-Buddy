@@ -143,7 +143,7 @@ export default function Com({ formData, setFormData, navigation, getData }) {
           )}
         </TouchableOpacity>
       </View>
-      <View style={styles.itemBox}>
+      {!formData.id &&(<View style={styles.itemBox}>
         <Text style={styles.itemTip}>Tap the map</Text>
         <TouchableOpacity
           onPress={() => {
@@ -157,8 +157,8 @@ export default function Com({ formData, setFormData, navigation, getData }) {
             color={COLORS.yellow}
           />
         </TouchableOpacity>
-      </View>
-      <View style={styles.btnBox}>
+      </View>)}
+     { !formData.id &&(<View style={styles.btnBox}>
         <Button
           onPress={async () => {
             // auth
@@ -200,10 +200,10 @@ export default function Com({ formData, setFormData, navigation, getData }) {
               photo: "",
             });
           }}
-          danger
+          danger = {true}
           title="Reset"
         ></Button>
-      </View>
+      </View>)}
     </ScrollView>
   );
 }

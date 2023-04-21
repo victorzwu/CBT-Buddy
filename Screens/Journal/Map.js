@@ -38,7 +38,7 @@ export default function Map({
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       const address = data.results[0].formatted_address;
       setAddress(address);
       setCoordinate(coordinate);
@@ -143,7 +143,7 @@ export default function Map({
           </TouchableOpacity>
         </View>
         <View style={styles.btnBox}>
-          <Pressable
+          <Button
             onPress={async () => {
               try {
                 if (route.params.screen === "Journal") {
@@ -155,16 +155,17 @@ export default function Map({
                       ...formData,
                       location: address,
                     });
-                    // Alert.alert("Congratulations", "Edit Success!");
+                    Alert.alert("Congratulations", "Edit Success!");
                     getData();
                     navigation.goBack();
                   } else {
-                    await addDoc(collection(firestore, "journals"), {
-                      ...formData,
-                    });
+                    navigation.goBack();
+                    // await addDoc(collection(firestore, "journals"), {
+                    //   ...formData,
+                    // });
                     // Alert.alert("Congratulations", "ADD Success!");
-                    getData();
-                    navigation.navigate("JournalList");
+                    // getData();
+                    // navigation.navigate("JournalList");
                   }
                 }
                 if (route.params.screen === "Resources") {
@@ -176,10 +177,8 @@ export default function Map({
                 console.error("Error adding document: ", e);
               }
             }}
-            disabled={!coordinate}
-          >
-            <Text>Confirm</Text>
-            </Pressable>
+            title="Confirm"
+          />
         </View>
 
         <View style={styles.mapBox}>
