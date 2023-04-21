@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React, { useState } from "react";
 import EditCBTEntry from "./EditCBTEntry";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -27,7 +26,7 @@ export default function EditEntry({ navigation, route }) {
         },
       }}
     >
-      <Stack.Screen name="Edit CBT Entry">
+      <Stack.Screen name="Edit CBT Entry" options={{ headerShown: false }}>
         {(props) => (
           <EditCBTEntry
             originalSituation={situation}
@@ -65,7 +64,7 @@ export default function EditEntry({ navigation, route }) {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen name="Map">
+      <Stack.Screen name="Map" options={{ headerShown: false }}>
         {(props) => (
           <Map
             location={location}

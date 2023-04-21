@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   tip: {
     fontSize: 15,
     paddingBottom: 5,
-    color: COLORS.grey,
+    color: COLORS.primary,
   },
   btnText: {
     fontSize: 20,

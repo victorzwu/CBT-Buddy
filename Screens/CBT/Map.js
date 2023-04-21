@@ -8,7 +8,7 @@ import {
 import Button from "../../Components/Button";
 import MapView, { Marker } from "react-native-maps";
 import { COLORS } from "../../color";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MAPS_API_KEY } from "@env";
 import * as Location from "expo-location";
 
@@ -169,5 +169,17 @@ const styles = StyleSheet.create({
   curAddress: {
     color: COLORS.primary,
     textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#F0FFFF",
+    borderRadius: 20,
+    padding: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "plum",
+    fontWeight: "bold",
+    fontSize: 12,
   },
 });

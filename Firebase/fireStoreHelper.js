@@ -10,7 +10,10 @@ import { auth } from "./firebase-setup";
 
 export async function addCBTEntry(cbtEntry) {
   try {
-    const docRef = await addDoc(collection(firestore, "CBTEntries"), cbtEntry);
+    const docRef = await addDoc(collection(firestore, "CBTEntries"), {
+      ...cbtEntry,
+      user: auth.currentUser.uid,
+    });
     console.log(docRef.id);
   } catch (err) {
     console.log(err);

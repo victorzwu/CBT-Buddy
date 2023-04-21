@@ -4,16 +4,16 @@ import {
   TextInput,
   FlatList,
   Alert,
-  Button,
   ScrollView,
+  StyleSheet,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { updateCBTEntry } from "../../Firebase/fireStoreHelper";
 import Distortion from "../../Components/Distortion";
-import RegularButton from "../../Components/RegularButton";
-import { onSnapshot, collection } from "firebase/firestore";
-import { firestore } from "../../Firebase/firebase-setup";
+import Button from "../../Components/Button";
 import DatetimePicker from "../../Components/DatetimePicker";
+import { distortions } from "../../Contexts/DistortionsContext";
+import { COLORS } from "../../color";
 
 export default function EditCBTEntry({
   id,
@@ -43,32 +43,20 @@ export default function EditCBTEntry({
   const [date, setDate] = useState(originalDate);
   // const [distortions, setDistortions] = useState(item.distortions);
   const [solution, setSolution] = useState(originalSolution);
-  const [allDistortions, setAllDistortions] = useState([]);
+  const [allDistortions, setAllDistortions] = useState(distortions);
   const [selectedDistortions, setSelectedDistortions] = useState(
     originalSelectedDistortions
   );
-  useEffect(() => {
-    onSnapshot(collection(firestore, "CBTDistortions"), (querySnapshot) => {
-      if (querySnapshot.empty) {
-      } else {
-        let docs = [];
-        querySnapshot.docs.forEach((snap) => {
-          docs.push({ ...snap.data(), id: snap.id });
-        });
-        setAllDistortions(docs);
-      }
-    });
-  }, []);
   function handleOnPress(item) {
     if (
       selectedDistortions
         .map((item) => {
-          return item.id;
+          return item.name;
         })
-        .includes(item.id)
+        .includes(item.name)
     ) {
       const newDistortions = selectedDistortions.filter(
-        (listItem) => listItem.id !== item.id
+        (listItem) => listItem.name !== item.name
       );
       setSelectedDistortions([...newDistortions]);
     } else {
@@ -102,8 +90,9 @@ export default function EditCBTEntry({
   return (
     <View>
       <ScrollView>
-        <Text>What was the situation</Text>
+        <Text style={styles.tit}>What was the situation</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
@@ -113,8 +102,9 @@ export default function EditCBTEntry({
           }}
           placeholder="Type here..."
         />
-        <Text>What were you doing</Text>
+        <Text style={styles.tit}>What were you doing</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
@@ -124,16 +114,19 @@ export default function EditCBTEntry({
           }}
           placeholder="Type here..."
         />
-        <Text>Where were you</Text>
-        <Button
-          onPress={() => {
-            navigation.navigate("Map");
-          }}
-          title="choose your location"
-        />
+        <Text style={styles.tit}>Where were you</Text>
+        <View style={styles.btnBox}>
+          <Button
+            onPress={() => {
+              navigation.navigate("Map");
+            }}
+            title="choose your location"
+          />
+        </View>
         <Text>{originalAddress}</Text>
-        <Text>Who were you with</Text>
+        <Text style={styles.tit}>Who were you with</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
@@ -143,8 +136,9 @@ export default function EditCBTEntry({
           }}
           placeholder="Type here..."
         />
-        <Text>What emotion did you experience</Text>
+        <Text style={styles.tit}>What emotion did you experience</Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
@@ -154,25 +148,35 @@ export default function EditCBTEntry({
           }}
           placeholder="Type here..."
         />
-        <Text>When did it happen</Text>
+        <Text style={styles.tit}>When did it happen</Text>
         <DatetimePicker changeDatetimeHandler={(date) => setDate(date)} />
-        <Text>Cognitive distortions</Text>
-        {allDistortions.map((item) => {
-          return (
-            <Distortion
-              onPress={() => handleOnPress(item)}
-              selected={selectedDistortions
-                .map((item) => {
-                  return item.id;
-                })
-                .includes(item.id)}
-              item={item}
-              key={item.id}
-            />
-          );
-        })}
-        <Text>How can you reframe or redirect this thought</Text>
+        <Text style={styles.tit}>Cognitive distortions</Text>
+        <View>
+          <FlatList
+            data={allDistortions}
+            horizontal
+            renderItem={({ item }) => (
+              <View style={{ padding: 10 }}>
+                <Distortion
+                  onPress={() => handleOnPress(item)}
+                  selected={selectedDistortions
+                    .map((item) => {
+                      return item.name;
+                    })
+                    .includes(item.name)}
+                  item={item}
+                  key={item.name}
+                />
+              </View>
+            )}
+            keyExtractor={(item) => item.name}
+          />
+        </View>
+        <Text style={styles.tit}>
+          How can you reframe or redirect this thought
+        </Text>
         <TextInput
+          style={styles.input}
           multiline={true}
           numberOfLines={5}
           textAlignVertical="top"
@@ -182,17 +186,73 @@ export default function EditCBTEntry({
           }}
           placeholder="Type here..."
         />
-        <RegularButton
-          pressHandler={() => {
-            navigation.goBack();
-          }}
-        >
-          <Text>Cancel</Text>
-        </RegularButton>
-        <RegularButton pressHandler={() => editHandler(id)}>
-          <Text>Confirm</Text>
-        </RegularButton>
+        <View style={styles.btnBox}>
+          <Button
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <Text style={styles.btnText}>Cancel</Text>
+          </Button>
+          <Button onPress={() => editHandler(id)}>
+            <Text style={styles.btnText}>Confirm</Text>
+          </Button>
+        </View>
       </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  tit: {
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingVertical: 20,
+  },
+  disBox: {
+    marginRight: 15,
+  },
+  itemBox: {
+    paddingHorizontal: 20,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: COLORS.second,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  input: {
+    borderColor: "#ddd",
+    borderWidth: 1,
+    padding: 10,
+    color: COLORS.textColor,
+    height: 200,
+    margin: 15,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  description: {
+    color: COLORS.textColor,
+    fontSize: 13,
+  },
+  tip: {
+    fontSize: 15,
+    paddingBottom: 5,
+    color: COLORS.grey,
+  },
+  btnText: {
+    fontSize: 20,
+    color: "white",
+  },
+});

@@ -1,14 +1,18 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import React from "react";
-import { useState, useEffect } from "react";
-import RegularButton from "../../Components/RegularButton";
+import { useState } from "react";
+import Button from "../../Components/Button";
+import { COLORS } from "../../color";
 
 export default function AddChallenge({ navigation, solution, changeSolution }) {
   const [currentSolution, setCurrentSolution] = useState(solution);
   return (
-    <View>
-      <Text>How can you reframe or redirect this thought</Text>
+    <View style={styles.container}>
+      <Text style={styles.tit}>
+        How can you reframe or redirect this thought
+      </Text>
       <TextInput
+        style={styles.input}
         multiline={true}
         numberOfLines={5}
         textAlignVertical="top"
@@ -19,13 +23,66 @@ export default function AddChallenge({ navigation, solution, changeSolution }) {
         }}
         placeholder="Type here..."
       />
-      <RegularButton
-        pressHandler={() => {
-          navigation.navigate("Review");
-        }}
-      >
-        <Text>continue</Text>
-      </RegularButton>
+      <View style={styles.btnBox}>
+        <Button
+          onPress={() => {
+            navigation.navigate("Review");
+          }}
+        >
+          <Text style={styles.btnText}>Continue</Text>
+        </Button>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  tit: {
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+    paddingVertical: 20,
+  },
+  itemBox: {
+    paddingHorizontal: 20,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: COLORS.second,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  input: {
+    borderColor: "#ddd",
+    borderWidth: 1,
+    padding: 10,
+    color: COLORS.textColor,
+    height: 200,
+    margin: 15,
+  },
+  btnBox: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  description: {
+    color: COLORS.textColor,
+    fontSize: 13,
+  },
+  tip: {
+    fontSize: 15,
+    paddingBottom: 5,
+    color: COLORS.grey,
+  },
+  btnText: {
+    fontSize: 20,
+    color: "white",
+  },
+});
