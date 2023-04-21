@@ -2,6 +2,7 @@ import { View, Text, Pressable, Alert } from "react-native";
 import React from "react";
 import * as Notifications from "expo-notifications";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
 export async function verifyPermission() {
   const permission = await Notifications.getPermissionsAsync();
@@ -14,6 +15,9 @@ export async function verifyPermission() {
 }
 
 export default function NotificationButton() {
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+
   const scheduleNotificationHandler = async () => {
     const hasPermission = await verifyPermission();
     if (!hasPermission) {
@@ -21,16 +25,15 @@ export default function NotificationButton() {
       return;
     }
     try {
-      // const trigger = new Date(Date.now() + 60 * 60 * 1000);
-      // trigger.setMinutes(0);
-      // trigger.setSeconds(0);
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "CBT Buddy",
           body: "It's time to write in your journal",
         },
-        trigger: { seconds: 5 },
-      });
+        trigger: { hour: hour, minute: minute, repeats: true },
+      }).then(
+        Alert.alert("Notification set for " + { hour } + ":" + { minute } + ".")
+      );
     } catch (err) {
       console.log("notification err:", err);
     }

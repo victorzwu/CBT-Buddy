@@ -54,7 +54,7 @@ export default function CBTEntries({ navigation }) {
           }}
         />
       ) : (
-        <Text>No data</Text>
+        <Text>{" "}</Text>
       )}
     </View>
   );
