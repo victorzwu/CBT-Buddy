@@ -46,7 +46,7 @@ export default function Details({ route, navigation }) {
     ]);
   }
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Text style={styles.tit}>What was the situation</Text>
       {item.situation ? (
         <Text style={styles.description}>{item.situation}</Text>
@@ -98,10 +98,14 @@ export default function Details({ route, navigation }) {
                 source={uris[item.uri]}
                 style={{ width: 100, height: 100 }}
               />
-              <Text style={{ fontSize: 22, color: COLORS.primary }}>
+              <Text style={{ fontSize: 22, color: COLORS.textColor }}>
+                {"\n"}
                 {item.name}
               </Text>
-              <Text>{item.text}</Text>
+              <Text style={{ color: COLORS.textColor }}>
+                {"\n"}
+                {item.text}
+              </Text>
             </View>
           )}
           keyExtractor={(item) => item.name}
@@ -139,6 +143,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 18,
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   description: {
-    color: COLORS.primary,
+    color: COLORS.white,
     fontSize: 18,
   },
   tip: {

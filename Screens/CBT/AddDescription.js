@@ -108,7 +108,7 @@ export default function AddDescription({
           />
         </View>
         {address && (
-          <Text style={styles.description}>Your location: {address}</Text>
+          <Text style={styles.description}>{"     "}{address}</Text>
         )}
         <Text style={styles.tit}>Who were you with?</Text>
         <TextInput
@@ -165,12 +165,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: COLORS.background,
   },
   tit: {
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
     paddingVertical: 20,
+    
   },
   itemBox: {
     paddingHorizontal: 20,
@@ -190,6 +192,9 @@ const styles = StyleSheet.create({
     color: COLORS.textColor,
     height: 200,
     margin: 15,
+    backgroundColor: COLORS.white,
+    borderRadius: 15,
+    fontSize: 25
   },
   btnBox: {
     flexDirection: "row",
@@ -204,7 +209,9 @@ const styles = StyleSheet.create({
   tip: {
     fontSize: 15,
     paddingBottom: 5,
-    color: COLORS.primary,
+    color: COLORS.textColor,
+    paddingHorizontal: 20,
+    textAlign: "center",
   },
   btnText: {
     fontSize: 20,

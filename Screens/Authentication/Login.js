@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ImageBackground,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -73,6 +74,10 @@ export default function Login({ navigation }) {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.form}>
+          <Image
+            source={require("../../assets/iconbackgroundless.png")}
+            style={styles.icon}
+          />
           <Text style={styles.title}>Welcome to CBT Buddy!</Text>
           <TextInput
             style={styles.input}
@@ -120,9 +125,7 @@ export default function Login({ navigation }) {
 
           <View style={styles.failureContainer}>
             {biometricFailed && (
-              <Text style={styles.failureText}>
-                {biometricFailText}
-              </Text>
+              <Text style={styles.failureText}>{biometricFailText}</Text>
             )}
           </View>
 
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  icon: { width: 150, height: 150 },
   background: {
     flex: 1,
     resizeMode: "cover",
@@ -158,7 +162,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 32,
     color: COLORS.textColor,
-
   },
   input: {
     width: "100%",

@@ -36,12 +36,12 @@ export default function DatetimePicker({ changeDatetimeHandler }) {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.btnBox}>
         <Button onPress={showDatepicker} title="Select date" />
+        <Text>{"           "}</Text>
         <Button onPress={showTimepicker} title="Select time" />
       </View>
-
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -52,7 +52,6 @@ export default function DatetimePicker({ changeDatetimeHandler }) {
         />
       )}
       <Text style={styles.description}>
-        selected:{" "}
         {date.toLocaleString("en-US", {
           year: "numeric",
           month: "long",
@@ -66,10 +65,14 @@ export default function DatetimePicker({ changeDatetimeHandler }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+  },
   btnBox: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginTop: 30,
+    marginBottom: 30,
   },
   description: {
     marginTop: 20,

@@ -35,7 +35,7 @@ export default function Distortion({ item, selected, onPress }) {
 const styles = StyleSheet.create({
   container: {},
   listItem: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.yellow,
     marginBottom: 10,
     borderRadius: 5,
     overflow: "hidden",
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(255,0,0,0.5)",
+    backgroundColor: "rgba(185,237,221,0.2)",
   },
 });

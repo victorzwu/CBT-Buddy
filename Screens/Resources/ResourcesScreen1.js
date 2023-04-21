@@ -99,7 +99,7 @@ export default function ResourcesScreen1({ navigation, route }) {
               : business.record.fields.businessname,
             city: business.record.fields.city,
             localarea: business.record.fields.localarea,
-            // location: business.record.fields.geo_point_2d,
+            location: business.record.fields.geo_point_2d,
             address: [
               business.record.fields.unit
                 ? business.record.fields.unit + "-"
@@ -148,7 +148,7 @@ export default function ResourcesScreen1({ navigation, route }) {
       {location && (
         <FlatList
           style={{ backgroundColor: COLORS.background }}
-          data={resources}
+          data={resources.slice(0, 10)}
           renderItem={({ item }) => {
             return (
               <Pressable style={styles.pressable} onPress={() => details(item)}>
