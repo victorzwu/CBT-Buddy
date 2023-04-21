@@ -148,7 +148,7 @@ export default function ResourcesScreen1({ navigation, route }) {
       {location && (
         <FlatList
           style={{ backgroundColor: COLORS.background }}
-          data={resources}
+          data={resources.slice(0, 10)}
           renderItem={({ item }) => {
             return (
               <Pressable style={styles.pressable} onPress={() => details(item)}>
