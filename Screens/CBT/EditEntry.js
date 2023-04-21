@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React, { useState } from "react";
 import EditCBTEntry from "./EditCBTEntry";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

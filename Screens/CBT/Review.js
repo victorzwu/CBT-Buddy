@@ -13,7 +13,6 @@ import Button from "../../Components/Button";
 import { COLORS } from "../../color";
 
 export default function Review({
-  route,
   navigation,
   situation,
   action,

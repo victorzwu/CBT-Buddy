@@ -8,7 +8,7 @@ import {
 import Button from "../../Components/Button";
 import MapView, { Marker } from "react-native-maps";
 import { COLORS } from "../../color";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MAPS_API_KEY } from "@env";
 import * as Location from "expo-location";
 

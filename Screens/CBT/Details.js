@@ -7,19 +7,13 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../Components/Button";
 import { deleteCBTEntry } from "../../Firebase/fireStoreHelper";
 import { COLORS } from "../../color";
 
 export default function Details({ route, navigation }) {
   const item = route.params.entry;
-  const [distortions, setDistortions] = useState(
-    route.params.entry.distortions
-  );
-  useEffect(() => {
-    console.log(distortions);
-  }, []);
   const uris = {
     FILTERING: require("../../assets/distortions/FILTERING.png"),
     CATASTROPHIZING: require("../../assets/distortions/CATASTROPHIZING.png"),

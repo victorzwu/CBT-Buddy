@@ -7,12 +7,10 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { updateCBTEntry } from "../../Firebase/fireStoreHelper";
 import Distortion from "../../Components/Distortion";
 import Button from "../../Components/Button";
-import { onSnapshot, collection } from "firebase/firestore";
-import { firestore } from "../../Firebase/firebase-setup";
 import DatetimePicker from "../../Components/DatetimePicker";
 import { distortions } from "../../Contexts/DistortionsContext";
 import { COLORS } from "../../color";
