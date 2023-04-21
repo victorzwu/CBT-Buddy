@@ -99,7 +99,7 @@ export default function ResourcesScreen1({ navigation, route }) {
               : business.record.fields.businessname,
             city: business.record.fields.city,
             localarea: business.record.fields.localarea,
-            // location: business.record.fields.geo_point_2d,
+            location: business.record.fields.geo_point_2d,
             address: [
               business.record.fields.unit
                 ? business.record.fields.unit + "-"
