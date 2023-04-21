@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: COLORS.background
   },
   tit: {
     fontSize: 20,
@@ -190,6 +191,9 @@ const styles = StyleSheet.create({
     color: COLORS.textColor,
     height: 200,
     margin: 15,
+    backgroundColor: COLORS.white,
+    borderRadius: 15,
+    fontSize: 25
   },
   btnBox: {
     flexDirection: "row",
