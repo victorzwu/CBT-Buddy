@@ -8,5 +8,6 @@ export const COLORS = {
   grey: "#577D86",
   darksilver: "#569DAA",
   danger: "#FA8072",
-  lime: "#569DAA"
+  lime: "#569DAA",
+  selected: "#B9EDDD"
 }

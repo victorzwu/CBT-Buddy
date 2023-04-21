@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   entryStyle: {
     width: 330,
-    padding: 10,
+    padding: 30,
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: COLORS.white,

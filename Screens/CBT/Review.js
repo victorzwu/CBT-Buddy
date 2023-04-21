@@ -86,7 +86,7 @@ export default function Review({
     SHOULDS: require("../../assets/distortions/SHOULDS.png"),
   };
   return (
-    <ScrollView>
+    <ScrollView style = {styles.container}>
       <Text style={styles.tit}>What was the situation</Text>
       {situation ? (
         <Text style={styles.description}>{situation}</Text>
@@ -142,7 +142,7 @@ export default function Review({
                 source={uris[item.uri]}
                 style={{ width: 100, height: 100 }}
               />
-              <Text style={{ fontSize: 22, color: COLORS.primary }}>
+              <Text style={{ fontSize: 22, color: COLORS.textColor }}>
                 {item.name}
               </Text>
               <Text>{item.text}</Text>
@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: COLORS.background
   },
   tit: {
     fontSize: 18,
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   description: {
-    color: COLORS.primary,
+    color: COLORS.white,
     fontSize: 18,
   },
   tip: {
