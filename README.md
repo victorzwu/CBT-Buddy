@@ -1,5 +1,53 @@
 # CBT-Buddy
 
+## Iteration 3
+
+### Victor
+
+Added Favorites Page to Resource with CRD operations
+
+<img src="./assets/readme/iteration3/resourcefavorites.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration3/resourcefavoritepage.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+Use Map to provide details and locate therapy resource when the Resource is pressed
+
+<img src="./assets/readme/iteration3/resourcedetails.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+Added Quote feature to API using 3rd Party API
+
+<img src="./assets/readme/iteration3/quotecard.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+<img src="./assets/readme/iteration3/quotes.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+Styled color scheme of app
+
+<img src="./assets/readme/iteration3/colorscheme.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+created app icon and splash screen and added to login page
+
+<img src="./assets/icon.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+<img src="./assets/splash.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+<img src="./assets/background.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+Error message when biometric and login fails
+
+<img src="./assets/readme/iteration3/biometricfailed.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+
+<img src="./assets/readme/iteration3/loginfailed.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+Changed locate button to useEffect so automatic location finding
+
+<img src="./assets/readme/iteration3/nolocate.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+Styled countdown timer
+
+<img src="./assets/readme/iteration3/countdowntimer.png" height="30%" width="30%" > <img src="./assets/readme/mapcbt.png" height="30%" width="30%" >
+
+
 ## Iteration 2
 
 ### Xilong Cai
