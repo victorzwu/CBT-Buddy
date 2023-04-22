@@ -22,6 +22,9 @@ import moment from "moment";
 export default function Com({ formData, setFormData, navigation, getData }) {
   const [image, setImage] = useState(null);
   const [cameraImage, setCameraImage] = useState(null);
+  const [permissionInfo, requestPermission] =
+    ImagePicker.useCameraPermissions();
+
   const getImageBlob = async (uri) => {
     try {
       const response = await fetch(uri);
@@ -32,45 +35,51 @@ export default function Com({ formData, setFormData, navigation, getData }) {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
-  }, []);
+  const verifyPermission = async () => {
+    if (permissionInfo.granted == true) {
+      return true;
+    }
+    await requestPermission();
+    return permissionInfo.granted;
+  };
 
   const takePicture = async () => {
-    let result = await ImagePicker.launchCameraAsync();
-    if (!result.canceled) {
-      // setImage(result.uri);
-      let uri = result.assets[0].uri;
-      let imgBlob = await getImageBlob(uri);
-      let uuid = moment().valueOf();
-      const storageRef = ref(storage, `${uuid}_img`);
-      uploadBytes(storageRef, imgBlob)
-        .then((snapshot) => {
-          console.log("Uploaded a blob!");
-          setFormData({
-            ...formData,
-            photo: `${uuid}_img`,
-          });
-          setCameraImage(uri);
-          if (formData.id) {
-            update(formData.id, {
+    const permissionReceived = await verifyPermission();
+    if (permissionReceived == false) {
+      Alert.alert("You need to give camera permissions");
+      return;
+    }
+    try {
+      const result = await ImagePicker.launchCameraAsync();
+      if (!result.canceled) {
+        // setImage(result.uri);
+        const uri = result.assets[0].uri;
+        let imgBlob = await getImageBlob(uri);
+        let uuid = moment().valueOf();
+        const storageRef = ref(storage, `${uuid}_img`);
+        uploadBytes(storageRef, imgBlob)
+          .then((snapshot) => {
+            console.log("Uploaded a blob!");
+            setFormData({
+              ...formData,
               photo: `${uuid}_img`,
             });
-            Alert.alert("WOW", "Edit Success!");
-            getData();
-            navigation.goBack();
-          }
-        })
-        .catch((err) => {
-          console.log("err = ", err);
-        });
+            setCameraImage(uri);
+            if (formData.id) {
+              update(formData.id, {
+                photo: `${uuid}_img`,
+              });
+              Alert.alert("WOW", "Edit Success!");
+              getData();
+              navigation.goBack();
+            }
+          })
+          .catch((err) => {
+            console.log("err = ", err);
+          });
+      }
+    } catch (e) {
+      console.log("camera err", e);
     }
   };
 
@@ -143,67 +152,71 @@ export default function Com({ formData, setFormData, navigation, getData }) {
           )}
         </TouchableOpacity>
       </View>
-      {!formData.id &&(<View style={styles.itemBox}>
-        <Text style={styles.itemTip}>Tap the map</Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Map", { screen: "Journal" });
-          }}
-          style={styles.itemMap}
-        >
-          <FontAwesome5
-            name="map-marker-alt"
-            size={100}
-            color={COLORS.yellow}
+      {!formData.id && (
+        <View style={styles.itemBox}>
+          <Text style={styles.itemTip}>Tap the map</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Map", { screen: "Journal" });
+            }}
+            style={styles.itemMap}
+          >
+            <FontAwesome5
+              name="map-marker-alt"
+              size={100}
+              color={COLORS.yellow}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+      {!formData.id && (
+        <View style={styles.btnBox}>
+          <Button
+            onPress={async () => {
+              // auth
+              // auth.currentUser.email
+              await addDoc(collection(firestore, "journals"), {
+                ...formData,
+                email: auth.currentUser.email,
+              });
+              Alert.alert("Congratulations", "ADD Success!");
+              getData();
+              navigation.navigate("JournalList");
+              // setFormData({
+              //   ...formData,
+              //   detail: value,
+              // });
+              // if (formData.id) {
+              //   update(formData.id, {
+              //     detail: value,
+              //   });
+              //   Alert.alert("Edit Success!");
+              //   getData();
+              //   navigation.goBack();
+              // } else {
+              //   navigation.navigate({
+              //     name: "AddPhotoAndLocation",
+              //   });
+              // }
+            }}
+            title="Submit"
           />
-        </TouchableOpacity>
-      </View>)}
-     { !formData.id &&(<View style={styles.btnBox}>
-        <Button
-          onPress={async () => {
-            // auth
-            // auth.currentUser.email
-            await addDoc(collection(firestore, "journals"), {
-              ...formData,
-              email: auth.currentUser.email,
-            });
-            Alert.alert("Congratulations", "ADD Success!");
-            getData();
-            navigation.navigate("JournalList");
-            // setFormData({
-            //   ...formData,
-            //   detail: value,
-            // });
-            // if (formData.id) {
-            //   update(formData.id, {
-            //     detail: value,
-            //   });
-            //   Alert.alert("Edit Success!");
-            //   getData();
-            //   navigation.goBack();
-            // } else {
-            //   navigation.navigate({
-            //     name: "AddPhotoAndLocation",
-            //   });
-            // }
-          }}
-          title="Submit"
-        />
-        <View style={styles.submitBtn}></View>
-        <Button
-          onPress={() => {
-            setImage(null);
-            setCameraImage(null);
-            setFormData({
-              ...formData,
-              location: "",
-              photo: "",
-            });
-          }}
-          danger = {true}
-          title="Reset"
-        ></Button>
-      </View>)}
+          <View style={styles.submitBtn}></View>
+          <Button
+            onPress={() => {
+              setImage(null);
+              setCameraImage(null);
+              setFormData({
+                ...formData,
+                location: "",
+                photo: "",
+              });
+            }}
+            danger={true}
+            title="Reset"
+          ></Button>
+        </View>
+      )}
     </ScrollView>
   );
 }
@@ -255,6 +268,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   submitBtn: {
-    marginRight:80, 
+    marginRight: 80,
   },
 });
