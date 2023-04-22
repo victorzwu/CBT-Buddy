@@ -219,7 +219,14 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 25,
     fontWeight: 900,
-    fontFamily: "Roboto",
+    ...Platform.select({
+      ios: {
+        fontFamily: "Futura",
+      },
+      android: {
+        fontFamily: "Roboto",
+      },
+    }),
   },
   boldText: {
     fontWeight: "bold",
