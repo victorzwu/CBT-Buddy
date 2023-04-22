@@ -75,7 +75,7 @@ export default function Login({ navigation }) {
       <SafeAreaView style={styles.container}>
         <View style={styles.form}>
           <Image
-            source={require("../../assets/iconbackgroundless.png")}
+            source={require("../../assets/icon.png")}
             style={styles.icon}
           />
           <Text style={styles.title}>Welcome to CBT Buddy!</Text>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  icon: { width: 150, height: 150 },
+  icon: { width: 80, height: 80, margin: 30 },
   background: {
     flex: 1,
     resizeMode: "cover",
