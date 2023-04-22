@@ -13,7 +13,7 @@ import { uploadAvatar } from "../../Firebase/firestore";
 import { firestore } from "../../Firebase/firebase-setup";
 
 
-export default function ProfileScreen({ setFormData }) {
+export default function ProfileScreen() {
   const [avatar, setAvatar] = useState("");
   useEffect(()=> {
     async function getUri () {
