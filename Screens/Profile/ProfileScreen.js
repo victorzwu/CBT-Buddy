@@ -1,31 +1,63 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import React, { useState } from "react";
-import { auth } from "../../Firebase/firebase-setup";
+import React, { useState, useEffect } from "react";
+import { auth, storage } from "../../Firebase/firebase-setup";
 import { signOut } from "firebase/auth";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Button from "../../Components/Button";
 import * as ImagePicker from "expo-image-picker";
 import { COLORS } from "../../color";
+import { getTime } from "date-fns";
 
 export default function ProfileScreen() {
   const [avatar, setAvatar] = useState("");
+  
+
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      try {
+        const avatarUrl = await getDownloadURL(ref(storage, `avatars/${auth.currentUser.uid}`));
+        setAvatar(avatarUrl);
+      } catch (error) {
+        console.log("Error fetching avatar:", error);
+      }
+    };
+    fetchAvatar();
+  }, []);
 
   const openImagePickerAsync = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      alert("Sorry, we need camera roll permissions to make this work!");
-      return;
-    }
-    
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-    
-    if (!result.canceled) {
-      setAvatar(result.assets[0].uri);
+    try {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+        return;
+      }
+  
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.5,
+      });
+  
+      // console.log('Image Picker Result:', result);
+  
+      if (!result.canceled && result.assets && result.assets[0]) {
+        const asset = result.assets[0];
+        console.log('Selected Asset:', asset);
+  
+        setAvatar(asset.uri);
+        const response = await fetch(asset.uri);
+        const blob = await response.blob();
+        const timestamp = getTime(new Date());
+        const storageRef = ref(storage, `avatars/${auth.currentUser.uid}/${timestamp}`);
+
+        // const storageRef = ref(storage, `avatars/${auth.currentUser.uid}`);
+        await uploadBytes(storageRef, blob);
+      }
+    } catch (error) {
+      console.log('Error in openImagePickerAsync:', error);
     }
   };
+  
 
   const changeAvatar = () => {
     openImagePickerAsync();
@@ -84,12 +116,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFEFEF",
     alignItems: "center",
     justifyContent: "center",
-    },
-    avatarText: {
+  },
+  avatarText: {
     fontSize: 16,
     fontWeight: "bold",
-    },
-    signOutButton: {
+  },
+  signOutButton: {
     marginTop: 20,
-    },
-    });
+  },
+});
