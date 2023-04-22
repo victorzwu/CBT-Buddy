@@ -27,7 +27,7 @@ export default function NotificationTimepicker({ navigation }) {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(true);
 
-  const scheduleNotificationHandler = async () => {
+  async function scheduleNotificationHandler () {
     const hasPermission = await verifyPermission();
     if (!hasPermission) {
       Alert.alert("Need to grant permission");
@@ -114,7 +114,7 @@ export default function NotificationTimepicker({ navigation }) {
         </View>
       )}
       <View style={styles.btnBox}>
-        <Button onPress={scheduleNotificationHandler} title="Confirm" />
+        <Button onPress={() => scheduleNotificationHandler()} title="Confirm" />
       </View>
     </View>
   );

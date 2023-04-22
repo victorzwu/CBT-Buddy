@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 25,
     fontWeight: 900,
-    fontFamily: "Futura",
+    fontFamily: "Roboto",
   },
   boldText: {
     fontWeight: "bold",
