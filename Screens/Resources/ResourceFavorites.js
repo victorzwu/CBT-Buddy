@@ -49,7 +49,7 @@ export default function ResourceFavorites() {
   }
 
   return (
-    <View style = {styles.container}>
+    <View style={styles.container}>
       {favoriteResources && (
         <FlatList
           style={{ backgroundColor: COLORS.background }}
@@ -122,7 +122,14 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 25,
     fontWeight: 900,
-    fontFamily: "Roboto",
+    ...Platform.select({
+      ios: {
+        fontFamily: "Futura",
+      },
+      android: {
+        fontFamily: "Roboto",
+      },
+    }),
   },
   boldText: {
     fontWeight: "bold",
