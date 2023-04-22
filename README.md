@@ -2,6 +2,16 @@
 
 ## Iteration 3
 
+### Xilong Cai
+
+Complete styling and add auth for CBT. Now users could only see their own entries.
+
+<img src="./assets/readme/cbt1.png" height="30%" width="30%" > <img src="./assets/readme/cbt2.png" height="30%" width="30%" > <img src="./assets/readme/cbt3.png" height="30%" width="30%" > 
+
+Add time picker in notification of Journal.
+
+<img src="./assets/readme/timepicker.png" height="30%" width="30%" > 
+
 ### Yiwei Tao
 
 Allow users to only be able to read their own entries in the database by using auth uid.
