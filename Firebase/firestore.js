@@ -7,7 +7,8 @@ import {
   getDoc,
   getDocs,
   query,
-  where
+  where,
+  setDoc
 } from "firebase/firestore";
 import { firestore } from "./firebase-setup";
 import { auth } from "./firebase-setup";
@@ -45,6 +46,19 @@ export async function writeToDB({ data, detail, location, mood, photo }) {
       mood: mood,
       photo: photo,
     });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function uploadAvatar(uri, uid) {
+  try {
+    const data = {
+      uri: uri
+    };
+    
+    const docRef = doc(firestore, "avatar", uid);
+    await setDoc(docRef, data);
   } catch (err) {
     console.log(err);
   }

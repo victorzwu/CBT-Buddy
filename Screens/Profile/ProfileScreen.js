@@ -1,93 +1,137 @@
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, ActivityIndicator, Alert} from "react-native";
 import { auth, storage } from "../../Firebase/firebase-setup";
 import { signOut } from "firebase/auth";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Button from "../../Components/Button";
 import * as ImagePicker from "expo-image-picker";
 import { COLORS } from "../../color";
-import { getTime } from "date-fns";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import moment from "moment";
+import { update } from "../../Firebase/firestore";
+import { doc, db,getDoc } from "firebase/firestore";
+import { uploadAvatar } from "../../Firebase/firestore";
+import { firestore } from "../../Firebase/firebase-setup";
 
-export default function ProfileScreen() {
+
+export default function ProfileScreen({ setFormData }) {
   const [avatar, setAvatar] = useState("");
-  const [newAvatar, setNewAvatar] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchAvatar = async () => {
-      try {
-        const avatarUrl = await getDownloadURL(ref(storage, `avatars/${auth.currentUser.uid}`));
-        setAvatar(avatarUrl);
-      } catch (error) {
-        console.log("Error fetching avatar:", error);
+  useEffect(()=> {
+    async function getUri () {
+      const docRef = doc(firestore, "avatar", auth.currentUser.uid);
+      const docSnapshot = await getDoc(docRef);
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        const downloadUrl = await getDownloadURL(ref(storage, data.uri));
+        setAvatar(downloadUrl)
       }
-    };
-    fetchAvatar();
-  }, []);
-  
-  const openImagePickerAsync = async () => {
+    }
+    getUri()
+  }, [])
+
+  const getImageBlob = async (uri) => {
     try {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== "granted") {
-        alert("Sorry, we need camera roll permissions to make this work!");
-        return;
-      }
-
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 0.5,
-      });
-
-      if (!result.canceled && result.assets && result.assets[0]) {
-        const asset = result.assets[0];
-        console.log('Selected Asset:', asset);
-
-        setNewAvatar(asset.uri);
-        const response = await fetch(asset.uri);
-        const blob = await response.blob();
-        const timestamp = getTime(new Date());
-        const storageRef = ref(storage, `avatars/${auth.currentUser.uid}/${timestamp}`);
-
-        setLoading(true);
-        await uploadBytes(storageRef, blob);
-        const newAvatarUrl = await getDownloadURL(storageRef);
-        setAvatar(newAvatarUrl);
-        setNewAvatar(null);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log('Error in openImagePickerAsync:', error);
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      return blob;
+    } catch (err) {
+      console.log("fetch image ", err);
     }
   };
 
-  const changeAvatar = () => {
-    Alert.alert(
-      "Change Avatar",
-      "Are you sure you want to change your avatar?",
-      [
-        { text: "Cancel", style: "cancel" },
-        { text: "Yes", onPress: () => openImagePickerAsync() },
-      ],
-      { cancelable: false }
-    );
+  const openImagePickerAsync = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      alert("Sorry, we need camera roll permissions to make this work!");
+      return;
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setAvatar(result.assets[0].uri);
+
+      let uri = result.assets[0].uri;
+      let imgBlob = await getImageBlob(uri);
+      let uuid = moment().valueOf();
+      const storageRef = ref(storage, `Avatar/${uuid}_img`);
+      uploadBytes(storageRef, imgBlob)
+        .then((snapshot) => {
+          console.log("Uploaded a blob!", snapshot);
+          uploadAvatar(`Avatar/${uuid}_img`, auth.currentUser.uid)
+          // setFormData({
+          //   ...formData,
+          //   photo: `${uuid}_img`,
+          // });
+          // if (formData.id) {
+          //   update(formData.id, {
+          //     photo: `${uuid}_img`,
+          //   });
+          //   Alert.alert("WOW", "Edit Success!");
+          // }
+        })
+        .catch((err) => {
+          console.log("err = ", err);
+        });
+    }
   };
+
+  // const pickImage = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //     allowsEditing: true,
+  //     aspect: [1, 1],
+  //     allowsMultipleSelection: false,
+  //     quality: 1,
+  //   });
+
+  //   if (!result.canceled) {
+  //     // let uri = result.uri;
+  //     let uri = result.assets[0].uri;
+  //     let imgBlob = await getImageBlob(uri);
+  //     let uuid = moment().valueOf();
+  //     const storageRef = ref(storage, `Avatar/${uuid}_img`);
+  //     uploadBytes(storageRef, imgBlob)
+  //       .then((snapshot) => {
+  //         // console.log("Uploaded a blob!");
+  //         setFormData({
+  //           ...formData,
+  //           photo: `${uuid}_img`,
+  //         });
+  //         setImage(uri);
+  //         if (formData.id) {
+  //           update(formData.id, {
+  //             photo: `${uuid}_img`,
+  //           });
+  //           Alert.alert("WOW", "Edit Success!");
+  //           // getData();
+  //           navigation.goBack();
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log("err = ", err);
+  //       });
+  //   }
+  // };
+
+  const changeAvatar = () => {
+    openImagePickerAsync();
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
-        <TouchableOpacity onPress={changeAvatar} disabled={loading}>
-          {newAvatar ? (
-            <Image source={{ uri: newAvatar }} style={styles.avatarImage} />
+        <TouchableOpacity onPress={changeAvatar}>
+          {avatar ? (
+            <Image source={{ uri: avatar }} style={styles.avatarImage} />
           ) : (
-            avatar ? (
-              <Image source={{ uri: avatar }} style={styles.avatarImage} />
-            ) : (
-              <View style={styles.avatarPlaceholder}>
-                <Text style={styles.avatarText}>Photo</Text>
-              </View>
-            )
+            <View style={styles.avatarPlaceholder}>
+              <Text style={styles.avatarText}>Photo</Text>
+            </View>
           )}
-          {loading && <ActivityIndicator size="large" color={COLORS.primary} style={styles.loadingIndicator} />}
         </TouchableOpacity>
       </View>
       <Text>Email: {auth.currentUser.email}</Text>
@@ -103,6 +147,7 @@ export default function ProfileScreen() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -118,33 +163,23 @@ const styles = StyleSheet.create({
     borderColor: "black",
     overflow: "hidden",
     marginBottom: 20,
-    position: "relative",
   },
   avatarImage: {
     height: "100%",
     width: "100%",
-    },
-    avatarPlaceholder: {
+  },
+  avatarPlaceholder: {
     height: "100%",
     width: "100%",
     backgroundColor: "#EFEFEF",
     alignItems: "center",
     justifyContent: "center",
-    },
-    avatarText: {
+  },
+  avatarText: {
     fontSize: 16,
     fontWeight: "bold",
-    },
-    signOutButton: {
+  },
+  signOutButton: {
     marginTop: 20,
-    },
-    loadingIndicator: {
-    position: "absolute",
-    zIndex: 1,
-    height: "100%",
-    width: "100%",
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-    alignItems: "center",
-    justifyContent: "center",
-    },
-    });
+  },
+});
