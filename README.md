@@ -2,6 +2,34 @@
 
 ## Iteration 3
 
+### Xilong Cai
+
+Complete styling and add auth for CBT. Now users could only see their own entries.
+
+<img src="./assets/readme/cbt1.png" height="30%" width="30%" > <img src="./assets/readme/cbt2.png" height="30%" width="30%" > <img src="./assets/readme/cbt3.png" height="30%" width="30%" > 
+
+Add time picker in notification of Journal.
+
+<img src="./assets/readme/timepicker.png" height="30%" width="30%" > 
+
+### Yiwei Tao
+
+Allow users to only be able to read their own entries in the database by using auth uid.
+
+<img src="./assets/readme/authuid.png" height="30%" width="30%" > 
+
+Remove Alerts from Delete and Add journal entry and add submit button to Add Entry page.
+
+<img src="./assets/readme/addButton.png" height="30%" width="30%" > 
+
+Update the 'Edit' page to allow changes to be made to specific entries.
+
+<img src="./assets/readme/edit1.png" height="30%" width="30%" > 
+
+Implement the ability to change avatars and store them in storage.
+
+<img src="./assets/readme/avatar.png" height="30%" width="30%" > 
+
 ### Victor
 
 Added Favorites Page to Resource with CRD operations
