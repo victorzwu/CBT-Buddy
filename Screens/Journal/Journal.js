@@ -10,6 +10,7 @@ import Map from "./Map";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { getFromDB } from "../../Firebase/firestore";
 import NotificationButton from "../../Components/NotificationButton";
+import NotificationTimepicker from "./NotificationTimepicker";
 
 export default function Journal({ navigation }) {
   const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ export default function Journal({ navigation }) {
       screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: "white",
-        headerShadowVisible: false
+        headerShadowVisible: false,
       })}
     >
       <Stack.Screen
@@ -47,7 +48,13 @@ export default function Journal({ navigation }) {
         options={() => {
           return {
             headerRight: () => {
-              return <NotificationButton />;
+              return (
+                <NotificationButton
+                  pressHandler={() =>
+                    navigation.navigate("Notification Timepicker")
+                  }
+                />
+              );
             },
             title: "Journal",
             headerTitleAlign: "center",
@@ -65,6 +72,10 @@ export default function Journal({ navigation }) {
           />
         )}
       </Stack.Screen>
+      <Stack.Screen
+        name="Notification Timepicker"
+        component={NotificationTimepicker}
+      />
       <Stack.Screen
         name="JournalEdit"
         options={{
