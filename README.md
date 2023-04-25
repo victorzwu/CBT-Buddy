@@ -1,5 +1,11 @@
 # CBT-Buddy
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=D2cxTa3rMdY
+" target="_blank"><img src="http://img.youtube.com/vi/D2cxTa3rMdY/0.jpg" 
+alt="CBT Buddy Demonstration" width="240" height="180" border="10" /></a>
+
+
+
 ## Iteration 3
 
 ### Xilong Cai
