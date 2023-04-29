@@ -8,162 +8,85 @@ import AddPhotoAndLocation from "./AddPhotoAndLocation";
 import JournalEdit from "./JournalEdit";
 import Map from "./Map";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { getFromDB } from "../../Firebase/firestore";
 import NotificationButton from "../../Components/NotificationButton";
 import NotificationTimepicker from "./NotificationTimepicker";
+import { JournalProvider } from "../../Contexts/JournalContext";
 
 export default function Journal({ navigation }) {
-  const [formData, setFormData] = useState({
-    mood: "",
-    detail: "",
-    photo: "",
-    location: "",
-    date: "",
-  });
-  const [data, setData] = useState([]);
-
-  const getData = () => {
-    getFromDB().then((res) => {
-      // console.log("res = ", res);
-      setData(res);
-    });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator
-      screenOptions={({ navigation }) => ({
-        headerStyle: { backgroundColor: COLORS.primary },
-        headerTintColor: "white",
-        headerShadowVisible: false,
-      })}
-    >
-      <Stack.Screen
-        name="JournalList"
-        options={() => {
-          return {
-            headerRight: () => {
-              return (
-                <NotificationButton
-                  pressHandler={() =>
-                    navigation.navigate("Notification Timepicker")
-                  }
-                />
-              );
-            },
-            title: "Journal",
-            headerTitleAlign: "center",
-          };
-        }}
+    <JournalProvider>
+      <Stack.Navigator
+        screenOptions={({ navigation }) => ({
+          headerStyle: { backgroundColor: COLORS.primary },
+          headerTintColor: "white",
+          headerShadowVisible: false,
+        })}
       >
-        {(props) => (
-          <JournalList
-            data={data}
-            getData={getData}
-            setData={setData}
-            formData={formData}
-            setFormData={setFormData}
-            {...props}
-          />
-        )}
-      </Stack.Screen>
-      <Stack.Screen
-        name="Notification Timepicker"
-        component={NotificationTimepicker}
-      />
-      <Stack.Screen
-        name="JournalEdit"
-        options={{
-          title: "Edit an entry",
-        }}
-      >
-        {(props) => (
-          <JournalEdit
-            data={data}
-            getData={getData}
-            setData={setData}
-            formData={formData}
-            setFormData={setFormData}
-            {...props}
-          />
-        )}
-      </Stack.Screen>
+        <Stack.Screen
+          name="JournalList"
+          options={() => {
+            return {
+              headerRight: () => {
+                return (
+                  <NotificationButton
+                    pressHandler={() =>
+                      navigation.navigate("Notification Timepicker")
+                    }
+                  />
+                );
+              },
+              title: "Journal",
+              headerTitleAlign: "center",
+            };
+          }}
+          component={JournalList}
+        />
 
-      <Stack.Screen
-        name="AddMood"
-        options={{
-          title: "Mood",
-        }}
-      >
-        {(props) => (
-          <AddMood
-            data={data}
-            getData={getData}
-            setData={setData}
-            formData={formData}
-            setFormData={setFormData}
-            {...props}
-          />
-        )}
-      </Stack.Screen>
+        <Stack.Screen
+          name="Notification Timepicker"
+          component={NotificationTimepicker}
+        />
+        <Stack.Screen
+          name="JournalEdit"
+          options={{
+            title: "Edit an entry",
+          }}
+          component={JournalEdit}
+        />
 
-      <Stack.Screen
-        name="AddDetail"
-        options={{
-          title: "Detail",
-        }}
-      >
-        {(props) => (
-          <AddDetail
-            data={data}
-            setData={setData}
-            getData={getData}
-            formData={formData}
-            setFormData={setFormData}
-            {...props}
-          />
-        )}
-      </Stack.Screen>
-      <Stack.Screen
-        name="AddPhotoAndLocation"
-        options={{
-          title: "Photo And Location",
-        }}
-      >
-        {(props) => (
-          <AddPhotoAndLocation
-            data={data}
-            getData={getData}
-            setData={setData}
-            formData={formData}
-            setFormData={setFormData}
-            {...props}
-          />
-        )}
-      </Stack.Screen>
+        <Stack.Screen
+          name="AddMood"
+          options={{
+            title: "Mood",
+          }}
+          component={AddMood}
+        />
 
-      <Stack.Screen
-        name="Map"
-        options={{
-          title: "Map",
-        }}
-      >
-        {(props) => (
-          <Map
-            data={data}
-            setData={setData}
-            getData={getData}
-            formData={formData}
-            setFormData={setFormData}
-            {...props}
-          />
-        )}
-      </Stack.Screen>
-    </Stack.Navigator>
+        <Stack.Screen
+          name="AddDetail"
+          options={{
+            title: "Detail",
+          }}
+          component={AddDetail}
+        />
+        <Stack.Screen
+          name="AddPhotoAndLocation"
+          options={{
+            title: "Photo And Location",
+          }}
+          component={AddPhotoAndLocation}
+        />
+
+        <Stack.Screen
+          name="Map"
+          options={{
+            title: "Map",
+          }}
+          component={Map}
+        />
+      </Stack.Navigator>
+    </JournalProvider>
   );
 }

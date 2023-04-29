@@ -6,8 +6,10 @@ import React, { useState } from "react";
 import { deleteFromDB } from "../../Firebase/firestore";
 import moment from "moment";
 import { storageBucket } from "@env";
+import { useEffect } from "react";
+import { useJournal } from "../../Contexts/JournalContext";
 
-export default function Com({ navigation, route, data, getData, setFormData }) {
+export default function JournalList({ navigation, route }) {
   const moodObj = {
     Normal: require("../../assets/emoji/general.png"),
     Happy: require("../../assets/emoji/happy.png"),
@@ -16,6 +18,11 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
     Amazed: require("../../assets/emoji/amazed.png"),
     Cry: require("../../assets/emoji/cry.png"),
   };
+
+  const { formData, setFormData, data, getData } = useJournal();
+
+  useEffect(() => getData(), []);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.btnBox}>
@@ -89,7 +96,7 @@ export default function Com({ navigation, route, data, getData, setFormData }) {
                 <Button
                   onPress={async () => {
                     await deleteFromDB(v.id);
-                    Alert.alert("Congratulations","Delete succeeded!");
+                    Alert.alert("Congratulations", "Delete succeeded!");
                     getData();
                   }}
                 >

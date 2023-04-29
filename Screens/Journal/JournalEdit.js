@@ -11,14 +11,12 @@ import { COLORS } from "../../color";
 import React, { useState } from "react";
 import moment from "moment";
 import { storageBucket } from "@env";
+import { useJournal } from "../../Contexts/JournalContext";
 
-export default function Com({
+
+export default function JournalEdit({
   navigation,
   route,
-  data,
-  getData,
-  formData,
-  setFormData,
 }) {
   // console.log("formData = ", formData);
   const moodObj = {
@@ -29,6 +27,9 @@ export default function Com({
     Amazed: require("../../assets/emoji/amazed.png"),
     Cry: require("../../assets/emoji/cry.png"),
   };
+
+  const { formData, setFormData, data, getData } = useJournal();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.cardBox}>

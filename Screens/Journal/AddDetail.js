@@ -3,9 +3,12 @@ import { COLORS } from "../../color";
 import Button from "../../Components/Button";
 import { update } from "../../Firebase/firestore";
 import React, { useState } from "react";
+import { useJournal } from "../../Contexts/JournalContext";
 
-export default function Com({ formData, setFormData, navigation, getData }) {
+export default function AddDetail({navigation}) {
   const [value, onChangeText] = useState("");
+  const { formData, setFormData, data, getData } = useJournal();
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.tit}>What do you want to say today?</Text>

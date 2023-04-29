@@ -45,6 +45,7 @@ export default function Home() {
         name="Journal"
         component={Journal}
       />
+      
       <Tab.Screen
         name="CBT"
         component={CBT}

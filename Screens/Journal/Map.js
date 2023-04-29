@@ -16,14 +16,17 @@ import { firestore } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
 import { MAPS_API_KEY } from "@env";
 import * as Location from "expo-location";
+import { useJournal } from "../../Contexts/JournalContext";
+
 
 export default function Map({
   route,
-  formData,
-  setFormData,
   navigation,
-  getData,
 }) {
+
+  const { formData, setFormData, getData } = useJournal();
+
+
   const [address, setAddress] = useState(null);
   const [coordinate, setCoordinate] = useState(null);
   const [permissionResponse, requestPermission] =

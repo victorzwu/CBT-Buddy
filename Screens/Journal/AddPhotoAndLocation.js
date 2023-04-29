@@ -18,8 +18,14 @@ import Button from "../../Components/Button";
 import { firestore, auth } from "../../Firebase/firebase-setup";
 import { addDoc, collection } from "firebase/firestore";
 import moment from "moment";
+import { useJournal } from "../../Contexts/JournalContext";
 
-export default function Com({ formData, setFormData, navigation, getData }) {
+
+export default function AddPhotoAndLocation({navigation}) {
+
+  const { formData, setFormData, data, getData } = useJournal();
+
+
   const [image, setImage] = useState(null);
   const [cameraImage, setCameraImage] = useState(null);
   const getImageBlob = async (uri) => {

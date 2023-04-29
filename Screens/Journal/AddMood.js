@@ -10,8 +10,13 @@ import {
 import { COLORS } from "../../color";
 import { update } from "../../Firebase/firestore";
 import React, { useState } from "react";
+import { useJournal } from "../../Contexts/JournalContext";
 
-export default function Com({ formData, setFormData, navigation, getData }) {
+
+export default function AddMood({navigation}) {
+
+  const { formData, setFormData, data, getData } = useJournal();
+
   const [listData, setListData] = useState([
     {
       icon: require("../../assets/emoji/general.png"),
