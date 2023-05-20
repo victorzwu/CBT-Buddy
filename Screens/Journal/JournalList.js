@@ -8,6 +8,8 @@ import moment from "moment";
 import { storageBucket } from "@env";
 import { useEffect } from "react";
 import { useJournal } from "../../Contexts/JournalContext";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../Firebase/firebase-setup";
 
 export default function JournalList({ navigation, route }) {
   const moodObj = {
@@ -68,7 +70,7 @@ export default function JournalList({ navigation, route }) {
                         height: 80,
                       }}
                       source={{
-                        uri: `https://firebasestorage.googleapis.com/v0/b/${storageBucket}/o/${v.photo}?alt=media&token=51e171f8-7b37-4a62-9144-25606b929148`,
+                        uri: "https://firebasestorage.googleapis.com/v0/b/${storageBucket}/o/images${v.photo}alt=media&token=375888cf-430e-4ad2-ad9c-281d7a98e55a",
                       }}
                     />
                   </View>

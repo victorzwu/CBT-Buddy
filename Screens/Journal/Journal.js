@@ -17,76 +17,77 @@ export default function Journal({ navigation }) {
 
   return (
     <JournalProvider>
-      <Stack.Navigator
-        screenOptions={({ navigation }) => ({
-          headerStyle: { backgroundColor: COLORS.primary },
-          headerTintColor: "white",
-          headerShadowVisible: false,
-        })}
-      >
-        <Stack.Screen
-          name="JournalList"
-          options={() => {
-            return {
-              headerRight: () => {
-                return (
-                  <NotificationButton
-                    pressHandler={() =>
-                      navigation.navigate("Notification Timepicker")
-                    }
-                  />
-                );
-              },
-              title: "Journal",
-              headerTitleAlign: "center",
-            };
-          }}
-          component={JournalList}
-        />
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        headerStyle: { backgroundColor: COLORS.primary },
+        headerTintColor: "white",
+        headerShadowVisible: false,
+      })}
+    >
 
-        <Stack.Screen
-          name="Notification Timepicker"
-          component={NotificationTimepicker}
-        />
-        <Stack.Screen
-          name="JournalEdit"
-          options={{
-            title: "Edit an entry",
-          }}
-          component={JournalEdit}
-        />
+      <Stack.Screen
+        name="JournalList"
+        options={() => {
+          return {
+            headerRight: () => {
+              return (
+                <NotificationButton
+                  pressHandler={() =>
+                    navigation.navigate("Notification Timepicker")
+                  }
+                />
+              );
+            },
+            title: "Journal",
+            headerTitleAlign: "center",
+          };
+        }}
+        component={JournalList}
+      />
 
-        <Stack.Screen
-          name="AddMood"
-          options={{
-            title: "Mood",
-          }}
-          component={AddMood}
-        />
+      <Stack.Screen
+        name="Notification Timepicker"
+        component={NotificationTimepicker}
+      />
+      <Stack.Screen
+        name="JournalEdit"
+        options={{
+          title: "Edit an entry",
+        }}
+        component={JournalEdit}
+      />
 
-        <Stack.Screen
-          name="AddDetail"
-          options={{
-            title: "Detail",
-          }}
-          component={AddDetail}
-        />
-        <Stack.Screen
-          name="AddPhotoAndLocation"
-          options={{
-            title: "Photo And Location",
-          }}
-          component={AddPhotoAndLocation}
-        />
+      <Stack.Screen
+        name="AddMood"
+        options={{
+          title: "Mood",
+        }}
+        component={AddMood}
+      />
 
-        <Stack.Screen
-          name="Map"
-          options={{
-            title: "Map",
-          }}
-          component={Map}
-        />
-      </Stack.Navigator>
+      <Stack.Screen
+        name="AddDetail"
+        options={{
+          title: "Detail",
+        }}
+        component={AddDetail}
+      />
+      <Stack.Screen
+        name="AddPhotoAndLocation"
+        options={{
+          title: "Photo And Location",
+        }}
+        component={AddPhotoAndLocation}
+      />
+
+      <Stack.Screen
+        name="Map"
+        options={{
+          title: "Map",
+        }}
+        component={Map}
+      />
+    </Stack.Navigator>
     </JournalProvider>
   );
 }

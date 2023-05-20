@@ -13,7 +13,6 @@ import moment from "moment";
 import { storageBucket } from "@env";
 import { useJournal } from "../../Contexts/JournalContext";
 
-
 export default function JournalEdit({
   navigation,
   route,

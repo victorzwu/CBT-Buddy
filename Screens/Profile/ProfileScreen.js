@@ -23,6 +23,7 @@ export default function ProfileScreen() {
         const data = docSnapshot.data();
         const downloadUrl = await getDownloadURL(ref(storage, data.uri));
         setAvatar(downloadUrl)
+        console.log("Download", downloadUrl);
       }
     }
     getUri()
@@ -60,7 +61,7 @@ export default function ProfileScreen() {
       const storageRef = ref(storage, `Avatar/${uuid}_img`);
       uploadBytes(storageRef, imgBlob)
         .then((snapshot) => {
-          console.log("Uploaded a blob!", snapshot);
+          // console.log("Uploaded a blob!", snapshot);
           uploadAvatar(`Avatar/${uuid}_img`, auth.currentUser.uid)
           // setFormData({
           //   ...formData,

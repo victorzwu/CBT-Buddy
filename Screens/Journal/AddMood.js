@@ -17,6 +17,7 @@ export default function AddMood({navigation}) {
 
   const { formData, setFormData, data, getData } = useJournal();
 
+  
   const [listData, setListData] = useState([
     {
       icon: require("../../assets/emoji/general.png"),

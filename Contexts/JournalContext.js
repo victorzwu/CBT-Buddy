@@ -2,7 +2,6 @@ import React from 'react'
 import { createContext, useContext, useState } from 'react';
 import { getFromDB } from '../Firebase/firestore';
 
-
 const JournalContext = createContext();
 
 function JournalProvider({children}) {
